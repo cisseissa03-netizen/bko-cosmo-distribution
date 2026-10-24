@@ -1,6 +1,6 @@
 // Client-side Application for BKO Cosmo Distribution (Bamako Wholesale)
 import { isQuantityAllowed, getInitialQuantity, getNextQuantity, getPrevQuantity, formatFCFA } from './rules.js';
-import { animateHeroEntrance, animateProductCards, animateAddToCartFeedback, animateQuantityChange, animateDrawerOpen } from './gsap-animations.js';
+import { animateHeroEntrance, animateProductCards, animateAddToCartFeedback, animateQuantityChange, animateDrawerOpen, animateSearchFocus, animateBrandPillClick } from './gsap-animations.js';
 import { initHeroThree } from './three-hero.js';
 
 // Application State
@@ -1715,5 +1715,47 @@ function setupEventListeners() {
   const trackForm = document.getElementById('tracking-form');
   if (trackForm) {
     trackForm.addEventListener('submit', trackOrder);
+  }
+}
+
+
+/* ========================================================
+   SEARCH SHORTCUT & PWA SMART BANNER
+======================================================== */
+function focusSearch() {
+  const homeSearch = document.getElementById('home-direct-search-input');
+  const catalogSearch = document.getElementById('catalog-search-input');
+
+  if (state.currentTab === 'home' && homeSearch) {
+    homeSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    animateSearchFocus(homeSearch);
+  } else {
+    switchTab('catalog');
+    if (catalogSearch) {
+      catalogSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      animateSearchFocus(catalogSearch);
+    }
+  }
+}
+
+function dismissPwaBanner() {
+  const banner = document.getElementById('mobile-pwa-banner');
+  if (banner) {
+    banner.style.display = 'none';
+    sessionStorage.setItem('pwa_banner_dismissed', 'true');
+  }
+}
+
+function checkPwaBannerVisibility() {
+  const banner = document.getElementById('mobile-pwa-banner');
+  if (!banner) return;
+  const isDismissed = sessionStorage.getItem('pwa_banner_dismissed') === 'true';
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile && !isStandalone && !isDismissed) {
+    banner.style.display = 'flex';
+  } else {
+    banner.style.display = 'none';
   }
 }
