@@ -54,6 +54,16 @@ function requireAuth(req, res, next) {
 ======================================================== */
 
 // Get public business settings
+// Health check & Keep-alive endpoint for UptimeRobot (Keeps Render instance awake 24/7)
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptime: Math.floor(process.uptime()),
+    service: 'BKO Cosmo Distribution - Bamako Wholesale'
+  });
+});
+
 app.get('/api/settings', (req, res) => {
   const settings = db.getSettings();
   res.json({

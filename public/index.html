@@ -124,13 +124,13 @@
     ========================================== -->
     <div id="tab-view-home">
 
-      <!-- Direct Mobile-First Search & 1-Click Brand Discovery Section -->
+      <!-- Direct Mobile-First Search Section -->
       <section class="home-search-hero-bar" id="home-search-hero-bar">
         <div class="container">
           <div class="search-hero-card">
             <div class="search-hero-header">
               <span class="search-hero-tag">🔍 Recherche Directe de Produits</span>
-              <span class="search-hero-sub">Stock Entrepôt Bamako • Tarifs de gros en FCFA</span>
+              <span class="search-hero-sub">Stock Bamako • Tarifs de gros en FCFA</span>
             </div>
             
             <div class="search-hero-input-wrap">
@@ -141,10 +141,43 @@
 
             <!-- Instant Brand Suggestion Banner (when typing) -->
             <div id="home-brand-search-suggestions" class="brand-search-suggestions" style="display:none;"></div>
+          </div>
+        </div>
+      </section>
 
-            <!-- 1-Click Quick Brand Pills (horizontal scroll with smooth touch) -->
-            <div class="search-hero-brands-row" id="home-brand-pills-row" role="tablist">
-              <!-- Dynamically populated by app.js: 🌟 Tout le catalogue, CeraVe, La Roche-Posay, etc. -->
+      <!-- Interactive Gammes & Catégories Déroulantes (Touch Accordion & Cards) -->
+      <section class="gammes-section" id="gammes-section">
+        <div class="container">
+          <div class="gammes-card" id="gammes-card">
+            <!-- Header Trigger -->
+            <div class="gammes-header-trigger" id="gammes-toggle-btn" onclick="window.app.toggleGammesDrawer()" role="button" tabindex="0" aria-expanded="false" aria-controls="gammes-dropdown">
+              <div class="gammes-trigger-left">
+                <div class="gammes-icon-badge">🗂️</div>
+                <div class="gammes-trigger-text">
+                  <div class="gammes-trigger-top">
+                    <strong class="gammes-title-text">Gammes & Catégories de Gros</strong>
+                    <span class="gammes-count-badge">5 gammes</span>
+                  </div>
+                  <div class="gammes-active-status" id="gammes-active-status">
+                    🌟 Toutes les gammes (12 réf. en entrepôt)
+                  </div>
+                </div>
+              </div>
+              <div class="gammes-trigger-right">
+                <span class="gammes-toggle-text" id="gammes-toggle-text">Ouvrir</span>
+                <span class="gammes-chevron" id="gammes-chevron">▼</span>
+              </div>
+            </div>
+
+            <!-- Collapsible Dropdown with all categories & ranges -->
+            <div class="gammes-dropdown" id="gammes-dropdown" style="display:none;">
+              <div class="gammes-dropdown-header">
+                <span>Touchez une gamme pour filtrer les produits correspondants :</span>
+                <button type="button" class="btn-gamme-reset" onclick="window.app.selectGammeCategory('all')">Tout afficher ✕</button>
+              </div>
+              <div class="gammes-grid" id="gammes-categories-list">
+                <!-- Dynamically populated by app.js -->
+              </div>
             </div>
           </div>
         </div>
@@ -605,6 +638,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
       <span>Accueil</span>
     </button>
+    <button type="button" class="bottom-nav-item" onclick="window.app.openGammes()" id="bnav-gammes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+      <span>Gammes</span>
+    </button>
     <button type="button" class="bottom-nav-item" data-tab="catalog" id="bnav-catalog">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
       <span>Catalogue</span>
@@ -626,5 +663,7 @@
 
   <!-- Application Main Script -->
   <script type="module" src="/js/app.js"></script>
+  <!-- Floating Toast Notification for Cart Actions -->
+  <div id="product-added-toast" class="product-added-toast" style="display:none;" role="status"></div>
 </body>
 </html>

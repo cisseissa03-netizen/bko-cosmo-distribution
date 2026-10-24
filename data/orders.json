@@ -1,5 +1,215 @@
 [
   {
+    "id": "ord-1792865099377",
+    "orderRef": "DEM-BKO-2026-6338",
+    "createdAt": "2026-10-24T18:04:59.377Z",
+    "establishmentName": "Pharmacie du Fleuve",
+    "establishmentType": "Pharmacie",
+    "contactName": "Dr. Coulibaly",
+    "phone": "+223 76 54 32 10",
+    "neighborhood": "ACI 2000",
+    "address": "En face de l'Hôtel Radisson",
+    "deliveryNotes": "",
+    "observation": "",
+    "status": "Demande reçue",
+    "paymentStatus": "Non payé",
+    "items": [
+      {
+        "productId": "prod-002",
+        "ref": "HYG-BKO-02",
+        "name": "Lait Corporel Hydratant Karité & Vitamine E",
+        "brand": "Sahel Naturals",
+        "format": "Flacon pompe 500 ml",
+        "unitPrice": 3800,
+        "qty": 6,
+        "deliveredQty": 6,
+        "lineTotal": 22800
+      },
+      {
+        "productId": "prod-001",
+        "ref": "DERM-BKO-01",
+        "name": "Baume Réparateur Intense Cica-Derm",
+        "brand": "DermoPlus Sahel",
+        "format": "Tube 100 ml",
+        "unitPrice": 4200,
+        "qty": 3,
+        "deliveredQty": 3,
+        "lineTotal": 12600
+      }
+    ],
+    "totalAmount": 35400,
+    "proposedModifications": null,
+    "internalNotes": ""
+  },
+  {
+    "id": "ord-1792856973074",
+    "orderRef": "DEM-BKO-2026-7179",
+    "createdAt": "2026-10-24T15:49:33.074Z",
+    "establishmentName": "Pharmacie du Fleuve",
+    "establishmentType": "Pharmacie",
+    "contactName": "Dr. Coulibaly",
+    "phone": "+223 76 54 32 10",
+    "neighborhood": "ACI 2000",
+    "address": "En face de l'Hôtel Radisson",
+    "deliveryNotes": "",
+    "observation": "",
+    "status": "Demande reçue",
+    "paymentStatus": "Non payé",
+    "items": [
+      {
+        "productId": "prod-002",
+        "ref": "HYG-BKO-02",
+        "name": "Lait Corporel Hydratant Karité & Vitamine E",
+        "brand": "Sahel Naturals",
+        "format": "Flacon pompe 500 ml",
+        "unitPrice": 3800,
+        "qty": 6,
+        "deliveredQty": 6,
+        "lineTotal": 22800
+      },
+      {
+        "productId": "prod-001",
+        "ref": "DERM-BKO-01",
+        "name": "Baume Réparateur Intense Cica-Derm",
+        "brand": "DermoPlus Sahel",
+        "format": "Tube 100 ml",
+        "unitPrice": 4200,
+        "qty": 3,
+        "deliveredQty": 3,
+        "lineTotal": 12600
+      }
+    ],
+    "totalAmount": 35400,
+    "proposedModifications": null,
+    "internalNotes": ""
+  },
+  {
+    "id": "ord-1792855377939",
+    "orderRef": "DEM-BKO-2026-6083",
+    "createdAt": "2026-10-24T15:22:57.939Z",
+    "establishmentName": "Pharmacie du Fleuve",
+    "establishmentType": "Pharmacie",
+    "contactName": "Dr. Coulibaly",
+    "phone": "+223 76 54 32 10",
+    "neighborhood": "ACI 2000",
+    "address": "En face de l'Hôtel Radisson",
+    "deliveryNotes": "",
+    "observation": "",
+    "status": "Demande reçue",
+    "paymentStatus": "Non payé",
+    "items": [
+      {
+        "productId": "prod-002",
+        "ref": "HYG-BKO-02",
+        "name": "Lait Corporel Hydratant Karité & Vitamine E",
+        "brand": "Sahel Naturals",
+        "format": "Flacon pompe 500 ml",
+        "unitPrice": 3800,
+        "qty": 6,
+        "deliveredQty": 6,
+        "lineTotal": 22800
+      },
+      {
+        "productId": "prod-001",
+        "ref": "DERM-BKO-01",
+        "name": "Baume Réparateur Intense Cica-Derm",
+        "brand": "DermoPlus Sahel",
+        "format": "Tube 100 ml",
+        "unitPrice": 4200,
+        "qty": 3,
+        "deliveredQty": 3,
+        "lineTotal": 12600
+      }
+    ],
+    "totalAmount": 35400,
+    "proposedModifications": null,
+    "internalNotes": ""
+  },
+  {
+    "id": "ord-1792850280641",
+    "orderRef": "DEM-BKO-2026-8621",
+    "createdAt": "2026-10-24T13:58:00.641Z",
+    "establishmentName": "Pharmacie du Fleuve",
+    "establishmentType": "Pharmacie",
+    "contactName": "Dr. Coulibaly",
+    "phone": "+223 76 54 32 10",
+    "neighborhood": "ACI 2000",
+    "address": "En face de l'Hôtel Radisson",
+    "deliveryNotes": "",
+    "observation": "",
+    "status": "Demande reçue",
+    "paymentStatus": "Non payé",
+    "items": [
+      {
+        "productId": "prod-002",
+        "ref": "HYG-BKO-02",
+        "name": "Lait Corporel Hydratant Karité & Vitamine E",
+        "brand": "Sahel Naturals",
+        "format": "Flacon pompe 500 ml",
+        "unitPrice": 3800,
+        "qty": 6,
+        "deliveredQty": 6,
+        "lineTotal": 22800
+      },
+      {
+        "productId": "prod-001",
+        "ref": "DERM-BKO-01",
+        "name": "Baume Réparateur Intense Cica-Derm",
+        "brand": "DermoPlus Sahel",
+        "format": "Tube 100 ml",
+        "unitPrice": 4200,
+        "qty": 3,
+        "deliveredQty": 3,
+        "lineTotal": 12600
+      }
+    ],
+    "totalAmount": 35400,
+    "proposedModifications": null,
+    "internalNotes": ""
+  },
+  {
+    "id": "ord-1792842257101",
+    "orderRef": "DEM-BKO-2026-8076",
+    "createdAt": "2026-10-24T11:44:17.101Z",
+    "establishmentName": "Pharmacie du Fleuve",
+    "establishmentType": "Pharmacie",
+    "contactName": "Dr. Coulibaly",
+    "phone": "+223 76 54 32 10",
+    "neighborhood": "ACI 2000",
+    "address": "En face de l'Hôtel Radisson",
+    "deliveryNotes": "",
+    "observation": "",
+    "status": "Demande reçue",
+    "paymentStatus": "Non payé",
+    "items": [
+      {
+        "productId": "prod-002",
+        "ref": "HYG-BKO-02",
+        "name": "Lait Corporel Hydratant Karité & Vitamine E",
+        "brand": "Sahel Naturals",
+        "format": "Flacon pompe 500 ml",
+        "unitPrice": 3800,
+        "qty": 6,
+        "deliveredQty": 6,
+        "lineTotal": 22800
+      },
+      {
+        "productId": "prod-001",
+        "ref": "DERM-BKO-01",
+        "name": "Baume Réparateur Intense Cica-Derm",
+        "brand": "DermoPlus Sahel",
+        "format": "Tube 100 ml",
+        "unitPrice": 4200,
+        "qty": 3,
+        "deliveredQty": 3,
+        "lineTotal": 12600
+      }
+    ],
+    "totalAmount": 35400,
+    "proposedModifications": null,
+    "internalNotes": ""
+  },
+  {
     "id": "ord-1792832423449",
     "orderRef": "DEM-BKO-2026-6029",
     "createdAt": "2026-10-24T09:00:23.449Z",

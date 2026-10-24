@@ -1,7 +1,7 @@
 // Service Worker for BKO Cosmo Distribution PWA
 // Provides offline catalog browsing, cached assets, and background sync preparation
 
-const CACHE_NAME = 'bko-cosmo-cache-v2';
+const CACHE_NAME = 'bko-cosmo-cache-v3';
 
 const STATIC_ASSETS = [
   '/',

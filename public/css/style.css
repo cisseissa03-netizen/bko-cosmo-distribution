@@ -2486,3 +2486,388 @@ button {
 .btn-toast-view-cart:active {
   transform: scale(0.95);
 }
+
+
+/* ========================================================
+   INTERACTIVE GAMMES & CATEGORIES ACCORDION
+======================================================== */
+.gammes-section {
+  padding: 10px 0 16px 0;
+  background: var(--bg-main);
+}
+
+.gammes-card {
+  background: #ffffff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 14px rgba(13, 92, 117, 0.06);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gammes-card:hover {
+  border-color: rgba(13, 92, 117, 0.3);
+}
+
+.gammes-header-trigger {
+  width: 100%;
+  min-height: 58px;
+  padding: 12px 16px;
+  background: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+  touch-action: manipulation;
+}
+
+.gammes-header-trigger:hover {
+  background: #f8fafc;
+}
+
+.gammes-trigger-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.gammes-icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.gammes-trigger-text {
+  min-width: 0;
+}
+
+.gammes-trigger-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gammes-title-text {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.gammes-count-badge {
+  background: #e2e8f0;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+}
+
+.gammes-active-status {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.gammes-trigger-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.gammes-toggle-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.gammes-chevron {
+  font-size: 0.75rem;
+  color: var(--primary);
+  transition: transform 0.25s ease;
+}
+
+/* Dropdown Content */
+.gammes-dropdown {
+  border-top: 1px solid var(--border);
+  background: #f8fafc;
+  padding: 14px;
+}
+
+.gammes-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-gamme-reset {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-gamme-reset:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.gammes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .gammes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+.gamme-card {
+  background: #ffffff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.gamme-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 92, 117, 0.1);
+}
+
+.gamme-card.active {
+  background: #f0fdfa;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(13, 92, 117, 0.15);
+}
+
+.gamme-card-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.gamme-card-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.gamme-card-body {
+  min-width: 0;
+}
+
+.gamme-card-top-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gamme-card-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.gamme-card.active .gamme-card-title {
+  color: var(--primary);
+}
+
+.gamme-card-count-badge {
+  background: rgba(13, 92, 117, 0.1);
+  color: var(--primary);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+}
+
+.gamme-card-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.gamme-card-brands {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.gamme-card-status-indicator {
+  flex-shrink: 0;
+}
+
+.gamme-check {
+  background: #059669;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+.gamme-arrow {
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ========================================================
+   ENHANCED MOBILE-FIRST PRODUCT CARDS (AFRICA B2B ERGONOMICS)
+======================================================== */
+.product-card {
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(13, 92, 117, 0.1);
+}
+
+.product-image-container {
+  padding-top: 68% !important;
+  background: #f8fafc;
+}
+
+.product-card-body {
+  padding: 14px 16px !important;
+}
+
+.product-title {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+  line-height: 1.35 !important;
+  margin-bottom: 6px !important;
+  height: auto !important;
+  max-height: 2.8em !important;
+}
+
+.product-format {
+  display: inline-block !important;
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+  margin-bottom: 10px !important;
+}
+
+.product-pricing-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  margin-bottom: 12px !important;
+}
+
+.price-value-highlight {
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+  color: var(--primary) !important;
+}
+
+.quantity-stepper-row {
+  height: 48px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  padding: 2px 4px !important;
+}
+
+.stepper-btn {
+  width: 44px !important;
+  height: 42px !important;
+  font-size: 1.35rem !important;
+  font-weight: 900 !important;
+  border-radius: 8px !important;
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+.stepper-qty {
+  font-size: 1.15rem !important;
+  font-weight: 900 !important;
+  color: #0f172a !important;
+}
+
+.stepper-subtotal {
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  color: var(--primary) !important;
+}
+
+.btn-add-to-cart {
+  height: 46px !important;
+  border-radius: 10px !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  background: var(--primary) !important;
+  box-shadow: 0 2px 8px rgba(13, 92, 117, 0.25) !important;
+}
+
+.btn-add-to-cart:hover {
+  background: var(--primary-hover) !important;
+}

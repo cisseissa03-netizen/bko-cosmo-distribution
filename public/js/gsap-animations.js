@@ -11,6 +11,7 @@ export function animateHeroEntrance() {
   const tl = window.gsap.timeline({ defaults: { ease: 'power2.out', duration: 0.6 } });
 
   tl.from('.search-hero-card', { opacity: 0, y: -10, duration: 0.45 })
+    .from('.gammes-card', { opacity: 0, y: 12, duration: 0.45 }, '-=0.2')
     .from('.hero-badge-tag', { opacity: 0, y: -12, duration: 0.4 }, '-=0.2')
     .from('.hero-title', { opacity: 0, y: 16, duration: 0.5 }, '-=0.2')
     .from('.hero-description', { opacity: 0, y: 14, duration: 0.5 }, '-=0.3')
@@ -87,6 +88,15 @@ export function animateBrandPillClick(pillElement) {
     .to(pillElement, { scale: 0.92, duration: 0.08, ease: 'power1.in' })
     .to(pillElement, { scale: 1.05, duration: 0.12, ease: 'back.out(2)' })
     .to(pillElement, { scale: 1, duration: 0.1, ease: 'power1.out' });
+}
+
+export function animateGammeCardSelect(cardElement) {
+  if (!cardElement || isReducedMotion() || typeof window.gsap === 'undefined') return;
+
+  window.gsap.timeline()
+    .to(cardElement, { scale: 0.96, duration: 0.1, ease: 'power1.in' })
+    .to(cardElement, { scale: 1.03, duration: 0.16, ease: 'back.out(2.5)' })
+    .to(cardElement, { scale: 1, duration: 0.12, ease: 'power1.out' });
 }
 
 export function animateQuantityChange(numberElement) {
