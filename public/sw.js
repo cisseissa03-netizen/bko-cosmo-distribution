@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bko-cosmo-cache-v5';
+const CACHE_NAME = 'bko-cosmo-cache-v6';
 
 const STATIC_ASSETS = [
   '/',

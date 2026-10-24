@@ -183,28 +183,7 @@
         </div>
       </section>
 
-      <!-- Live Catalog Grid Directly on Home: Immediate 1-Click Wholesale Ordering -->
-      <section class="home-catalog-section" id="home-catalog-section">
-        <div class="container">
-          <div class="home-catalog-header">
-            <div>
-              <span class="section-subtitle-tag" id="home-results-tag">Catalogue Disponible</span>
-              <h2 class="home-catalog-title" id="home-catalog-heading">Références en Stock</h2>
-            </div>
-            <div class="home-catalog-actions">
-              <span class="results-count-text" id="home-results-count">12 références prêtes</span>
-              <button type="button" class="btn-switch-quick" onclick="window.app.switchTab('quick-order')" title="Saisie rapide en grille">
-                ⚡ Saisie Rapide
-              </button>
-            </div>
-          </div>
-
-          <!-- Product Grid directly accessible on Home -->
-          <div class="products-grid" id="home-products-grid">
-            <!-- Rendered by app.js with GSAP animations -->
-          </div>
-        </div>
-      </section>
+      
 
       <!-- Hero Showcase Section (Photo HD OU Scène 3D Stylisée Three.js) -->
       <section class="hero-section">
@@ -320,29 +299,13 @@
         </div>
       </section>
 
-      <!-- Featured New Arrivals preview on home -->
-      <section style="padding:48px 0; background:var(--bg-main);">
-        <div class="container">
-          <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:24px;">
-            <div>
-              <span class="section-subtitle-tag">Disponibilités récentes</span>
-              <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-main);">Derniers arrivages en entrepôt</h2>
-            </div>
-            <button type="button" class="btn-secondary-large" onclick="window.app.switchTab('arrivages')" style="min-height:40px; font-size:0.875rem;">
-              Voir tous les arrivages →
-            </button>
-          </div>
-          <div id="home-featured-grid" class="products-grid">
-            <!-- Dynamically populated by app.js -->
-          </div>
-        </div>
-      </section>
+      
     </div>
 
     <!-- ==========================================
          VIEW 2: CATALOG (CATALOGUE COMPLET)
     ========================================== -->
-    <div id="tab-view-catalog" style="display:none;">
+    <div id="tab-view-catalog">
       <section class="catalog-section">
         <div class="container">
           <!-- Filter and Search Toolbar -->
@@ -403,7 +366,7 @@
     <!-- ==========================================
          VIEW 3: QUICK ORDER (COMMANDE RAPIDE)
     ========================================== -->
-    <div id="tab-view-quick-order" style="display:none;">
+    <div id="tab-view-quick-order">
       <section class="quick-order-section">
         <div class="container">
           <div style="margin-bottom:16px;">
@@ -451,7 +414,7 @@
     <!-- ==========================================
          VIEW 4: ARRIVAGES & RESTOCKS
     ========================================== -->
-    <div id="tab-view-arrivages" style="display:none;">
+    <div id="tab-view-arrivages">
       <section style="padding:40px 0 64px 0;">
         <div class="container">
           <!-- Arrivages Header Banner -->
@@ -490,7 +453,7 @@
     <!-- ==========================================
          VIEW 5: TRACK ORDER (SUIVI DE DEMANDE)
     ========================================== -->
-    <div id="tab-view-track" style="display:none;">
+    <div id="tab-view-track">
       <section style="padding:48px 0 64px 0;">
         <div class="container">
           <div class="tracking-card">

@@ -106,30 +106,21 @@ function switchTab(tabName) {
     btn.classList.toggle('active', btn.dataset.tab === tabName);
   });
 
-  // Toggle view panels
-  const tabs = ['home', 'catalog', 'quick-order', 'arrivages', 'track'];
-  tabs.forEach(t => {
-    const el = document.getElementById(`tab-view-${t}`);
-    if (el) el.style.display = (t === tabName) ? 'block' : 'none';
-  });
-
-  // Render & scroll behavior
-  if (tabName === 'catalog') {
-    applyFilters();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else if (tabName === 'quick-order') {
-    renderQuickOrderList();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else if (tabName === 'arrivages') {
-    renderArrivagesList();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else if (tabName === 'home') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Close mobile nav if open
+  // Close mobile nav panel if open
   const mobileNav = document.getElementById('mobile-nav-panel');
   if (mobileNav) mobileNav.classList.remove('open');
+
+  // ALL TABS ON THE SAME PAGE: Smooth scroll to target section
+  const target = document.getElementById(`tab-view-${tabName}`);
+  if (target) {
+    const headerOffset = 62;
+    const elementPosition = target.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    window.scrollTo({
+      top: Math.max(0, offsetPosition),
+      behavior: 'smooth'
+    });
+  }
 }
 
 /* ========================================================
@@ -427,6 +418,33 @@ function selectGammeCategory(categoryName, clickedCard = null) {
       targetGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 150);
   }
+}
+
+
+/* ========================================================
+   SCROLLSPY FOR SINGLE-PAGE UNIFIED NAVIGATION
+======================================================== */
+function setupScrollSpy() {
+  const sections = ['home', 'catalog', 'quick-order', 'arrivages', 'track'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id.replace('tab-view-', '');
+        state.currentTab = id;
+        document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.tab === id);
+        });
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.toggle('active', link.dataset.tab === id);
+        });
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sections.forEach(s => {
+    const el = document.getElementById(`tab-view-${s}`);
+    if (el) observer.observe(el);
+  });
 }
 
 /* ========================================================

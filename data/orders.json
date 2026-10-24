@@ -1,5 +1,47 @@
 [
   {
+    "id": "ord-1792878385175",
+    "orderRef": "DEM-BKO-2026-5451",
+    "createdAt": "2026-10-24T21:46:25.175Z",
+    "establishmentName": "Pharmacie du Fleuve",
+    "establishmentType": "Pharmacie",
+    "contactName": "Dr. Coulibaly",
+    "phone": "+223 76 54 32 10",
+    "neighborhood": "ACI 2000",
+    "address": "En face de l'Hôtel Radisson",
+    "deliveryNotes": "",
+    "observation": "",
+    "status": "Demande reçue",
+    "paymentStatus": "Non payé",
+    "items": [
+      {
+        "productId": "prod-002",
+        "ref": "HYG-BKO-02",
+        "name": "Lait Corporel Hydratant Karité & Vitamine E",
+        "brand": "Sahel Naturals",
+        "format": "Flacon pompe 500 ml",
+        "unitPrice": 3800,
+        "qty": 6,
+        "deliveredQty": 6,
+        "lineTotal": 22800
+      },
+      {
+        "productId": "prod-001",
+        "ref": "DERM-BKO-01",
+        "name": "Baume Réparateur Intense Cica-Derm",
+        "brand": "DermoPlus Sahel",
+        "format": "Tube 100 ml",
+        "unitPrice": 4200,
+        "qty": 3,
+        "deliveredQty": 3,
+        "lineTotal": 12600
+      }
+    ],
+    "totalAmount": 35400,
+    "proposedModifications": null,
+    "internalNotes": ""
+  },
+  {
     "id": "ord-1792877954134",
     "orderRef": "DEM-BKO-2026-6536",
     "createdAt": "2026-10-24T21:39:14.134Z",
