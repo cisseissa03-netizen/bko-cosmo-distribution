@@ -2447,3 +2447,42 @@ button {
     display: none !important;
   }
 }
+
+
+/* Product Added Toast Notification */
+.product-added-toast {
+  position: fixed;
+  bottom: 82px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  z-index: 950;
+  max-width: 92vw;
+  width: auto;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btn-toast-view-cart {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s ease;
+}
+
+.btn-toast-view-cart:active {
+  transform: scale(0.95);
+}

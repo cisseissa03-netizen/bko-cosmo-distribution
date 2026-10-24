@@ -1,4 +1,7 @@
-const CACHE_NAME = 'bko-cosmo-cache-v1';
+// Service Worker for BKO Cosmo Distribution PWA
+// Provides offline catalog browsing, cached assets, and background sync preparation
+
+const CACHE_NAME = 'bko-cosmo-cache-v2';
 
 const STATIC_ASSETS = [
   '/',
@@ -37,6 +40,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((name) => {
           if (name !== CACHE_NAME) {
+            console.log('SW: Purging old cache:', name);
             return caches.delete(name);
           }
         })
@@ -45,7 +49,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Network First for API, Cache First for static assets
+// Fetch: Network First for API and Code, Stale-While-Revalidate for images
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
@@ -76,10 +80,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Static Assets (CSS, JS, Images, HTML, Icons): Stale-While-Revalidate
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request)
+  // 2. HTML navigation and core JS/CSS: Network First so updates are instant, with Cache fallback
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('.js') || url.pathname.endsWith('.css') || url.pathname === '/') {
+    event.respondWith(
+      fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const clone = networkResponse.clone();
@@ -88,13 +92,28 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // If offline and request is an HTML navigation, return cached index
-          if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
-          }
-        });
+          return caches.match(event.request).then((cached) => {
+            if (cached) return cached;
+            if (event.request.mode === 'navigate') return caches.match('/index.html');
+          });
+        })
+    );
+    return;
+  }
 
-      return cachedResponse || fetchPromise;
+  // 3. Other static assets (images, fonts, icons): Cache First, fallback to Network
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return networkResponse;
+      });
     })
   );
 });
