@@ -113,6 +113,12 @@ test('Technical product strictly REFUSES 9 units', () => {
   assert.strictEqual(res.valid, false);
 });
 
+test('Strict packaging rule: Quantity 9 must be refused with explicit forbidden notice', () => {
+  const res = isQuantityAllowed(9, technicalProduct);
+  assert.strictEqual(res.valid, false);
+  assert.match(res.message, /formellement interdite/i);
+});
+
 test('Technical product strictly REFUSES 15 units', () => {
   const res = isQuantityAllowed(15, technicalProduct);
   assert.strictEqual(res.valid, false);

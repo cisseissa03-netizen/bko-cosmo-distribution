@@ -146,6 +146,20 @@ export async function initHeroThree() {
   }
 
   window.addEventListener('mousemove', onMouseMove, { passive: true });
+  function onTouchMove(event) {
+    if (!event.touches || event.touches.length === 0) return;
+    const touch = event.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    const x = (touch.clientX - rect.left) / rect.width - 0.5;
+    const y = (touch.clientY - rect.top) / rect.height - 0.5;
+    targetRotationY = x * 1.4;
+    targetRotationX = y * 0.9;
+  }
+
+  canvas.addEventListener('touchmove', onTouchMove, { passive: true });
+  canvas.addEventListener('touchstart', onTouchMove, { passive: true });
+
 
   function onResize() {
     if (!container) return;

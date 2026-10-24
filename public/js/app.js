@@ -1454,17 +1454,22 @@ function renderCartDrawer() {
         <strong>${state.cart.length} référence${state.cart.length > 1 ? 's' : ''} (${totalUnits} unités)</strong>
       </div>
       <div class="total-line-item">
-        <span>Frais de livraison à Bamako :</span>
-        <span style="color:var(--text-muted);">Confirmés par le commercial selon quartier</span>
+        <span>Livraison Bamako :</span>
+        <span style="color:var(--text-muted); font-size:0.8rem;">Confirmée par le commercial selon quartier</span>
       </div>
-      <div class="total-line-grand">
-        <span>Total estimatif :</span>
-        <span style="color:var(--primary);">${formatFCFA(totalAmount)}</span>
+      <div class="cart-total-highlight-card">
+        <div class="cart-total-label-wrap">
+          <span class="cart-total-badge">Tarif de gros HT</span>
+          <strong class="cart-total-title">Total estimatif :</strong>
+        </div>
+        <div class="cart-total-amount" id="cart-drawer-total-amount">
+          ${formatFCFA(totalAmount)}
+        </div>
       </div>
     </div>
-    <button class="btn-primary-large" style="width:100%; justify-content:center;" onclick="window.app.openCheckoutModal()">
-      Transmettre ma demande
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    <button type="button" class="btn-primary-large btn-checkout-trigger" onclick="window.app.openCheckoutModal()">
+      <span>Transmettre ma demande (${formatFCFA(totalAmount)})</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
     </button>
   `;
 }
@@ -1476,6 +1481,7 @@ function openCartDrawer() {
   if (backdrop && drawer) {
     backdrop.classList.add('active');
     drawer.classList.add('active');
+    document.body.classList.add('cart-drawer-open');
     animateDrawerOpen(drawer);
   }
   renderCartDrawer();
@@ -1488,6 +1494,7 @@ function closeCartDrawer() {
   if (backdrop && drawer) {
     backdrop.classList.remove('active');
     drawer.classList.remove('active');
+    document.body.classList.remove('cart-drawer-open');
   }
 }
 

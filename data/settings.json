@@ -7,6 +7,6 @@
   "warehouseAddress": "Zone Industrielle Sotuba / ACI 2000, Bamako",
   "currency": "FCFA",
   "adminPasswordHash": "0000",
-  "heroDisplayMode": "image",
+  "heroDisplayMode": "3d",
   "heroImage": "/uploads/photo-1792831019111-669.jpg"
 }

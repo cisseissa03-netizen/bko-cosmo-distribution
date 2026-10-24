@@ -260,7 +260,7 @@
             <!-- Hero Visual Card (Photo Réelle OU Scène 3D Stylisée) -->
             <div class="hero-visual-card" id="hero-visual-card">
               <!-- Real Showcase Photo Container -->
-              <div id="hero-photo-wrapper" class="hero-photo-wrapper">
+              <div id="hero-photo-wrapper" class="hero-photo-wrapper" style="display:none;">
                 <img id="hero-main-photo" src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1000&auto=format&fit=crop&q=80" alt="Présentation Cosmétique Pro" class="hero-cover-image">
                 <div class="hero-photo-badge">
                   <span>✨ Gamme Professionnelle Disponible</span>
@@ -268,7 +268,7 @@
               </div>
 
               <!-- 3D Canvas -->
-              <canvas id="hero-three-canvas" aria-label="Visualisation 3D décorative" style="display:none;"></canvas>
+              <canvas id="hero-three-canvas" aria-label="Visualisation 3D décorative"></canvas>
 
               <!-- Static Accessible Fallback -->
               <div class="hero-fallback-visual">
@@ -279,10 +279,10 @@
 
               <!-- Bottom Bar with 1-Click Toggle between Photo and 3D -->
               <div class="hero-visual-caption">
-                <span id="hero-visual-caption-text">📸 Présentation visuelle des gammes</span>
+                <span id="hero-visual-caption-text">✨ Vitrine 3D Interactive (Three.js WebGL)</span>
                 <div style="display:flex; gap:6px; align-items:center;">
                   <button type="button" class="btn-3d-toggle" id="toggle-hero-mode-btn" onclick="window.app.toggleHeroMode()" title="Basculer entre la Photo réelle et la Scène 3D">
-                    🧊 Voir en 3D
+                    📸 Voir la Photo
                   </button>
                   <button type="button" class="btn-3d-toggle" id="toggle-3d-btn" style="display:none;" title="Mettre en pause ou relancer la scène 3D">⏸ Pause</button>
                 </div>
@@ -516,14 +516,14 @@
   <!-- ==========================================
        CART SLIDE-OVER DRAWER
   ========================================== -->
-  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <div class="drawer-backdrop" id="drawer-backdrop" onclick="window.app.closeCartDrawer()"></div>
   <aside class="cart-drawer-panel" id="cart-drawer" aria-label="Panier de commande">
     <div class="drawer-header">
       <div style="display:flex; align-items:center; gap:8px;">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
         <h2 class="drawer-title">Ma Demande de Commande</h2>
       </div>
-      <button type="button" class="btn-close-drawer" id="close-cart-btn" aria-label="Fermer le panier">✕</button>
+      <button type="button" class="btn-close-drawer" id="close-cart-btn" onclick="window.app.closeCartDrawer()" aria-label="Fermer le panier">✕</button>
     </div>
     <div class="drawer-body" id="cart-drawer-body">
       <!-- Rendered by app.js -->

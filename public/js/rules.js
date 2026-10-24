@@ -19,7 +19,7 @@ export function isQuantityAllowed(qty, product) {
     if (qty >= 6 && qty % 6 === 0) return { valid: true };
     return {
       valid: false,
-      message: `Quantités autorisées pour cette référence : 3, 6, 12, 18, 24... (${qty} est interdit).`
+      message: `Règle de colisage stricte : la quantité ${qty} est formellement interdite. Paliers autorisés : 3, 6, 12, 18, 24...`
     };
   } else {
     if (qty >= 6 && qty % 6 === 0) return { valid: true };

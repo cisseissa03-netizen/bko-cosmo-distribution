@@ -23,9 +23,15 @@ function isQuantityAllowed(qty, product) {
     if (qty >= 6 && qty % 6 === 0) {
       return { valid: true };
     }
+    if (qty === 9 || qty === 15 || qty === 21) {
+      return {
+        valid: false,
+        message: `Règle de colisage stricte : la quantité ${qty} est formellement interdite. Les paliers autorisés sont 3, 6, 12, 18, 24...`
+      };
+    }
     return {
       valid: false,
-      message: `Pour cet article avec exception (3 unités), les paliers autorisés sont 3, 6, 12, 18, 24... (${qty} n'est pas autorisé).`
+      message: `Pour cet article avec exception (3 unités), la quantité ${qty} est formellement interdite. Les paliers autorisés sont 3, 6, 12, 18, 24...`
     };
   } else {
     // Standard rule: 6, 12, 18, 24, 30... (3, 9, 15 forbidden)

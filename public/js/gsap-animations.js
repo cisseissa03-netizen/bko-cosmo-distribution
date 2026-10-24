@@ -116,3 +116,15 @@ export function animateDrawerOpen(drawerElement) {
     { x: '0%', duration: 0.35, ease: 'power3.out' }
   );
 }
+
+
+export function animateThreeEntrance() {
+  if (isReducedMotion() || typeof window.gsap === 'undefined') return;
+  const card = document.getElementById('hero-visual-card');
+  if (!card) return;
+
+  window.gsap.fromTo(card,
+    { opacity: 0, scale: 0.94, y: 16 },
+    { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }
+  );
+}

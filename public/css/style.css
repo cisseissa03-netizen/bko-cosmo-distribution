@@ -1,8 +1,6 @@
-/* ========================================================
-   BKO COSMO DISTRIBUTION - STYLESHEET
+/*    BKO COSMO DISTRIBUTION - STYLESHEET
    Direction Artistique : Moderne, Claire, Chaleureuse & Lisible
    Mobile-First & Accessibilité Conforme
-======================================================== */
 
 :root {
   /* Palette de couleurs sobre & chaleureuse */
@@ -134,9 +132,7 @@ button {
   }
 }
 
-/* ========================================================
-   TOP NOTIFICATION BAR (BAMAKO DISTRIBUTION PROVISIONAL)
-======================================================== */
+/*    TOP NOTIFICATION BAR (BAMAKO DISTRIBUTION PROVISIONAL)
 .top-notice-bar {
   background: #0f172a;
   color: #e2e8f0;
@@ -158,9 +154,7 @@ button {
   color: #fef08a;
 }
 
-/* ========================================================
-   NAVBAR & HEADER
-======================================================== */
+/*    NAVBAR & HEADER
 .site-header {
   position: sticky;
   top: 0;
@@ -364,9 +358,7 @@ button {
   display: flex;
 }
 
-/* ========================================================
-   HERO SECTION & THREE.JS 3D CANVAS
-======================================================== */
+/*    HERO SECTION & THREE.JS 3D CANVAS
 .hero-section {
   position: relative;
   background: linear-gradient(135deg, #ffffff 0%, #f0f7f9 100%);
@@ -624,9 +616,7 @@ button {
   text-align: center;
 }
 
-/* ========================================================
-   HOW IT WORKS (FONCTIONNEMENT EN 3 ÉTAPES)
-======================================================== */
+/*    HOW IT WORKS (FONCTIONNEMENT EN 3 ÉTAPES)
 .how-it-works-section {
   padding: 48px 0;
   background: #ffffff;
@@ -715,9 +705,7 @@ button {
   line-height: 1.5;
 }
 
-/* ========================================================
-   CATALOG SECTION & FILTER BAR
-======================================================== */
+/*    CATALOG SECTION & FILTER BAR
 .catalog-section {
   padding: 48px 0 64px 0;
   background: var(--bg-main);
@@ -777,9 +765,7 @@ button {
   display: none;
 }
 
-/* ========================================================
-   SYNCHRONIZED BRAND SEARCH & 1-CLICK BRAND PILLS
-======================================================== */
+/*    SYNCHRONIZED BRAND SEARCH & 1-CLICK BRAND PILLS
 .brand-filter-container {
   display: flex;
   flex-direction: column;
@@ -1361,9 +1347,7 @@ button {
   display: block;
 }
 
-/* ========================================================
-   COMMANDE RAPIDE (FAST WHOLESALE ORDER SHEET)
-======================================================== */
+/*    COMMANDE RAPIDE (FAST WHOLESALE ORDER SHEET)
 .quick-order-section {
   padding: 36px 0 64px 0;
 }
@@ -1439,9 +1423,7 @@ button {
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* ========================================================
-   ARRIVAGES PAGE (NOUVEAUX PRODUITS & RESTOCKS)
-======================================================== */
+/*    ARRIVAGES PAGE (NOUVEAUX PRODUITS & RESTOCKS)
 .arrivages-header-card {
   background: linear-gradient(135deg, #0d5c75 0%, #093746 100%);
   color: #ffffff;
@@ -1482,15 +1464,13 @@ button {
   color: #ffffff;
 }
 
-/* ========================================================
-   CART DRAWER & TRANSMISSION CHECKOUT MODAL
-======================================================== */
+/*    CART DRAWER & TRANSMISSION CHECKOUT MODAL
 .drawer-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(4px);
-  z-index: 100;
+  z-index: 2000;
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1509,7 +1489,9 @@ button {
   width: 100%;
   max-width: 480px;
   background: #ffffff;
-  z-index: 101;
+  height: 100%;
+  height: 100dvh;
+  z-index: 2010;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
@@ -1664,15 +1646,13 @@ button {
   margin-top: 4px;
 }
 
-/* ========================================================
-   TRANSMISSION MODAL / CHECKOUT FORM
-======================================================== */
+/*    TRANSMISSION MODAL / CHECKOUT FORM
 .modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(4px);
-  z-index: 110;
+  z-index: 2100;
   display: none;
   align-items: center;
   justify-content: center;
@@ -1793,9 +1773,7 @@ button {
   border: 1px dashed var(--primary);
 }
 
-/* ========================================================
-   TRACKING PAGE (SUIVI DE DEMANDE)
-======================================================== */
+/*    TRACKING PAGE (SUIVI DE DEMANDE)
 .tracking-card {
   background: #ffffff;
   border: 1px solid var(--border);
@@ -1823,9 +1801,7 @@ button {
 .status-delivered { background: #dcfce7; color: #15803d; }
 .status-cancelled { background: #fee2e2; color: #b91c1c; }
 
-/* ========================================================
-   FOOTER
-======================================================== */
+/*    FOOTER
 .site-footer {
   margin-top: auto;
   background: #0f172a;
@@ -1876,9 +1852,7 @@ button {
   }
 }
 
-/* ========================================================
-   ADMIN STYLES (ESPACE GÉRANT / CEO)
-======================================================== */
+/*    ADMIN STYLES (ESPACE GÉRANT / CEO)
 .admin-layout {
   min-height: 100vh;
   background: #f1f5f9;
@@ -2003,9 +1977,7 @@ button {
   border-color: var(--primary);
 }
 
-/* ========================================================
-   PWA & NATIVE MOBILE APP EXPERIENCE
-======================================================== */
+/*    PWA & NATIVE MOBILE APP EXPERIENCE
 /* Install Pill in Header */
 .btn-pwa-install {
   display: inline-flex;
@@ -2171,9 +2143,7 @@ button {
   margin-top: 2px;
 }
 
-/* ========================================================
-   PRINT STYLES FOR OFFICIAL DOCUMENTS
-======================================================== */
+/*    PRINT STYLES FOR OFFICIAL DOCUMENTS
 @media print {
   body {
     background: #ffffff !important;
@@ -2190,9 +2160,7 @@ button {
 }
 
 
-/* ========================================================
-   MOBILE SMART PWA BANNER & DIRECT PRODUCT SEARCH
-======================================================== */
+/*    MOBILE SMART PWA BANNER & DIRECT PRODUCT SEARCH
 .mobile-pwa-banner {
   background: linear-gradient(135deg, #0d5c75 0%, #064052 100%);
   color: #ffffff;
@@ -2488,9 +2456,7 @@ button {
 }
 
 
-/* ========================================================
-   INTERACTIVE GAMMES & CATEGORIES ACCORDION
-======================================================== */
+/*    INTERACTIVE GAMMES & CATEGORIES ACCORDION
 .gammes-section {
   padding: 10px 0 16px 0;
   background: var(--bg-main);
@@ -2660,6 +2626,21 @@ button {
 .gamme-card {
   background: #ffffff;
   border: 1.5px solid var(--border);
+/*    ENHANCED MOBILE CART DRAWER & PROMINENT TOTAL ESTIMATIF
+body.cart-drawer-open {
+  overflow: hidden !important;
+}
+
+body.cart-drawer-open .mobile-bottom-app-bar {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(100%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cart-total-highlight-card {
+  background: #f0fdfa;
+  border: 1.5px solid #0d5c75;
   border-radius: var(--radius-md);
   padding: 12px 14px;
   display: flex;
@@ -2766,9 +2747,7 @@ button {
   font-weight: 700;
 }
 
-/* ========================================================
-   ENHANCED MOBILE-FIRST PRODUCT CARDS (AFRICA B2B ERGONOMICS)
-======================================================== */
+/*    ENHANCED MOBILE-FIRST PRODUCT CARDS (AFRICA B2B ERGONOMICS)
 .product-card {
   border: 1.5px solid var(--border);
   border-radius: 16px;
@@ -2870,4 +2849,242 @@ button {
 
 .btn-add-to-cart:hover {
   background: var(--primary-hover) !important;
+  margin-top: 6px;
+  box-shadow: 0 2px 6px rgba(13, 92, 117, 0.08);
+}
+
+.cart-total-label-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cart-total-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cart-total-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.cart-total-amount {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.btn-checkout-trigger {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--primary);
+  box-shadow: 0 4px 14px rgba(13, 92, 117, 0.25);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn-checkout-trigger:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 640px) {
+  .cart-drawer-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+  }
+  .drawer-header {
+    padding: 14px 16px !important;
+    min-height: 54px;
+  }
+  .drawer-body {
+    padding: 12px 14px !important;
+    padding-bottom: 20px !important;
+  }
+  .drawer-footer {
+    padding: 12px 16px max(16px, env(safe-area-inset-bottom)) 16px !important;
+    background: #ffffff !important;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08) !important;
+    border-top: 1.5px solid var(--border) !important;
+  }
+}
+
+
+/*    PRO PWA & MOBILE ERGONOMICS (AFRICA SMARTPHONE FIRST)
+
+/* 1. Hide clunky top notice bar on mobile & PWA */
+@media (max-width: 768px) {
+  .top-notice-bar {
+    display: none !important;
+  }
+  .site-header {
+    min-height: 54px !important;
+    padding: 6px 0 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  .brand-logo-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
+  }
+  .brand-title {
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+  }
+  .brand-subtitle {
+    font-size: 0.68rem !important;
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+  }
+  /* Remove the circular green install button that was overlapping the header! */
+  .btn-pwa-install {
+    display: none !important;
+  }
+  .btn-whatsapp-header {
+    padding: 6px 10px !important;
+    font-size: 0.78rem !important;
+  }
+  .btn-whatsapp-text {
+    display: inline !important;
+  }
+}
+
+/* 2. Standalone PWA mode tweaks */
+@media (display-mode: standalone) {
+  .btn-pwa-install, #mobile-pwa-banner, .mobile-pwa-banner {
+    display: none !important;
+  }
+  .top-notice-bar {
+    display: none !important;
+  }
+}
+
+/* 3. Hero Section Pro Styling with Interactive Three.js */
+.hero-section {
+  padding: 16px 0 24px 0 !important;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%) !important;
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 16px !important;
+  }
+  .hero-title {
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 10px !important;
+  }
+  .hero-description {
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 14px !important;
+  }
+  .hero-badge-tag {
+    font-size: 0.75rem !important;
+    padding: 4px 10px !important;
+    margin-bottom: 10px !important;
+  }
+  .hero-rules-highlights {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  .rule-highlight-item {
+    padding: 8px 12px !important;
+  }
+}
+
+/* 4. Three.js 3D Visual Card High-End Polish */
+.hero-visual-card {
+  border: 1.5px solid rgba(13, 92, 117, 0.2) !important;
+  border-radius: 18px !important;
+  background: radial-gradient(circle at 50% 30%, #f0fdfa 0%, #ffffff 100%) !important;
+  box-shadow: 0 8px 28px rgba(13, 92, 117, 0.12) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  touch-action: pan-y !important;
+}
+
+#hero-three-canvas {
+  width: 100% !important;
+  height: 240px !important;
+  display: block;
+  cursor: grab;
+}
+
+#hero-three-canvas:active {
+  cursor: grabbing;
+}
+
+@media (min-width: 769px) {
+  #hero-three-canvas {
+    height: 380px !important;
+  }
+}
+
+.hero-visual-caption {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  border-top: 1px solid #e2e8f0 !important;
+  padding: 8px 14px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+}
+
+/* 5. Cart Drawer Absolute Mobile Fix */
+.drawer-backdrop {
+  z-index: 2000 !important;
+}
+
+.cart-drawer-panel {
+  z-index: 2010 !important;
+  height: 100% !important;
+  height: 100dvh !important;
+}
+
+.modal-overlay {
+  z-index: 2100 !important;
+}
+
+body.cart-drawer-open {
+  overflow: hidden !important;
+}
+
+body.cart-drawer-open .mobile-bottom-app-bar {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(100%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .cart-drawer-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+  .drawer-footer {
+    padding: 12px 16px max(16px, env(safe-area-inset-bottom)) 16px !important;
+    background: #ffffff !important;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.1) !important;
+    border-top: 1.5px solid var(--border) !important;
+  }
 }
