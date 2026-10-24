@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: bko-cosmo-distribution
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    disk:
+      name: bko-cosmo-data
+      mountPath: /app/data
+      sizeGB: 1

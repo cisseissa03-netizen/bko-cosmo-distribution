@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Espace Gérant & Commercial | BKO Cosmo Distribution</title>
+  
+  <!-- PWA Manifest & App Icons -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0d5c75">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BKO Cosmo Admin">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .admin-table {
@@ -89,6 +102,7 @@
       <button type="button" class="admin-tab-btn active" data-admintab="dashboard">Tableau de bord</button>
       <button type="button" class="admin-tab-btn" data-admintab="orders">Demandes de commande</button>
       <button type="button" class="admin-tab-btn" data-admintab="catalog">Gestion du catalogue</button>
+      <button type="button" class="admin-tab-btn" data-admintab="hero">Visuel d'Accueil (Photo / 3D)</button>
     </nav>
 
     <!-- Main Content Area -->
@@ -242,6 +256,103 @@
         </div>
       </div>
 
+      <!-- =====================================
+           TAB: HERO VISUAL (PHOTO / 3D)
+      ===================================== -->
+      <div id="admin-panel-hero" class="admin-view-panel" style="display:none;">
+        <div style="margin-bottom:20px;">
+          <h2 style="font-size:1.4rem; font-weight:800;">Visuel d'Accueil de la Plateforme</h2>
+          <p style="font-size:0.875rem; color:var(--text-light);">
+            Personnalisez le visuel principal affiché sur la page d'accueil : choisissez d'afficher une photo réelle de vos produits ou la scène 3D stylisée.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start;">
+          <!-- Left: Settings Form -->
+          <div style="background:#ffffff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px;">
+            <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:16px;">Configuration du Visuel</h3>
+
+            <div class="form-group" style="margin-bottom:20px;">
+              <label class="form-label" style="font-weight:700;">Mode d'affichage sur la page d'accueil :</label>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+                <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-size:0.9rem;">
+                  <input type="radio" name="heroDisplayMode" id="hero-mode-image-radio" value="image" checked onchange="window.admin.updateHeroPreviewMode(this.value)">
+                  <span><strong>🖼️ Photo réelle de vos produits</strong> (Recommandé pour montrer votre vrai stock)</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-size:0.9rem;">
+                  <input type="radio" name="heroDisplayMode" id="hero-mode-3d-radio" value="3d" onchange="window.admin.updateHeroPreviewMode(this.value)">
+                  <span><strong>🧊 Animation 3D stylisée</strong> (Three.js géométrique)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Photo Upload & URL -->
+            <div class="form-group">
+              <label class="form-label" style="font-weight:700;">Photo du Hero :</label>
+              
+              <div style="display:flex; gap:8px; margin-bottom:12px;">
+                <input type="url" id="admin-hero-image-input" class="form-control" placeholder="https://... URL de l'image" oninput="window.admin.setHeroImageDirect(this.value)">
+                <button type="button" class="btn-secondary-large" style="padding:6px 14px; font-size:0.8rem; min-height:38px; white-space:nowrap;" onclick="document.getElementById('admin-hero-file-input').click()">
+                  📸 Importer un fichier
+                </button>
+              </div>
+              <input type="file" id="admin-hero-file-input" accept="image/*" style="display:none;" onchange="window.admin.handleHeroFileSelected(event)">
+
+              <!-- Preset showcases -->
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; display:block; margin-bottom:6px;">
+                Ou choisir une superbe vitrine cosmétique prête à l'emploi :
+              </span>
+              <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px;">
+                <button type="button" class="preset-chip" onclick="window.admin.setHeroImageDirect('https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1000&auto=format&fit=crop&q=80')">🧴 Flacons & Soins Dermo</button>
+                <button type="button" class="preset-chip" onclick="window.admin.setHeroImageDirect('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=1000&auto=format&fit=crop&q=80')">✨ Assortiment Beauté & Officine</button>
+                <button type="button" class="preset-chip" onclick="window.admin.setHeroImageDirect('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1000&auto=format&fit=crop&q=80')">💄 Produits Beauté & Hygiène</button>
+                <button type="button" class="preset-chip" onclick="window.admin.setHeroImageDirect('https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=1000&auto=format&fit=crop&q=80')">☀️ Gamme Solaire & Protection</button>
+              </div>
+
+              <!-- Pinterest direct photo import for Hero -->
+              <div style="background:#fff5f5; border:1px solid #fecaca; border-radius:var(--radius-sm); padding:12px; margin-bottom:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                  <strong style="font-size:0.8rem; color:#991b1b;">Importer une image depuis Pinterest pour l'accueil :</strong>
+                  <button type="button" class="btn-secondary-large" style="padding:2px 8px; font-size:0.72rem; min-height:24px; color:#e60023; border-color:#e60023; background:#fff;" onclick="window.open('https://www.pinterest.com/search/pins/?q=cosmetics%20store%20pharmacy%20display%20products', '_blank')">
+                    🔍 Chercher sur Pinterest ↗
+                  </button>
+                </div>
+                <div style="display:flex; gap:6px;">
+                  <input type="url" id="admin-hero-pinterest-url" class="form-control" style="font-size:0.78rem; min-height:34px;" placeholder="Collez le lien de l'image Pinterest ici...">
+                  <button type="button" class="btn-primary-large" style="padding:4px 12px; font-size:0.78rem; min-height:34px; background:#e60023; border-color:#e60023; white-space:nowrap;" onclick="window.admin.downloadHeroPinterestPhoto()">
+                    📥 Télécharger
+                  </button>
+                </div>
+              </div>
+
+              <button type="button" class="btn-primary-large" style="width:100%; min-height:44px;" onclick="window.admin.saveHeroSettings()">
+                💾 Enregistrer le visuel d'accueil
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Live Preview Box -->
+          <div style="background:#ffffff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h3 style="font-size:1.1rem; font-weight:800;">Aperçu en Direct</h3>
+              <span id="admin-hero-preview-badge" style="font-size:0.75rem; background:var(--primary-light); color:var(--primary); padding:3px 10px; border-radius:var(--radius-full); font-weight:700;">Mode Photo</span>
+            </div>
+            
+            <div style="border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden; position:relative; min-height:280px; max-height:320px; background:#f8fafc; display:flex; align-items:center; justify-content:center;">
+              <img id="admin-hero-preview-img" src="" alt="Aperçu du visuel" style="width:100%; height:300px; object-fit:cover;">
+              <div id="admin-hero-preview-3d-text" style="display:none; text-align:center; padding:30px;">
+                <div style="font-size:3rem; margin-bottom:8px;">🧊✨</div>
+                <strong>Scène 3D active</strong>
+                <p style="font-size:0.8rem; color:var(--text-light); margin-top:4px;">L'animation 3D Three.js sera affichée par défaut sur la page d'accueil.</p>
+              </div>
+            </div>
+            <p style="font-size:0.75rem; color:var(--text-light); margin-top:10px;">
+              * Les visiteurs pourront toujours basculer entre la photo et la 3D via le bouton situé sous le visuel sur la page d'accueil.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -381,16 +492,19 @@
                   <strong style="font-size:0.82rem; color:#991b1b;">Rechercher et importer des photos depuis Pinterest</strong>
                 </div>
                 <button type="button" class="btn-secondary-large" style="padding:4px 10px; font-size:0.75rem; min-height:28px; background:#fff; border-color:#e60023; color:#e60023; font-weight:700;" onclick="window.admin.openPinterestSearch()" title="Recherche ciblée avec Marque, Nom et Format/Contenance">
-                  🔍 Ouvrir Pinterest (Nom + Marque + Format) ↗
+                  🔍 1. Ouvrir Pinterest (recherche ciblée) ↗
                 </button>
               </div>
-              <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px; line-height:1.4;">
-                Recherche ciblée automatique combinant le <strong>Nom</strong>, la <strong>Marque</strong> et le <strong>Format / Contenance</strong>. Collez ensuite le lien direct de l'image (clic-droit sur l'image → <em>« Copier l'adresse de l'image »</em>) :
-              </p>
+              <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px; line-height:1.5;">
+                <strong>Comment faire :</strong><br>
+                1. Cliquez sur le bouton ci-dessus pour ouvrir les visuels correspondants sur Pinterest.<br>
+                2. Faites un clic droit sur la photo $\rightarrow$ <em>« Copier l'adresse de l'image »</em> (ou copiez simplement le lien du Pin).<br>
+                3. Collez ce lien dans la case ci-dessous puis cliquez sur <strong>Télécharger</strong>.
+              </div>
               <div style="display:flex; gap:8px;">
-                <input type="url" id="pinterest-url-input" class="form-control" style="font-size:0.8rem; min-height:36px;" placeholder="https://i.pinimg.com/... ou URL d'image web">
+                <input type="url" id="pinterest-url-input" class="form-control" style="font-size:0.8rem; min-height:36px;" placeholder="Collez le lien ici (ex: https://i.pinimg.com/... ou lien Pinterest)">
                 <button type="button" class="btn-primary-large" style="padding:6px 14px; font-size:0.8rem; min-height:36px; background:#e60023; border-color:#e60023; white-space:nowrap;" onclick="window.admin.downloadPinterestPhoto()">
-                  📥 Télécharger l'image sur le serveur
+                  📥 2. Télécharger l'image
                 </button>
               </div>
             </div>

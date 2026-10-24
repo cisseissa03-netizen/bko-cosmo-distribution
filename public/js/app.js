@@ -78,7 +78,10 @@ window.app = {
   filterByCategory,
   clearSearch,
   resetAllFilters,
-  selectBrandFromSearch
+  selectBrandFromSearch,
+  toggleHeroMode,
+  promptPwaInstall,
+  closeIosModal
 };
 
 /* ========================================================
@@ -91,6 +94,11 @@ function switchTab(tabName) {
   // Nav link active classes
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.toggle('active', link.dataset.tab === tabName);
+  });
+
+  // Mobile bottom bar active classes
+  document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tabName);
   });
 
   // Toggle view panels
@@ -126,6 +134,7 @@ function init() {
   loadCartFromStorage();
   updateCartBadge();
   setupEventListeners();
+  initPwa();
 
   fetchSettings();
   fetchProducts();
@@ -143,6 +152,94 @@ if (document.readyState === 'loading') {
 }
 
 /* ========================================================
+   PWA INSTALLATION & SERVICE WORKER
+======================================================== */
+let deferredPrompt = null;
+
+function initPwa() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('PWA ServiceWorker ready, scope:', reg.scope))
+        .catch(err => console.warn('PWA ServiceWorker registration issue:', err));
+    });
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById('pwa-install-header-btn');
+    if (btn) btn.style.display = 'inline-flex';
+  });
+
+  window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    const btn = document.getElementById('pwa-install-header-btn');
+    if (btn) btn.style.display = 'none';
+    showToastNotification('✓ BKO Cosmo installée avec succès sur votre appareil !', 'online');
+  });
+
+  window.addEventListener('online', () => {
+    showToastNotification('✓ Connexion Internet rétablie.', 'online');
+  });
+  window.addEventListener('offline', () => {
+    showToastNotification('📶 Mode Hors-Ligne : vous pouvez continuer à préparer votre demande.', 'warning');
+  });
+}
+
+function promptPwaInstall() {
+  const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  if (isStandalone) {
+    alert('✓ L\'application BKO Cosmo est déjà installée et active sur votre appareil.');
+    return;
+  }
+
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        const btn = document.getElementById('pwa-install-header-btn');
+        if (btn) btn.style.display = 'none';
+      }
+      deferredPrompt = null;
+    });
+    return;
+  }
+
+  if (isIos) {
+    openIosModal();
+    return;
+  }
+
+  alert('Pour installer l\'application sur votre écran d\'accueil :\n\n1. Cliquez sur le menu de votre navigateur (les 3 points ou l\'icône Installer dans la barre d\'adresse).\n2. Cliquez sur « Installer l\'application » ou « Ajouter à l\'écran d\'accueil ».\n3. L\'icône BKO Cosmo apparaîtra instantanément avec vos applications !');
+}
+
+function openIosModal() {
+  const modal = document.getElementById('pwa-ios-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeIosModal() {
+  const modal = document.getElementById('pwa-ios-modal');
+  if (modal) modal.classList.remove('active');
+}
+
+function showToastNotification(message, type = 'online') {
+  const toast = document.getElementById('offline-status-toast');
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.className = `offline-status-toast ${type}`;
+  toast.style.display = 'flex';
+
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 4000);
+}
+
+/* ========================================================
    API DATA FETCHING
 ======================================================== */
 async function fetchSettings() {
@@ -151,9 +248,67 @@ async function fetchSettings() {
     if (res.ok) {
       state.settings = await res.json();
       updateHeaderWhatsApp();
+      applyHeroVisualSettings();
     }
   } catch (e) {
     console.warn('Could not fetch settings, using defaults.', e);
+  }
+}
+
+function applyHeroVisualSettings() {
+  if (!state.settings) return;
+  const mainPhoto = document.getElementById('hero-main-photo');
+  if (mainPhoto && state.settings.heroImage) {
+    mainPhoto.src = state.settings.heroImage;
+  }
+
+  const is3DDefault = state.settings.heroDisplayMode === '3d';
+  const photoWrapper = document.getElementById('hero-photo-wrapper');
+  const canvas = document.getElementById('hero-three-canvas');
+  const toggleModeBtn = document.getElementById('toggle-hero-mode-btn');
+  const togglePauseBtn = document.getElementById('toggle-3d-btn');
+  const captionText = document.getElementById('hero-visual-caption-text');
+
+  if (is3DDefault) {
+    if (photoWrapper) photoWrapper.style.display = 'none';
+    if (canvas) canvas.style.display = 'block';
+    if (toggleModeBtn) toggleModeBtn.textContent = '📸 Voir la Photo';
+    if (togglePauseBtn) togglePauseBtn.style.display = 'inline-block';
+    if (captionText) captionText.textContent = 'Composition 3D stylisée (Three.js)';
+  } else {
+    if (photoWrapper) photoWrapper.style.display = 'flex';
+    if (canvas) canvas.style.display = 'none';
+    if (toggleModeBtn) toggleModeBtn.textContent = '🧊 Voir en 3D';
+    if (togglePauseBtn) togglePauseBtn.style.display = 'none';
+    if (captionText) captionText.textContent = '📸 Présentation visuelle des gammes';
+  }
+}
+
+function toggleHeroMode() {
+  const photoWrapper = document.getElementById('hero-photo-wrapper');
+  const canvas = document.getElementById('hero-three-canvas');
+  const toggleModeBtn = document.getElementById('toggle-hero-mode-btn');
+  const togglePauseBtn = document.getElementById('toggle-3d-btn');
+  const captionText = document.getElementById('hero-visual-caption-text');
+
+  if (!photoWrapper || !canvas) return;
+
+  const isPhotoCurrentlyShown = photoWrapper.style.display !== 'none';
+
+  if (isPhotoCurrentlyShown) {
+    // Switch to 3D
+    photoWrapper.style.display = 'none';
+    canvas.style.display = 'block';
+    if (toggleModeBtn) toggleModeBtn.textContent = '📸 Voir la Photo';
+    if (togglePauseBtn) togglePauseBtn.style.display = 'inline-block';
+    if (captionText) captionText.textContent = 'Composition 3D stylisée (Three.js)';
+  } else {
+    // Switch to Photo
+    photoWrapper.style.display = 'flex';
+    canvas.style.display = 'none';
+    if (toggleModeBtn) toggleModeBtn.textContent = '🧊 Voir en 3D';
+    if (togglePauseBtn) togglePauseBtn.style.display = 'none';
+    if (captionText) captionText.textContent = '📸 Présentation visuelle des gammes';
   }
 }
 
@@ -232,6 +387,12 @@ function updateCartBadge() {
   const stickyTotal = document.getElementById('sticky-cart-total');
   if (stickyUnits) stickyUnits.textContent = `${totalUnits} unité${totalUnits > 1 ? 's' : ''}`;
   if (stickyTotal) stickyTotal.textContent = formatFCFA(totalAmount);
+
+  const bottomBadge = document.getElementById('bottom-cart-badge');
+  if (bottomBadge) {
+    bottomBadge.textContent = totalUnits;
+    bottomBadge.style.display = totalUnits > 0 ? 'inline-block' : 'none';
+  }
 }
 
 /* ========================================================

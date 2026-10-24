@@ -178,5 +178,41 @@
     "isRestock": true,
     "description": "Isole l'épiderme fessier contre l'humidité et prévient les rougeurs et irritations du nourrisson dès la première application.",
     "image": "https://images.unsplash.com/photo-1594824813589-780b62e49755?w=600&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "prod-1792828505466",
+    "ref": "LDB",
+    "name": "CISSE",
+    "brand": "MIXA LAIT CORPS SATINANT",
+    "category": "Hygiène & Corps",
+    "format": "400 ML",
+    "unitPrice": 6000,
+    "stock": 100,
+    "active": true,
+    "allow3UnitsPermanent": false,
+    "allow3UnitsSpecial": false,
+    "isNewProduct": false,
+    "isNewArrival": false,
+    "isRestock": false,
+    "description": "",
+    "image": "/uploads/photo-1792828271624-451.jpg"
+  },
+  {
+    "id": "prod-1792829188961",
+    "ref": "DEO",
+    "name": "LOREAL",
+    "brand": "USHUAIA DEO GREANADE",
+    "category": "Hygiène & Corps",
+    "format": "200 ML",
+    "unitPrice": 2000,
+    "stock": 100,
+    "active": true,
+    "allow3UnitsPermanent": false,
+    "allow3UnitsSpecial": true,
+    "isNewProduct": false,
+    "isNewArrival": false,
+    "isRestock": false,
+    "description": "",
+    "image": "/uploads/photo-1792829132111-760.jpg"
   }
 ]

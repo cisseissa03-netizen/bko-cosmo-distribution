@@ -44,12 +44,23 @@ window.admin = {
   confirmExcelImport,
   openPinterestSearch,
   downloadPinterestPhoto,
-  filterProductsTable
+  filterProductsTable,
+  updateHeroPreviewMode,
+  setHeroImageDirect,
+  handleHeroFileSelected,
+  downloadHeroPinterestPhoto,
+  saveHeroSettings
 };
 
 function initAdmin() {
   setupAdminEventListeners();
   checkAuth();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
 }
 
 if (document.readyState === 'loading') {
@@ -127,12 +138,151 @@ async function loadAdminDashboard() {
   await Promise.all([
     fetchStats(),
     fetchOrders(),
-    fetchProducts()
+    fetchProducts(),
+    fetchHeroSettings()
   ]);
 
   renderKPIs();
   renderOrdersTable();
   renderProductsTable();
+}
+
+/* ========================================================
+   HERO VISUAL MANAGEMENT (PHOTO / 3D)
+======================================================== */
+async function fetchHeroSettings() {
+  try {
+    const res = await fetch('/api/settings');
+    if (!res.ok) return;
+    const settings = await res.json();
+    adminState.settings = settings;
+
+    const mode = settings.heroDisplayMode || 'image';
+    const image = settings.heroImage || 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1000&auto=format&fit=crop&q=80';
+
+    const radioImage = document.getElementById('hero-mode-image-radio');
+    const radio3D = document.getElementById('hero-mode-3d-radio');
+    if (radioImage && radio3D) {
+      if (mode === '3d') radio3D.checked = true;
+      else radioImage.checked = true;
+    }
+
+    const input = document.getElementById('admin-hero-image-input');
+    if (input) input.value = image;
+
+    setHeroImageDirect(image);
+    updateHeroPreviewMode(mode);
+  } catch (err) {
+    console.error('Error fetching hero settings:', err);
+  }
+}
+
+function updateHeroPreviewMode(mode) {
+  const badge = document.getElementById('admin-hero-preview-badge');
+  const img = document.getElementById('admin-hero-preview-img');
+  const text3D = document.getElementById('admin-hero-preview-3d-text');
+
+  if (mode === '3d') {
+    if (badge) {
+      badge.textContent = 'Mode 3D Actif';
+      badge.style.background = '#fef3c7';
+      badge.style.color = '#b45309';
+    }
+    if (img) img.style.display = 'none';
+    if (text3D) text3D.style.display = 'block';
+  } else {
+    if (badge) {
+      badge.textContent = 'Mode Photo Actif';
+      badge.style.background = 'var(--primary-light)';
+      badge.style.color = 'var(--primary)';
+    }
+    if (img) img.style.display = 'block';
+    if (text3D) text3D.style.display = 'none';
+  }
+}
+
+function setHeroImageDirect(url) {
+  const img = document.getElementById('admin-hero-preview-img');
+  const input = document.getElementById('admin-hero-image-input');
+  if (img && url) img.src = url;
+  if (input && input.value !== url) input.value = url;
+}
+
+async function handleHeroFileSelected(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const dataUrl = e.target.result;
+    setHeroImageDirect(dataUrl);
+
+    try {
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ dataUrl })
+      });
+      const data = await res.json();
+      if (data.url) {
+        setHeroImageDirect(data.url);
+      }
+    } catch (err) {
+      console.warn('Hero file upload fallback to dataUrl');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function downloadHeroPinterestPhoto() {
+  const input = document.getElementById('admin-hero-pinterest-url');
+  if (!input || !input.value.trim()) {
+    alert('Veuillez coller le lien d\'une image Pinterest.');
+    return;
+  }
+
+  const imageUrl = input.value.trim();
+  try {
+    const res = await fetch('/api/admin/fetch-image-url', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ imageUrl })
+    });
+    const data = await res.json();
+    if (data.url) {
+      setHeroImageDirect(data.url);
+      input.value = '';
+      alert('✓ Photo Pinterest téléchargée pour le visuel d\'accueil !');
+    }
+  } catch (err) {
+    setHeroImageDirect(imageUrl);
+  }
+}
+
+async function saveHeroSettings() {
+  const selectedRadio = document.querySelector('input[name="heroDisplayMode"]:checked');
+  const mode = selectedRadio ? selectedRadio.value : 'image';
+  const imgInput = document.getElementById('admin-hero-image-input');
+  const heroImage = imgInput ? imgInput.value.trim() : '';
+
+  try {
+    const res = await fetch('/api/admin/settings', {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        heroDisplayMode: mode,
+        heroImage: heroImage
+      })
+    });
+
+    if (res.ok) {
+      alert('✓ Visuel d\'accueil enregistré avec succès ! Le changement est immédiatement visible sur la page d\'accueil.');
+    } else {
+      alert('Erreur lors de l\'enregistrement des paramètres.');
+    }
+  } catch (err) {
+    alert('Erreur réseau.');
+  }
 }
 
 async function fetchStats() {

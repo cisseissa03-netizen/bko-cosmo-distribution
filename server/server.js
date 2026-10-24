@@ -62,8 +62,26 @@ app.get('/api/settings', (req, res) => {
     whatsappNumber: settings.whatsappNumber,
     city: settings.city,
     currency: settings.currency,
-    warehouseAddress: settings.warehouseAddress
+    warehouseAddress: settings.warehouseAddress,
+    heroDisplayMode: settings.heroDisplayMode || 'image',
+    heroImage: settings.heroImage || 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1000&auto=format&fit=crop&q=80'
   });
+});
+
+// Admin: Update settings (hero image, mode, etc.)
+app.put('/api/admin/settings', requireAuth, (req, res) => {
+  const current = db.getSettings();
+  const allowed = ['companyName', 'ceoName', 'whatsappNumber', 'email', 'city', 'warehouseAddress', 'currency', 'heroDisplayMode', 'heroImage'];
+  
+  const updated = { ...current };
+  allowed.forEach(key => {
+    if (req.body[key] !== undefined) {
+      updated[key] = req.body[key];
+    }
+  });
+
+  db.saveSettings(updated);
+  res.json({ success: true, settings: updated });
 });
 
 // Get catalog products (active only for public)
@@ -345,15 +363,36 @@ app.post('/api/admin/fetch-image-url', requireAuth, async (req, res) => {
   }
 
   try {
-    const response = await fetch(imageUrl.trim());
+    let targetUrl = imageUrl.trim();
+    let response = await fetch(targetUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+      }
+    });
+
     if (!response.ok) {
       throw new Error(`Échec de récupération de l'image (HTTP ${response.status})`);
+    }
+
+    let contentType = response.headers.get('content-type') || '';
+
+    // If a Pinterest page or pin link was pasted (text/html), extract og:image
+    if (contentType.includes('text/html')) {
+      const html = await response.text();
+      const match = html.match(/<meta\s+(?:property|name)=["'](?:og:image|twitter:image)["']\s+content=["']([^"']+)["']/i) ||
+                    html.match(/(https:\/\/i\.pinimg\.com\/originals\/[a-zA-Z0-9_\/.-]+)/i) ||
+                    html.match(/(https:\/\/i\.pinimg\.com\/736x\/[a-zA-Z0-9_\/.-]+)/i) ||
+                    html.match(/(https:\/\/i\.pinimg\.com\/[a-zA-Z0-9_\/.-]+\.(?:jpg|jpeg|png|webp))/i);
+      if (match && match[1]) {
+        targetUrl = match[1];
+        response = await fetch(targetUrl);
+        contentType = response.headers.get('content-type') || '';
+      }
     }
 
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    const contentType = response.headers.get('content-type') || '';
     let ext = 'jpg';
     if (contentType.includes('png')) ext = 'png';
     else if (contentType.includes('webp')) ext = 'webp';
