@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Récapitulatif de Demande / Devis Proforma | BKO Cosmo Distrib</title>
+  <style>
+    @page { size: A4 portrait; margin: 15mm; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #0f172a;
+      background: #f8fafc;
+      margin: 0;
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .sheet {
+      background: #ffffff;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .header-table { width: 100%; margin-bottom: 25px; border-bottom: 2px solid #0d5c75; padding-bottom: 15px; }
+    .company-title { font-size: 18px; font-weight: 900; color: #0d5c75; }
+    .doc-badge { background: #e6f4f8; color: #0d5c75; padding: 6px 14px; font-weight: 800; font-size: 14px; border-radius: 4px; display: inline-block; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+    .info-card { background: #f8fafc; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 6px; }
+    .info-card h4 { margin: 0 0 8px 0; font-size: 12px; text-transform: uppercase; color: #64748b; }
+    table.items-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
+    table.items-table th { background: #0d5c75; color: #ffffff; padding: 8px 10px; font-size: 12px; text-align: left; }
+    table.items-table td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; }
+    .totals-area { margin-left: auto; width: 300px; }
+    .totals-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #e2e8f0; }
+    .totals-grand { font-size: 16px; font-weight: 900; color: #0d5c75; border-top: 2px solid #0d5c75; padding-top: 8px; }
+    .disclaimer { margin-top: 30px; padding: 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; font-size: 11px; color: #92400e; }
+    .print-bar { max-width: 800px; margin: 0 auto 15px auto; display: flex; justify-content: space-between; }
+    .btn { background: #0d5c75; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 700; border: none; cursor: pointer; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .print-bar { display: none; }
+      .sheet { border: none; box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <a href="/admin.html" class="btn" style="background:#64748b;">← Retour à l'espace CEO</a>
+    <button class="btn" onclick="window.print()">🖨️ Imprimer ce document</button>
+  </div>
+
+  <div class="sheet" id="doc-content">
+    <table class="header-table">
+      <tr>
+        <td>
+          <div class="company-title">BKO COSMO DISTRIBUTION</div>
+          <div style="color:#64748b; font-size:12px; margin-top:4px;">
+            Distribution de gros en Dermo-Cosmétique & Hygiène<br>
+            Entrepôt Bamako : Sotuba / ACI 2000, Mali<br>
+            Contact CEO : +223 70 00 00 00
+          </div>
+        </td>
+        <td style="text-align:right;">
+          <div class="doc-badge">DEVIS PROFORMA / RÉCAPITULATIF</div>
+          <div style="font-family:monospace; font-weight:900; font-size:14px; margin-top:6px;" id="order-ref">DEM-BKO-...</div>
+          <div style="color:#64748b; font-size:11px;" id="order-date">Date : --/--/----</div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Établissement Destinataire</h4>
+        <div style="font-size:14px; font-weight:800;" id="client-name">Pharmacie...</div>
+        <div id="client-type" style="color:#64748b; font-size:12px; margin-bottom:4px;">Officine</div>
+        <div id="client-contact">Contact : Dr. ...</div>
+        <div id="client-phone">Téléphone : +223 ...</div>
+      </div>
+      <div class="info-card">
+        <h4>Lieu & Modalités de Livraison</h4>
+        <div><strong>Ville :</strong> Bamako</div>
+        <div><strong>Quartier :</strong> <span id="client-neighborhood">...</span></div>
+        <div><strong>Adresse :</strong> <span id="client-address">...</span></div>
+        <div><strong>Consignes :</strong> <span id="client-instructions">...</span></div>
+      </div>
+    </div>
+
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th style="width:15%;">Réf</th>
+          <th style="width:45%;">Désignation Produit & Format</th>
+          <th style="width:15%; text-align:right;">Prix Unitaire</th>
+          <th style="width:10%; text-align:center;">Quantité</th>
+          <th style="width:15%; text-align:right;">Total (FCFA)</th>
+        </tr>
+      </thead>
+      <tbody id="items-tbody">
+        <!-- Rendered by JS -->
+      </tbody>
+    </table>
+
+    <div class="totals-area">
+      <div class="totals-row">
+        <span>Sous-total articles :</span>
+        <strong id="subtotal-val">0 FCFA</strong>
+      </div>
+      <div class="totals-row">
+        <span>Frais de livraison :</span>
+        <span style="color:#64748b;">Inclus / À confirmer</span>
+      </div>
+      <div class="totals-row totals-grand">
+        <span>TOTAL ESTIMÉ :</span>
+        <span id="grandtotal-val">0 FCFA</span>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Mention importante :</strong> Ce document récapitule la demande de commande transmise pour vérification commerciale. Les prix sont exprimés en Francs CFA (FCFA) nets et correspondent aux tarifs de gros en vigueur lors de la commande. Ce récapitulatif ne constitue pas une facture fiscale définitive.
+    </div>
+
+    <div style="margin-top:40px; display:flex; justify-content:space-between; padding-top:20px; border-top:1px dashed #cbd5e1;">
+      <div style="text-align:center; width:220px;">
+        <div style="font-weight:700; font-size:12px; margin-bottom:45px;">Pour le Commercial / La Direction</div>
+        <div style="border-top:1px solid #94a3b8; font-size:11px; padding-top:4px;">Signature autorisée & Cachet</div>
+      </div>
+      <div style="text-align:center; width:220px;">
+        <div style="font-weight:700; font-size:12px; margin-bottom:45px;">Pour l'Établissement Client</div>
+        <div style="border-top:1px solid #94a3b8; font-size:11px; padding-top:4px;">Date, Cachet & Bon pour Accord</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('id');
+    const token = sessionStorage.getItem('bko_admin_token');
+
+    if (!orderId) {
+      document.body.innerHTML = '<div style="padding:40px; text-align:center;">Paramètre ID manquant.</div>';
+    } else {
+      fetch(`/api/admin/orders/${orderId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      .then(res => res.json())
+      .then(order => {
+        if (order.error) throw new Error(order.error);
+
+        document.getElementById('order-ref').textContent = order.orderRef;
+        document.getElementById('order-date').textContent = 'Date : ' + new Date(order.createdAt).toLocaleDateString('fr-FR');
+        document.getElementById('client-name').textContent = order.establishmentName;
+        document.getElementById('client-type').textContent = order.establishmentType;
+        document.getElementById('client-contact').textContent = 'Contact : ' + order.contactName;
+        document.getElementById('client-phone').textContent = 'Téléphone : ' + order.phone;
+        document.getElementById('client-neighborhood').textContent = order.neighborhood;
+        document.getElementById('client-address').textContent = order.address || 'Non spécifié';
+        document.getElementById('client-instructions').textContent = order.deliveryNotes || 'Aucune consigne';
+
+        const tbody = document.getElementById('items-tbody');
+        tbody.innerHTML = order.items.map(i => `
+          <tr>
+            <td style="font-family:monospace;">${i.ref}</td>
+            <td><strong>${i.name}</strong> (${i.format})</td>
+            <td style="text-align:right;">${i.unitPrice.toLocaleString('fr-FR')} FCFA</td>
+            <td style="text-align:center; font-weight:700;">${i.qty}</td>
+            <td style="text-align:right; font-weight:700;">${i.lineTotal.toLocaleString('fr-FR')} FCFA</td>
+          </tr>
+        `).join('');
+
+        document.getElementById('subtotal-val').textContent = order.totalAmount.toLocaleString('fr-FR') + ' FCFA';
+        document.getElementById('grandtotal-val').textContent = order.totalAmount.toLocaleString('fr-FR') + ' FCFA';
+      })
+      .catch(err => {
+        document.body.innerHTML = `<div style="padding:40px; text-align:center; color:red;">Erreur : ${err.message}. Veuillez vous connecter à l'espace CEO.</div>`;
+      });
+    }
+  </script>
+</body>
+</html>

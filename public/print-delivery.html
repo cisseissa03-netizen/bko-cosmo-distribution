@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bon de Livraison (BL) | BKO Cosmo Distribution</title>
+  <style>
+    @page { size: A4 portrait; margin: 15mm; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #0f172a;
+      background: #f8fafc;
+      margin: 0;
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .sheet {
+      background: #ffffff;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .header-table { width: 100%; margin-bottom: 25px; border-bottom: 2px solid #0d5c75; padding-bottom: 15px; }
+    .company-title { font-size: 18px; font-weight: 900; color: #0d5c75; }
+    .doc-badge { background: #0d5c75; color: #ffffff; padding: 6px 14px; font-weight: 800; font-size: 14px; border-radius: 4px; display: inline-block; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+    .info-card { background: #f8fafc; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 6px; }
+    .info-card h4 { margin: 0 0 8px 0; font-size: 12px; text-transform: uppercase; color: #64748b; }
+    table.items-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
+    table.items-table th { background: #334155; color: #ffffff; padding: 8px 10px; font-size: 12px; text-align: left; }
+    table.items-table td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; }
+    .disclaimer { margin-top: 30px; padding: 10px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 11px; color: #475569; }
+    .print-bar { max-width: 800px; margin: 0 auto 15px auto; display: flex; justify-content: space-between; }
+    .btn { background: #0d5c75; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 700; border: none; cursor: pointer; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .print-bar { display: none; }
+      .sheet { border: none; box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <a href="/admin.html" class="btn" style="background:#64748b;">← Retour à l'espace CEO</a>
+    <button class="btn" onclick="window.print()">🖨️ Imprimer le Bon de Livraison</button>
+  </div>
+
+  <div class="sheet" id="doc-content">
+    <table class="header-table">
+      <tr>
+        <td>
+          <div class="company-title">BKO COSMO DISTRIBUTION</div>
+          <div style="color:#64748b; font-size:12px; margin-top:4px;">
+            Distribution en Gros • Pharmacies & Supermarchés<br>
+            Entrepôt Logistique Bamako (Mali)<br>
+            Téléphone Coordination : +223 70 00 00 00
+          </div>
+        </td>
+        <td style="text-align:right;">
+          <div class="doc-badge">BON DE LIVRAISON (BL)</div>
+          <div style="font-family:monospace; font-weight:900; font-size:14px; margin-top:6px;" id="bl-ref">BL-BKO-...</div>
+          <div style="color:#64748b; font-size:11px;" id="bl-date">Date de livraison : --/--/----</div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Destinataire / Client</h4>
+        <div style="font-size:14px; font-weight:800;" id="client-name">Pharmacie...</div>
+        <div id="client-type" style="color:#64748b; font-size:12px; margin-bottom:4px;">Officine</div>
+        <div id="client-contact">Contact réception : ...</div>
+        <div id="client-phone">Téléphone : +223 ...</div>
+      </div>
+      <div class="info-card">
+        <h4>Adresse de Déchargement à Bamako</h4>
+        <div><strong>Quartier :</strong> <span id="client-neighborhood">...</span></div>
+        <div><strong>Repère / Adresse :</strong> <span id="client-address">...</span></div>
+        <div><strong>Consignes d'accès :</strong> <span id="client-instructions">...</span></div>
+        <div style="margin-top:6px; font-size:11px; color:#0d5c75; font-weight:600;">
+          Réf. Demande initiale : <span id="order-ref" style="font-family:monospace;">DEM-BKO-...</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th style="width:15%;">Réf</th>
+          <th style="width:40%;">Désignation Produit & Colisage</th>
+          <th style="width:15%; text-align:center;">Qté Commandée</th>
+          <th style="width:15%; text-align:center; background:#0d5c75;">Qté Livrée</th>
+          <th style="width:15%; text-align:center;">Conformité</th>
+        </tr>
+      </thead>
+      <tbody id="items-tbody">
+        <!-- Rendered by JS -->
+      </tbody>
+    </table>
+
+    <div class="disclaimer">
+      <strong>Condition de livraison :</strong> Le présent bon de livraison atteste de la remise matérielle des colis mentionnés ci-dessus en bon état apparent. Tout écart de colisage ou réserve doit être consigné par écrit sur ce document lors de la réception. Ce bon de livraison ne constitue pas une facture fiscale.
+    </div>
+
+    <!-- Signatures Section -->
+    <div style="margin-top:40px; display:grid; grid-template-columns: 1fr 1fr; gap:30px; padding-top:20px; border-top:1px dashed #cbd5e1;">
+      <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; text-align:center;">
+        <div style="font-weight:700; font-size:12px; margin-bottom:50px;">Livreur / Chauffeur BKO Cosmo</div>
+        <div style="border-top:1px solid #94a3b8; font-size:11px; padding-top:4px;">Nom, Date & Signature</div>
+      </div>
+      <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; text-align:center;">
+        <div style="font-weight:700; font-size:12px; margin-bottom:50px;">Réceptionnaire (Officine / Supermarché)</div>
+        <div style="border-top:1px solid #94a3b8; font-size:11px; padding-top:4px;">Reçu conforme (Date, Cachet & Signature)</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('id');
+    const token = sessionStorage.getItem('bko_admin_token');
+
+    if (!orderId) {
+      document.body.innerHTML = '<div style="padding:40px; text-align:center;">Paramètre ID manquant.</div>';
+    } else {
+      fetch(`/api/admin/orders/${orderId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      .then(res => res.json())
+      .then(order => {
+        if (order.error) throw new Error(order.error);
+
+        const blRef = order.orderRef.replace('DEM', 'BL');
+        document.getElementById('bl-ref').textContent = blRef;
+        document.getElementById('order-ref').textContent = order.orderRef;
+        document.getElementById('bl-date').textContent = 'Date : ' + new Date().toLocaleDateString('fr-FR');
+        document.getElementById('client-name').textContent = order.establishmentName;
+        document.getElementById('client-type').textContent = order.establishmentType;
+        document.getElementById('client-contact').textContent = 'Contact : ' + order.contactName;
+        document.getElementById('client-phone').textContent = 'Téléphone : ' + order.phone;
+        document.getElementById('client-neighborhood').textContent = order.neighborhood;
+        document.getElementById('client-address').textContent = order.address || 'Non spécifié';
+        document.getElementById('client-instructions').textContent = order.deliveryNotes || 'Aucune consigne';
+
+        const tbody = document.getElementById('items-tbody');
+        tbody.innerHTML = order.items.map(i => {
+          const delivered = i.deliveredQty !== undefined ? i.deliveredQty : i.qty;
+          return `
+            <tr>
+              <td style="font-family:monospace;">${i.ref}</td>
+              <td><strong>${i.name}</strong> (${i.format})</td>
+              <td style="text-align:center;">${i.qty}</td>
+              <td style="text-align:center; font-weight:800; color:#0d5c75; font-size:14px;">${delivered}</td>
+              <td style="text-align:center;">[ &nbsp; ] Conforme</td>
+            </tr>
+          `;
+        }).join('');
+      })
+      .catch(err => {
+        document.body.innerHTML = `<div style="padding:40px; text-align:center; color:red;">Erreur : ${err.message}. Veuillez vous connecter à l'espace CEO.</div>`;
+      });
+    }
+  </script>
+</body>
+</html>

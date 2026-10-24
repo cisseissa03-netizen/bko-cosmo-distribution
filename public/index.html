@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKO Cosmo Distribution | Grossiste Dermo-Cosmétique & Hygiène Bamako</title>
+  <meta name="description" content="Plateforme de commande en gros de produits cosmétiques, dermo-cosmétiques et hygiène pour pharmacies et supermarchés à Bamako, Mali.">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- GSAP Local Library -->
+  <script src="/vendor/gsap.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Announcement Bar (Explicit Provisional Wholesale Notice) -->
+  <aside class="top-notice-bar" aria-label="Informations professionnelles">
+    <span>📍 <strong>Entrepôt Bamako :</strong> Distribution directe pour Pharmacies & Supermarchés</span>
+    <span class="pill">Colisage Pro : dès 6 unités (Exceptions 3 unités)</span>
+    <span>📞 Assistance directe : Commercial & Gérant</span>
+  </aside>
+
+  <!-- Site Header / Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Brand / Identity -->
+        <a href="#home" class="brand-wrapper" data-tab="home">
+          <div class="brand-logo-icon" aria-hidden="true">BKO</div>
+          <div class="brand-text">
+            <span class="brand-title">COSMO DISTRIB</span>
+            <span class="brand-subtitle">Grossiste Pharmacies & Supermarchés • Bamako</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="main-nav" aria-label="Navigation principale">
+          <button type="button" class="nav-link active" data-tab="home">Accueil</button>
+          <button type="button" class="nav-link" data-tab="catalog">Catalogue</button>
+          <button type="button" class="nav-link" data-tab="quick-order">Commande Rapide</button>
+          <button type="button" class="nav-link" data-tab="arrivages">Nouveaux Arrivages</button>
+          <button type="button" class="nav-link" data-tab="track">Suivi Demande</button>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <a href="https://wa.me/22370000000" target="_blank" class="btn-whatsapp-header" id="header-whatsapp-btn" title="Contacter le commercial sur WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <span>WhatsApp</span>
+          </a>
+
+          <button type="button" class="cart-toggle-btn" id="cart-toggle-btn" aria-label="Ouvrir mon panier de demande">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span>Ma Demande</span>
+            <span class="cart-badge">0</span>
+            <span class="cart-price-sum">0 FCFA</span>
+          </button>
+
+          <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu de navigation">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Panel -->
+    <div class="mobile-nav-panel" id="mobile-nav-panel">
+      <button type="button" class="nav-link active" data-tab="home">Accueil</button>
+      <button type="button" class="nav-link" data-tab="catalog">Catalogue complet</button>
+      <button type="button" class="nav-link" data-tab="quick-order">Commande Rapide multi-produits</button>
+      <button type="button" class="nav-link" data-tab="arrivages">Nouveaux Arrivages & Retours de stock</button>
+      <button type="button" class="nav-link" data-tab="track">Suivre une demande reçue</button>
+      <a href="/admin.html" class="nav-link" style="color:var(--text-light); margin-top:8px;">🔒 Espace Gérant / CEO</a>
+    </div>
+  </header>
+
+  <!-- MAIN APP VIEWS -->
+  <main id="main-content">
+
+    <!-- ==========================================
+         VIEW 1: HOME (ACCUEIL)
+    ========================================== -->
+    <div id="tab-view-home">
+      <!-- Hero Section with Three.js Progressive Enhancement -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <div class="hero-badge-tag">
+                <span class="badge-dot" style="width:8px; height:8px; border-radius:50%; background:var(--primary);"></span>
+                <span>Plateforme B2B Grossiste • Bamako, Mali</span>
+              </div>
+              <h1 class="hero-title">
+                Approvisionnement direct pour <span class="highlight">Pharmacies & Supermarchés</span>
+              </h1>
+              <p class="hero-description">
+                Catalogue de distribution en gros de dermo-cosmétique, hygiène et soins bébé à Bamako. Tarifs transparents en FCFA, colisage rigoureux dès 6 unités (ou 3 unités sur références techniques), transmission simple sans paiement en ligne.
+              </p>
+              <div class="hero-ctas">
+                <button type="button" class="btn-primary-large" data-tab="catalog">
+                  <span>Consulter le catalogue</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <button type="button" class="btn-secondary-large" data-tab="quick-order">
+                  <span>Commande rapide</span>
+                </button>
+              </div>
+
+              <!-- Key Rules Highlights -->
+              <div class="hero-rules-highlights">
+                <div class="rule-highlight-item">
+                  <div class="rule-highlight-icon">✓</div>
+                  <div class="rule-highlight-text">
+                    <strong>Colisage Standard</strong>
+                    <span>Paliers stricts de 6 unités (6, 12, 18...)</span>
+                  </div>
+                </div>
+                <div class="rule-highlight-item">
+                  <div class="rule-highlight-icon">⚡</div>
+                  <div class="rule-highlight-text">
+                    <strong>Exception 3 Unités</strong>
+                    <span>Autorisée sur produits techniques & fins de stock</span>
+                  </div>
+                </div>
+                <div class="rule-highlight-item">
+                  <div class="rule-highlight-icon">🚚</div>
+                  <div class="rule-highlight-text">
+                    <strong>Livraison Bamako</strong>
+                    <span>Coordination directe avec notre commercial</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3D Scene / Decorative Card -->
+            <div class="hero-visual-card">
+              <canvas id="hero-three-canvas" aria-label="Visualisation 3D décorative"></canvas>
+              <!-- Static Accessible Fallback -->
+              <div class="hero-fallback-visual">
+                <div style="font-size:3rem; margin-bottom:12px;">🧴✨</div>
+                <h3 style="font-size:1.2rem; font-weight:800; color:var(--primary);">Distribution Cosmétique Pro</h3>
+                <p style="font-size:0.875rem; color:var(--text-muted); margin-top:8px;">Soins dermatologiques, capillaires et corporels sélectionnés pour le marché de Bamako.</p>
+              </div>
+              <div class="hero-visual-caption">
+                <span>Composition 3D stylisée (légère & désactivable)</span>
+                <button type="button" class="btn-3d-toggle" id="toggle-3d-btn" title="Mettre en pause ou relancer la scène 3D">⏸ Pause 3D</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it Works (Fonctionnement en 3 étapes) -->
+      <section class="how-it-works-section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-subtitle-tag">Simplicité & Rigueur Commerciale</span>
+            <h2 class="section-main-title">Comment fonctionne votre approvisionnement</h2>
+            <p class="section-description">Un parcours d'achat conçu pour les professionnels de santé et gérants de magasins à Bamako.</p>
+          </div>
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <h3 class="step-title">Sélectionnez vos références</h3>
+              <p class="step-text">Parcourez le catalogue ou la commande rapide. Choisissez des quantités autorisées (6, 12, 18... ou 3 sur références spécifiques). Chaque produit est contrôlé indépendamment.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <h3 class="step-title">Transmettez votre demande</h3>
+              <p class="step-text">Renseignez le nom de votre établissement et votre quartier à Bamako. Aucun compte obligatoire, aucun paiement en ligne : votre demande est enregistrée immédiatement.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <h3 class="step-title">Confirmation & Livraison</h3>
+              <p class="step-text">Le commercial/CEO vérifie votre commande, vous contacte pour confirmer le créneau et organise la livraison directe à votre officine ou point de vente.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured New Arrivals preview on home -->
+      <section style="padding:48px 0; background:var(--bg-main);">
+        <div class="container">
+          <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:24px;">
+            <div>
+              <span class="section-subtitle-tag">Disponibilités récentes</span>
+              <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-main);">Derniers arrivages en entrepôt</h2>
+            </div>
+            <button type="button" class="btn-secondary-large" data-tab="arrivages" style="min-height:40px; font-size:0.875rem;">
+              Voir tous les arrivages →
+            </button>
+          </div>
+          <div id="home-featured-grid" class="products-grid">
+            <!-- Dynamically populated or mirrors catalog arrivals -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         VIEW 2: CATALOG (CATALOGUE COMPLET)
+    ========================================== -->
+    <div id="tab-view-catalog" style="display:none;">
+      <section class="catalog-section">
+        <div class="container">
+          <!-- Filter and Search Toolbar -->
+          <div class="filter-bar">
+            <!-- Search Input with Synchronized Brand Matching -->
+            <div class="search-input-wrapper">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="catalog-search-input" class="search-input" placeholder="Rechercher par nom de produit, marque (ex: CeraVe, Bioderma) ou réf..." autocomplete="off">
+              <button type="button" id="clear-search-btn" class="btn-clear-search" aria-label="Effacer recherche">✕</button>
+            </div>
+
+            <!-- Instant 1-Click Brand Suggestion Bar (dynamically populated when typing) -->
+            <div id="brand-search-suggestions" class="brand-search-suggestions" style="display:none;"></div>
+
+            <!-- 1-Click Brand Pills Bar (Synchronized with Search) -->
+            <div class="brand-filter-container">
+              <div class="brand-filter-label-row">
+                <span class="brand-filter-title">🏷️ Marques en 1 clic :</span>
+                <span class="brand-filter-hint">Sélectionnez une marque pour voir tous ses produits</span>
+              </div>
+              <div class="brand-pills-row" id="brand-pills-row" role="tablist">
+                <!-- Populated dynamically by app.js -->
+              </div>
+            </div>
+
+            <!-- Categories Horizontal Pills -->
+            <div class="category-pills-row" role="tablist">
+              <button type="button" class="pill-filter active" data-category="all">Toutes les catégories</button>
+              <button type="button" class="pill-filter" data-category="Dermo-Cosmétique">Dermo-Cosmétique</button>
+              <button type="button" class="pill-filter" data-category="Hygiène & Corps">Hygiène & Corps</button>
+              <button type="button" class="pill-filter" data-category="Protection Solaire">Protection Solaire</button>
+              <button type="button" class="pill-filter" data-category="Soins Bébé & Maternité">Soins Bébé</button>
+              <button type="button" class="pill-filter" data-category="Capillaire">Capillaire</button>
+            </div>
+
+            <!-- Additional Selects & Active Filters Badges & Results Count -->
+            <div class="filter-controls-row">
+              <div class="active-filters-badges" id="active-filters-badges">
+                <!-- Dynamically populated with active brand, category or search chips -->
+              </div>
+              <div class="filter-selects-group">
+                <select id="brand-select" class="custom-select" aria-label="Filtrer par marque">
+                  <option value="all">Toutes les marques</option>
+                </select>
+              </div>
+              <span class="results-count-text" id="catalog-results-count">Chargement des références...</span>
+            </div>
+          </div>
+
+          <!-- Product Cards Grid -->
+          <div class="products-grid" id="products-grid">
+            <!-- Rendered by app.js -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         VIEW 3: QUICK ORDER (COMMANDE RAPIDE)
+    ========================================== -->
+    <div id="tab-view-quick-order" style="display:none;">
+      <section class="quick-order-section">
+        <div class="container">
+          <div style="margin-bottom:16px;">
+            <span class="section-subtitle-tag">Vue groupée haute productivité</span>
+            <h2 style="font-size:1.6rem; font-weight:800; color:var(--text-main);">Saisie Rapide Multi-Références</h2>
+            <p style="font-size:0.9rem; color:var(--text-muted);">
+              Ajustez directement les quantités autorisées par ligne sans ouvrir les fiches individuelles.
+            </p>
+          </div>
+
+          <!-- Quick Order 1-Click Brand Filter -->
+          <div class="quick-order-brand-bar" style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-md); padding:12px 16px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+              <span style="font-size:0.8125rem; font-weight:700; color:var(--text-main);">🏷️ Filtrer par Marque en 1 clic :</span>
+              <span style="font-size:0.75rem; color:var(--text-light);" id="quick-order-count"></span>
+            </div>
+            <div class="brand-pills-row" id="quick-order-brand-pills">
+              <!-- Populated dynamically by app.js -->
+            </div>
+          </div>
+
+          <div class="quick-order-table-card">
+            <div id="quick-order-items-list">
+              <!-- Rendered by app.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky Floating Bar for Quick Order -->
+      <div class="sticky-bottom-summary-bar">
+        <div>
+          <span style="font-size:0.8125rem; opacity:0.8; display:block;">Total sélectionné :</span>
+          <strong id="sticky-cart-units" style="font-size:1.1rem; color:#fef08a;">0 unités</strong>
+          <span style="margin:0 8px; opacity:0.4;">|</span>
+          <strong id="sticky-cart-total" style="font-size:1.1rem;">0 FCFA</strong>
+        </div>
+        <button type="button" class="btn-primary-large" id="sticky-open-cart-btn" style="min-height:42px; padding:8px 18px; font-size:0.9rem;">
+          <span>Consulter mon panier</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         VIEW 4: ARRIVAGES & RESTOCKS
+    ========================================== -->
+    <div id="tab-view-arrivages" style="display:none;">
+      <section style="padding:40px 0 64px 0;">
+        <div class="container">
+          <!-- Arrivages Header Banner -->
+          <div class="arrivages-header-card">
+            <div>
+              <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:var(--radius-full); font-size:0.75rem; font-weight:700; text-transform:uppercase;">
+                Stock Bamako Entrepôt
+              </span>
+              <h2 style="font-size:1.6rem; font-weight:900; margin-top:8px;">Nouveaux Arrivages & Retours en Stock</h2>
+              <p style="font-size:0.9rem; opacity:0.9; margin-top:4px;">
+                Références récemment réceptionnées prêtes pour expédition rapide dans vos rayons.
+              </p>
+            </div>
+            <button type="button" class="btn-share-whatsapp-arrivages" id="share-arrivages-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              <span>Partager la liste sur WhatsApp</span>
+            </button>
+          </div>
+
+          <!-- Arrivages Sub-tabs -->
+          <div style="display:flex; gap:8px; margin-bottom:24px; overflow-x:auto;">
+            <button type="button" class="pill-filter active arrivage-tab-pill" data-filter="all">Tous les arrivages</button>
+            <button type="button" class="pill-filter arrivage-tab-pill" data-filter="new-arrival">Nouveaux arrivages</button>
+            <button type="button" class="pill-filter arrivage-tab-pill" data-filter="new-product">Nouveaux produits</button>
+            <button type="button" class="pill-filter arrivage-tab-pill" data-filter="restock">Retours en stock</button>
+          </div>
+
+          <!-- Arrivages Grid -->
+          <div class="products-grid" id="arrivages-products-grid">
+            <!-- Rendered by app.js -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         VIEW 5: TRACK ORDER (SUIVI DE DEMANDE)
+    ========================================== -->
+    <div id="tab-view-track" style="display:none;">
+      <section style="padding:48px 0 64px 0;">
+        <div class="container">
+          <div class="tracking-card">
+            <h2 style="font-size:1.4rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">Suivre votre demande de commande</h2>
+            <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:20px;">
+              Saisissez le numéro de référence transmis lors de votre demande (ex : <code>DEM-BKO-2026-XXXX</code>).
+            </p>
+            <form id="tracking-form" style="display:flex; gap:10px; flex-wrap:wrap;">
+              <input type="text" id="track-order-input" class="form-control" style="flex:1; min-width:240px; font-family:monospace; font-weight:700;" placeholder="ex: DEM-BKO-2026-9841" required>
+              <button type="submit" class="btn-primary-large" style="min-height:44px; padding:10px 20px;">
+                Vérifier le statut
+              </button>
+            </form>
+
+            <div id="tracking-result-box" style="margin-top:24px;"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- ==========================================
+       CART SLIDE-OVER DRAWER
+  ========================================== -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="cart-drawer-panel" id="cart-drawer" aria-label="Panier de commande">
+    <div class="drawer-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <h2 class="drawer-title">Ma Demande de Commande</h2>
+      </div>
+      <button type="button" class="btn-close-drawer" id="close-cart-btn" aria-label="Fermer le panier">✕</button>
+    </div>
+    <div class="drawer-body" id="cart-drawer-body">
+      <!-- Rendered by app.js -->
+    </div>
+    <div class="drawer-footer" id="cart-drawer-footer">
+      <!-- Rendered by app.js -->
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       MODAL: PRODUCT DETAIL
+  ========================================== -->
+  <div class="modal-overlay" id="product-detail-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size:1.1rem; font-weight:800;">Fiche Produit Détaillée</h3>
+        <button type="button" class="btn-close-drawer" onclick="window.app.closeProductModal()" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body" id="product-modal-body">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL: TRANSMISSION CHECKOUT FORM
+  ========================================== -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem; font-weight:800;">Transmission de votre Demande</h3>
+        <button type="button" class="btn-close-drawer" onclick="window.app.closeCheckoutModal()" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body" id="checkout-modal-body">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>BKO COSMO DISTRIBUTION (Démonstration)</h4>
+          <p>
+            Plateforme professionnelle de distribution en gros destinée aux pharmacies d'officine, parapharmacies et supermarchés de Bamako et ses environs.
+          </p>
+          <p style="font-size:0.8125rem; color:#cbd5e1;">
+            Direction Commerciale & Gérance : Bamako, Mali.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Règles de Colisage</h4>
+          <p>• <strong>Colisage Standard :</strong> Minimum 6 unités, progression par 6 (6, 12, 18, 24...).</p>
+          <p>• <strong>Exception Technique :</strong> 3 unités minimum sur références spécifiques (3, 6, 12, 18...).</p>
+          <p>• Les quantités 9, 15 et 21 sont strictement non conformes.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Espace Professionnel</h4>
+          <p>Accès réservé au commercial et CEO de la plateforme pour l'administration du catalogue et le suivi des demandes.</p>
+          <a href="/admin.html" class="btn-secondary-large" style="display:inline-block; padding:8px 16px; font-size:0.84rem; margin-top:8px; border-color:#475569; color:#f8fafc; background:transparent;">
+            🔒 Accès Espace Gérant / CEO
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 BKO Cosmo Distribution. Tous droits réservés. Plateforme B2B Bamako.</div>
+        <div style="font-size:0.75rem; color:#94a3b8;">
+          Note : Les marques et visuels sont présentés à titre indicatif pour démonstration de gros.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Main Script -->
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

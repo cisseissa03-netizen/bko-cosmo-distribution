@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Gérant & Commercial | BKO Cosmo Distribution</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      font-size: 0.875rem;
+    }
+    .admin-table th {
+      background: #f8fafc;
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+    }
+    .admin-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .admin-table tr:hover {
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body class="admin-layout">
+
+  <!-- LOGIN VIEW FOR CEO -->
+  <section id="admin-login-section" style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:#ffffff; border-radius:var(--radius-lg); padding:36px; max-width:420px; width:100%; box-shadow:var(--shadow-lg); border:1px solid var(--border);">
+      <div style="text-align:center; margin-bottom:24px;">
+        <div class="brand-logo-icon" style="margin:0 auto 12px auto;">BKO</div>
+        <h1 style="font-size:1.35rem; font-weight:800; color:var(--text-main);">Espace Gérant & CEO</h1>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-top:4px;">Administration du catalogue et traitement des demandes clients</p>
+      </div>
+
+      <div id="login-error-msg" style="display:none; background:var(--danger-bg); color:var(--danger); padding:10px; border-radius:var(--radius-sm); font-size:0.84rem; margin-bottom:14px; text-align:center;"></div>
+
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label class="form-label">Mot de passe de gestion</label>
+          <input type="password" id="admin-password-input" class="form-control" placeholder="Entrez le mot de passe" required autofocus>
+          <span class="form-helper">Mot de passe de gestion : <code>0000</code></span>
+        </div>
+        <button type="submit" class="btn-primary-large" style="width:100%; justify-content:center; margin-top:16px;">
+          Se connecter à l'espace CEO
+        </button>
+      </form>
+
+      <div style="text-align:center; margin-top:20px; font-size:0.8125rem;">
+        <a href="/" style="color:var(--text-muted);">← Revenir au catalogue public</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHENTICATED MANAGEMENT APP -->
+  <div id="admin-app-section" style="display:none;">
+    <!-- Top Header -->
+    <header class="admin-header">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div class="brand-logo-icon" style="width:36px; height:36px; font-size:1rem;">BKO</div>
+        <div>
+          <span style="font-weight:800; font-size:1rem; display:block;">BKO COSMO DISTRIB • ESPACE CEO</span>
+          <span style="font-size:0.75rem; color:#94a3b8;">Gérance commerciale • Bamako</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <a href="/" target="_blank" class="btn-secondary-large" style="background:transparent; color:#ffffff; border-color:#475569; padding:6px 12px; font-size:0.8125rem; min-height:36px;">
+          Voir catalogue public ↗
+        </a>
+        <button type="button" id="admin-logout-btn" class="btn-secondary-large" style="background:#dc2626; color:#ffffff; border:none; padding:6px 12px; font-size:0.8125rem; min-height:36px;">
+          Déconnexion
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="admin-nav-tabs">
+      <button type="button" class="admin-tab-btn active" data-admintab="dashboard">Tableau de bord</button>
+      <button type="button" class="admin-tab-btn" data-admintab="orders">Demandes de commande</button>
+      <button type="button" class="admin-tab-btn" data-admintab="catalog">Gestion du catalogue</button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container" style="padding-top:28px; padding-bottom:60px;">
+
+      <!-- =====================================
+           TAB: DASHBOARD
+      ===================================== -->
+      <div id="admin-panel-dashboard" class="admin-view-panel">
+        <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:18px;">Indicateurs d'activité</h2>
+        
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-title">Demandes à vérifier</span>
+            <div class="kpi-value" id="kpi-pending-count" style="color:var(--warning);">0</div>
+            <span style="font-size:0.75rem; color:var(--text-light);">En attente de votre validation commerciale</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-title">Commandes confirmées</span>
+            <div class="kpi-value" id="kpi-confirmed-count" style="color:var(--success);">0</div>
+            <span style="font-size:0.75rem; color:var(--text-light);">En préparation ou livraison</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-title">CA Potentiel des Demandes</span>
+            <div class="kpi-value" id="kpi-revenue-total" style="color:var(--primary); font-size:1.5rem;">0 FCFA</div>
+            <span style="font-size:0.75rem; color:var(--text-light);">Valeur cumulée brute</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-title">Alertes Stock Faible</span>
+            <div class="kpi-value" id="kpi-low-stock" style="color:#b45309;">0</div>
+            <span style="font-size:0.75rem; color:var(--text-light);">Références avec ≤ 24 unités</span>
+          </div>
+        </div>
+
+        <div style="background:#ffffff; border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; margin-top:24px;">
+          <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:12px;">Rappel des règles commerciales de la plateforme</h3>
+          <ul style="padding-left:20px; font-size:0.875rem; color:var(--text-muted); line-height:1.7;">
+            <li><strong>Colisage Standard :</strong> Paliers stricts de 6 unités (6, 12, 18, 24...). Les commandes 3, 9, 15 sont systématiquement rejetées.</li>
+            <li><strong>Exception 3 Unités :</strong> Réservée aux produits techniques cochés dans le catalogue ou activée ponctuellement en cas de stock faible. Les paliers deviennent 3, 6, 12, 18... (9, 15 et 21 restent interdits).</li>
+            <li><strong>Prix gelés :</strong> Le prix unitaire d'un produit est scellé dans la demande au moment où le client la valide. Modifier les tarifs du catalogue ultérieurement n'altère pas les anciennes demandes.</li>
+            <li><strong>Traçabilité :</strong> La demande est enregistrée de manière permanente même si le client n'ouvre pas son application WhatsApp.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- =====================================
+           TAB: ORDERS MANAGEMENT
+      ===================================== -->
+      <div id="admin-panel-orders" class="admin-view-panel" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <div>
+            <h2 style="font-size:1.4rem; font-weight:800;">Demandes de commande reçues</h2>
+            <p style="font-size:0.875rem; color:var(--text-light);">Gérez les statuts de validation commerciale, livraison et paiement.</p>
+          </div>
+          
+          <!-- Filters Toolbar -->
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="text" id="admin-orders-search" class="form-control" style="width:220px;" placeholder="Rechercher réf, client, tél...">
+            
+            <select id="admin-status-filter" class="custom-select">
+              <option value="all">Tous les statuts de demande</option>
+              <option value="Demande reçue">Demande reçue</option>
+              <option value="En vérification">En vérification</option>
+              <option value="En attente du client">En attente du client</option>
+              <option value="Confirmée">Confirmée</option>
+              <option value="En préparation">En préparation</option>
+              <option value="En livraison">En livraison</option>
+              <option value="Livrée">Livrée</option>
+              <option value="Annulée">Annulée</option>
+            </select>
+
+            <select id="admin-payment-filter" class="custom-select">
+              <option value="all">Tous les statuts paiement</option>
+              <option value="Non payé">Non payé</option>
+              <option value="Acompte versé">Acompte versé</option>
+              <option value="Payé à la livraison">Payé à la livraison</option>
+              <option value="Payé">Payé</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Réf Demande</th>
+                <th>Établissement & Quartier</th>
+                <th>Contact & Téléphone</th>
+                <th>Total FCFA</th>
+                <th>Statut Demande</th>
+                <th>Paiement</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-orders-tbody">
+              <!-- Rendered by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- =====================================
+           TAB: CATALOG MANAGEMENT
+      ===================================== -->
+      <div id="admin-panel-catalog" class="admin-view-panel" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <div>
+            <h2 style="font-size:1.4rem; font-weight:800;">Catalogue Produits & Règles de Colisage</h2>
+            <p style="font-size:0.875rem; color:var(--text-light);">Activez les autorisations à 3 unités, gérez le stock et les prix unitaires.</p>
+          </div>
+          
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="btn-secondary-large" onclick="window.admin.downloadExcelTemplate()" style="min-height:40px; font-size:0.84rem; padding:8px 14px;">
+              📥 Modèle Excel
+            </button>
+            <button type="button" class="btn-secondary-large" onclick="window.admin.exportCatalogToExcel()" style="min-height:40px; font-size:0.84rem; padding:8px 14px;">
+              📤 Exporter (.xlsx)
+            </button>
+            <button type="button" class="btn-primary-large" onclick="window.admin.openImportExcelModal()" style="min-height:40px; font-size:0.84rem; padding:8px 14px; background:#059669; border-color:#059669;">
+              📊 Importer Fichier Excel
+            </button>
+            <button type="button" class="btn-primary-large" onclick="window.admin.openAddProductModal()" style="min-height:40px; font-size:0.84rem; padding:8px 14px;">
+              + Ajouter une référence
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick filter in admin -->
+        <div style="margin-bottom:14px; display:flex; gap:10px; align-items:center;">
+          <input type="search" id="admin-catalog-search" class="form-control" style="max-width:380px; min-height:38px; font-size:0.85rem;" placeholder="Recherche rapide (nom, référence, marque)..." oninput="window.admin.filterProductsTable(this.value)">
+          <span style="font-size:0.8rem; color:var(--text-light);" id="admin-catalog-count"></span>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Réf</th>
+                <th>Produit & Format</th>
+                <th>Prix Unitaire</th>
+                <th>Stock</th>
+                <th>Règles Colisage Spéciales</th>
+                <th>Visibilité</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-tbody">
+              <!-- Rendered by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL: ORDER DETAIL & PROCESSING
+  ========================================== -->
+  <div class="modal-overlay" id="order-detail-modal">
+    <div class="modal-dialog" style="max-width:800px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem; font-weight:800;">Traitement de la Demande Commerciale</h3>
+        <button type="button" class="btn-close-drawer" onclick="window.admin.closeOrderDetailModal()" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body" id="order-modal-body">
+        <!-- Rendered by admin.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL: ADD / EDIT PRODUCT
+  ========================================== -->
+  <div class="modal-overlay" id="product-edit-modal">
+    <div class="modal-dialog" style="max-width:680px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem; font-weight:800;" id="product-edit-modal-title">Modifier Produit</h3>
+        <button type="button" class="btn-close-drawer" onclick="window.admin.closeProductEditModal()" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="product-edit-form">
+          <input type="hidden" name="productId">
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Référence interne <span class="req">*</span></label>
+              <input type="text" name="ref" class="form-control" placeholder="ex: DERM-BKO-01" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom commercial <span class="req">*</span></label>
+              <input type="text" name="name" class="form-control" placeholder="ex: Baume Réparateur Cica-Derm" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Marque</label>
+              <input type="text" name="brand" class="form-control" placeholder="ex: DermoPlus Sahel">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Catégorie</label>
+              <select name="category" class="form-control">
+                <option value="Dermo-Cosmétique">Dermo-Cosmétique</option>
+                <option value="Hygiène & Corps">Hygiène & Corps</option>
+                <option value="Protection Solaire">Protection Solaire</option>
+                <option value="Soins Bébé & Maternité">Soins Bébé & Maternité</option>
+                <option value="Capillaire">Capillaire</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Format / Contenance</label>
+              <input type="text" name="format" class="form-control" placeholder="ex: Tube 100 ml ou Flacon 500 ml">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Prix unitaire de gros (FCFA) <span class="req">*</span></label>
+              <input type="number" name="unitPrice" class="form-control" placeholder="ex: 4200" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Stock disponible (unités)</label>
+              <input type="number" name="stock" class="form-control" placeholder="ex: 96">
+            </div>
+          </div>
+
+          <!-- PHOTO DU PRODUIT (IMPORT FICHIER / APPAREIL PHOTO / URL) -->
+          <div class="form-group" style="background:#f8fafc; border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; margin-bottom:18px;">
+            <label class="form-label" style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Photo du produit</span>
+              <span id="upload-status-indicator" style="font-size:0.75rem; color:var(--primary); font-weight:600;"></span>
+            </label>
+
+            <input type="hidden" name="image" id="product-photo-url-val">
+            <input type="file" id="product-photo-file-input" accept="image/*" style="display:none;" onchange="window.admin.handlePhotoFileSelected(event)">
+
+            <!-- Dropzone (visible if no image chosen) -->
+            <div id="photo-dropzone" class="photo-upload-zone" onclick="document.getElementById('product-photo-file-input').click()">
+              <div style="font-size:2rem; margin-bottom:6px;">📸</div>
+              <strong style="color:var(--primary); display:block; font-size:0.95rem;">
+                Cliquez pour importer une photo
+              </strong>
+              <span style="font-size:0.8rem; color:var(--text-light); display:block; margin-top:2px;">
+                Depuis votre ordinateur ou appareil photo smartphone (JPG, PNG, WEBP)
+              </span>
+            </div>
+
+            <!-- Preview Box (visible when image is loaded) -->
+            <div id="photo-preview-box" class="photo-preview-box" style="display:none;">
+              <img id="product-photo-preview" src="" alt="Aperçu du produit" class="photo-preview-img">
+              <div style="flex-grow:1;">
+                <strong id="photo-preview-title" style="font-size:0.875rem; display:block; color:var(--text-main);">Photo chargée</strong>
+                <span id="photo-preview-path" style="font-size:0.75rem; color:var(--text-light); word-break:break-all; display:block; margin-bottom:8px;"></span>
+                <div style="display:flex; gap:8px;">
+                  <button type="button" class="btn-secondary-large" style="padding:4px 10px; font-size:0.75rem; min-height:30px;" onclick="document.getElementById('product-photo-file-input').click()">
+                    Changer de photo
+                  </button>
+                  <button type="button" class="btn-secondary-large" style="padding:4px 10px; font-size:0.75rem; min-height:30px; color:var(--danger); border-color:#fca5a5;" onclick="window.admin.clearProductPhoto()">
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visuels cosmétiques prêts à l'emploi (Presets) -->
+            <div style="margin-top:12px; padding-top:10px; border-top:1px dashed var(--border);">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; display:block; margin-bottom:6px;">
+                Ou choisir un modèle cosmétique professionnel prêt à l'emploi :
+              </span>
+              <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <button type="button" class="preset-chip" onclick="window.admin.selectPresetPhoto('https://images.unsplash.com/photo-1608248597359-25f0a3821817?w=600&auto=format&fit=crop&q=80', 'Tube Baume / Crème Cica')">🧴 Tube Crème Cica</button>
+                <button type="button" class="preset-chip" onclick="window.admin.selectPresetPhoto('https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80', 'Flacon Pompe Lait Corporel')">🧴 Flacon Pompe Lait</button>
+                <button type="button" class="preset-chip" onclick="window.admin.selectPresetPhoto('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80', 'Flacon Pipette Sérum Niacinamide')">🧪 Sérum Pipette</button>
+                <button type="button" class="preset-chip" onclick="window.admin.selectPresetPhoto('https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&auto=format&fit=crop&q=80', 'Solaire SPF 50+ Teinté')">☀️ Solaire SPF 50+</button>
+                <button type="button" class="preset-chip" onclick="window.admin.selectPresetPhoto('https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&auto=format&fit=crop&q=80', 'Gel Lavant Bébé Calendula')">👶 Soin Bébé Doux</button>
+                <button type="button" class="preset-chip" onclick="window.admin.selectPresetPhoto('https://images.unsplash.com/photo-1607006314144-8d9335ef0f04?w=600&auto=format&fit=crop&q=80', 'Pain Dermatologique Surgras')">🧼 Pain Surgras</button>
+                <button type="button" class="preset-chip" onclick="window.admin.selectPresetPhoto('https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=600&auto=format&fit=crop&q=80', 'Pot Masque Nutrition Karité')">💆‍♀️ Pot Masque Capillaire</button>
+              </div>
+            </div>
+
+            <!-- SECTION PINTEREST & TÉLÉCHARGEMENT DIRECT -->
+            <div style="margin-top:14px; padding:12px; border-radius:var(--radius-sm); background:#fff5f5; border:1px solid #fecaca;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="background:#e60023; color:#fff; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-weight:900; font-size:11px;">P</span>
+                  <strong style="font-size:0.82rem; color:#991b1b;">Rechercher et importer des photos depuis Pinterest</strong>
+                </div>
+                <button type="button" class="btn-secondary-large" style="padding:4px 10px; font-size:0.75rem; min-height:28px; background:#fff; border-color:#e60023; color:#e60023; font-weight:700;" onclick="window.admin.openPinterestSearch()" title="Recherche ciblée avec Marque, Nom et Format/Contenance">
+                  🔍 Ouvrir Pinterest (Nom + Marque + Format) ↗
+                </button>
+              </div>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px; line-height:1.4;">
+                Recherche ciblée automatique combinant le <strong>Nom</strong>, la <strong>Marque</strong> et le <strong>Format / Contenance</strong>. Collez ensuite le lien direct de l'image (clic-droit sur l'image → <em>« Copier l'adresse de l'image »</em>) :
+              </p>
+              <div style="display:flex; gap:8px;">
+                <input type="url" id="pinterest-url-input" class="form-control" style="font-size:0.8rem; min-height:36px;" placeholder="https://i.pinimg.com/... ou URL d'image web">
+                <button type="button" class="btn-primary-large" style="padding:6px 14px; font-size:0.8rem; min-height:36px; background:#e60023; border-color:#e60023; white-space:nowrap;" onclick="window.admin.downloadPinterestPhoto()">
+                  📥 Télécharger l'image sur le serveur
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description commerciale</label>
+            <textarea name="description" class="form-control" rows="2" placeholder="Indications, posologie, cible pharmacie..."></textarea>
+          </div>
+
+          <!-- Strict Business Rules Options -->
+          <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; margin-bottom:18px;">
+            <h4 style="font-size:0.875rem; font-weight:800; margin-bottom:10px;">Autorisations Commerciales Spécifiques</h4>
+            <div style="display:flex; flex-direction:column; gap:8px; font-size:0.84rem;">
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                <input type="checkbox" name="allow3UnitsPermanent">
+                <strong>Autorisation permanente à 3 unités (Produit technique spécifique)</strong>
+              </label>
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:#b45309;">
+                <input type="checkbox" name="allow3UnitsSpecial">
+                <strong>Autorisation ponctuelle à 3 unités (Stock insuffisant / Décision gérant)</strong>
+              </label>
+              <span class="form-helper">Si activé, les quantités permises deviennent 3, 6, 12, 18, 24... (9 et 15 restent interdits).</span>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px; font-size:0.84rem;">
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+              <input type="checkbox" name="isNewProduct"> Nouveau produit
+            </label>
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+              <input type="checkbox" name="isNewArrival"> Nouvel arrivage
+            </label>
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+              <input type="checkbox" name="isRestock"> Retour en stock
+            </label>
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-weight:700; color:var(--primary);">
+              <input type="checkbox" name="active" checked> Actif & visible au catalogue
+            </label>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:10px; border-top:1px solid var(--border); padding-top:14px;">
+            <button type="button" class="btn-secondary-large" onclick="window.admin.closeProductEditModal()">Annuler</button>
+            <button type="submit" class="btn-primary-large">Enregistrer la référence</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL: EXCEL / CSV CATALOG IMPORT
+  ========================================== -->
+  <div class="modal-overlay" id="excel-import-modal">
+    <div class="modal-dialog" style="max-width:850px;">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.4rem;">📊</span>
+          <h3 style="font-size:1.15rem; font-weight:800;">Importer un Catalogue Excel (.xlsx, .xls, .csv)</h3>
+        </div>
+        <button type="button" class="btn-close-drawer" onclick="window.admin.closeImportExcelModal()" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Instruction Banner -->
+        <div style="background:var(--primary-light); border-left:4px solid var(--primary); padding:12px 14px; border-radius:var(--radius-sm); margin-bottom:18px; font-size:0.84rem;">
+          <strong>Astuce :</strong> Vous pouvez d'abord 
+          <a href="javascript:void(0)" onclick="window.admin.downloadExcelTemplate()" style="font-weight:700; text-decoration:underline; color:var(--primary);">télécharger notre modèle Excel pré-formaté</a>, 
+          le remplir avec vos produits et stocks, puis le sélectionner ci-dessous.
+        </div>
+
+        <!-- File Dropzone -->
+        <div id="excel-dropzone" class="photo-upload-zone" style="padding:28px;" onclick="document.getElementById('excel-file-input').click()">
+          <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv" style="display:none;" onchange="window.admin.handleExcelFileSelected(event)">
+          <div style="font-size:2.5rem; margin-bottom:8px;">📑</div>
+          <strong style="color:var(--primary); font-size:1rem; display:block;">
+            Cliquez pour choisir votre fichier Excel ou CSV
+          </strong>
+          <span style="font-size:0.8rem; color:var(--text-light); display:block; margin-top:4px;">
+            Formats pris en charge : .xlsx (Microsoft Excel), .xls, .csv
+          </span>
+        </div>
+
+        <!-- Preview Section -->
+        <div id="excel-preview-section" style="display:none; margin-top:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <strong style="font-size:0.95rem; color:var(--text-main);">
+              Aperçu des lignes détectées (<span id="excel-preview-count">0</span> produits prêts à être importés) :
+            </strong>
+            <button type="button" class="btn-secondary-large" style="padding:4px 10px; font-size:0.75rem; min-height:30px;" onclick="document.getElementById('excel-file-input').click()">
+              Changer de fichier
+            </button>
+          </div>
+
+          <div style="max-height:260px; overflow-y:auto; border:1px solid var(--border); border-radius:var(--radius-md); margin-bottom:16px;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.8rem;">
+              <thead style="position:sticky; top:0; background:#f8fafc; z-index:1;">
+                <tr style="border-bottom:2px solid var(--border); text-align:left;">
+                  <th style="padding:8px 10px;">Réf</th>
+                  <th style="padding:8px 10px;">Produit</th>
+                  <th style="padding:8px 10px;">Marque</th>
+                  <th style="padding:8px 10px;">Prix FCFA</th>
+                  <th style="padding:8px 10px; text-align:center;">Stock</th>
+                  <th style="padding:8px 10px; text-align:center;">Exception 3 un.</th>
+                </tr>
+              </thead>
+              <tbody id="excel-preview-tbody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background:#ffffff; border:1px solid var(--border); border-radius:var(--radius-md); padding:12px; margin-bottom:16px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.84rem; cursor:pointer;">
+              <input type="checkbox" id="excel-update-existing" checked>
+              <span><strong>Mettre à jour les références déjà existantes</strong> (met à jour le prix et le stock si la référence existe déjà).</span>
+            </label>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:10px;">
+            <button type="button" class="btn-secondary-large" onclick="window.admin.closeImportExcelModal()">Annuler</button>
+            <button type="button" class="btn-primary-large" id="btn-confirm-import" style="background:#059669; border-color:#059669;" onclick="window.admin.confirmExcelImport()">
+              ✓ Valider et intégrer au catalogue
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/admin.js"></script>
+</body>
+</html>
