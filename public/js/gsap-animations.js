@@ -128,3 +128,27 @@ export function animateThreeEntrance() {
     { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }
   );
 }
+
+
+export function animateDrawerClose(drawerElement, onComplete) {
+  if (!drawerElement) {
+    if (onComplete) onComplete();
+    return;
+  }
+
+  if (isReducedMotion() || typeof window.gsap === 'undefined') {
+    drawerElement.style.transform = '';
+    if (onComplete) onComplete();
+    return;
+  }
+
+  window.gsap.to(drawerElement, {
+    x: '100%',
+    duration: 0.25,
+    ease: 'power2.in',
+    onComplete: () => {
+      drawerElement.style.transform = '';
+      if (onComplete) onComplete();
+    }
+  });
+}

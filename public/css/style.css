@@ -3088,3 +3088,33 @@ body.cart-drawer-open .mobile-bottom-app-bar {
     border-top: 1.5px solid var(--border) !important;
   }
 }
+
+
+/* Fail-safe rule: If not active, drawer MUST be 100% off-screen even if inline transform was set */
+.cart-drawer-panel:not(.active) {
+  transform: translateX(100%) !important;
+  pointer-events: none !important;
+}
+
+.cart-drawer-panel.active {
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
+}
+
+.btn-close-drawer {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.6rem !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.btn-close-drawer:active {
+  transform: scale(0.9) !important;
+}

@@ -1,6 +1,6 @@
 // Client-side Application for BKO Cosmo Distribution (Bamako Wholesale)
 import { isQuantityAllowed, getInitialQuantity, getNextQuantity, getPrevQuantity, formatFCFA } from './rules.js';
-import { animateHeroEntrance, animateProductCards, animateAddToCartFeedback, animateQuantityChange, animateDrawerOpen, animateSearchFocus, animateBrandPillClick, animateGammeCardSelect } from './gsap-animations.js';
+import { animateHeroEntrance, animateProductCards, animateAddToCartFeedback, animateQuantityChange, animateDrawerOpen, animateDrawerClose, animateSearchFocus, animateBrandPillClick, animateGammeCardSelect } from './gsap-animations.js';
 import { initHeroThree } from './three-hero.js';
 
 // Application State
@@ -1509,10 +1509,21 @@ function closeCartDrawer() {
   state.isCartDrawerOpen = false;
   const backdrop = document.getElementById('drawer-backdrop');
   const drawer = document.getElementById('cart-drawer');
-  if (backdrop && drawer) {
+
+  if (backdrop) {
     backdrop.classList.remove('active');
+  }
+  document.body.classList.remove('cart-drawer-open');
+
+  if (drawer) {
     drawer.classList.remove('active');
-    document.body.classList.remove('cart-drawer-open');
+    if (typeof animateDrawerClose === 'function') {
+      animateDrawerClose(drawer, () => {
+        drawer.style.transform = '';
+      });
+    } else {
+      drawer.style.transform = '';
+    }
   }
 }
 
@@ -1901,6 +1912,15 @@ function trackOrderDirect(orderRef) {
    GLOBAL EVENT LISTENERS WITH DELEGATION
 ======================================================== */
 function setupEventListeners() {
+  // Global Escape key listener to close drawer or modals
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeCartDrawer();
+      closeProductModal();
+      closeCheckoutModal();
+    }
+  });
+
   // Global Event Delegation for [data-tab] (works for any button anywhere)
   document.addEventListener('click', (e) => {
     const tabBtn = e.target.closest('[data-tab]');
