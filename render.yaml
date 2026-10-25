@@ -3,6 +3,8 @@ services:
     name: bko-cosmo-distribution
     env: node
     plan: free
+    branch: master
+    autoDeploy: true
     buildCommand: npm install
     startCommand: node server/server.js
     envVars:
