@@ -1489,6 +1489,9 @@ function renderCartDrawer() {
       <span>Transmettre ma demande (${formatFCFA(totalAmount)})</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
     </button>
+    <button type="button" class="btn-secondary-large" style="width:100%; margin-top:8px; justify-content:center; min-height:42px; font-weight:700; background:#f8fafc;" onclick="window.app.closeCartDrawer()">
+      ← Continuer mes achats (Fermer)
+    </button>
   `;
 }
 
@@ -1502,6 +1505,11 @@ function openCartDrawer() {
     document.body.classList.add('cart-drawer-open');
     animateDrawerOpen(drawer);
   }
+  try {
+    if (!history.state || history.state.modalOpen !== 'cart') {
+      history.pushState({ modalOpen: 'cart' }, '');
+    }
+  } catch (e) {}
   renderCartDrawer();
 }
 
@@ -1618,11 +1626,19 @@ function openProductModal(productId) {
         <button type="button" class="btn-primary-large" style="width:100%; margin-top:16px;" onclick="window.app.addToCart('${product.id}', this); window.app.closeProductModal();">
           Ajouter à ma demande
         </button>
+        <button type="button" class="btn-secondary-large" style="width:100%; margin-top:8px; justify-content:center; min-height:42px; font-weight:700;" onclick="window.app.closeProductModal();">
+          ← Retour au catalogue
+        </button>
       </div>
     </div>
   `;
 
   modal.classList.add('active');
+  try {
+    if (!history.state || history.state.modalOpen !== 'product') {
+      history.pushState({ modalOpen: 'product' }, '');
+    }
+  } catch (e) {}
 }
 
 function closeProductModal() {
@@ -1705,8 +1721,8 @@ function openCheckoutModal() {
         <textarea name="observation" class="form-control" rows="2" placeholder="Précisions de colisage, facture proforma spécifique, etc."></textarea>
       </div>
 
-      <div style="border-top:1px solid var(--border); padding-top:16px; margin-top:20px; display:flex; justify-content:flex-end; gap:12px;">
-        <button type="button" class="btn-secondary-large" onclick="window.app.closeCheckoutModal()">Annuler</button>
+      <div style="border-top:1px solid var(--border); padding-top:16px; margin-top:20px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <button type="button" class="btn-secondary-large" style="font-weight:700;" onclick="window.app.closeCheckoutModal(); window.app.openCartDrawer();">← Revenir au panier</button>
         <button type="submit" class="btn-primary-large" id="submit-order-btn">
           <span>Confirmer et Transmettre</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
@@ -1716,6 +1732,11 @@ function openCheckoutModal() {
   `;
 
   modal.classList.add('active');
+  try {
+    if (!history.state || history.state.modalOpen !== 'product') {
+      history.pushState({ modalOpen: 'product' }, '');
+    }
+  } catch (e) {}
 }
 
 function handleNeighborhoodChange(select) {
@@ -1915,12 +1936,54 @@ function trackOrderDirect(orderRef) {
    GLOBAL EVENT LISTENERS WITH DELEGATION
 ======================================================== */
 function setupEventListeners() {
+  // Native back gesture & browser physical Back button support (never leaves the app accidentally)
+  window.addEventListener('popstate', () => {
+    const checkoutModal = document.getElementById('checkout-modal');
+    if (checkoutModal && checkoutModal.classList.contains('active')) {
+      closeCheckoutModal();
+      openCartDrawer();
+      return;
+    }
+    const productModal = document.getElementById('product-detail-modal');
+    if (productModal && productModal.classList.contains('active')) {
+      closeProductModal();
+      return;
+    }
+    const cartDrawer = document.getElementById('cart-drawer');
+    if (cartDrawer && (cartDrawer.classList.contains('active') || state.isCartDrawerOpen)) {
+      closeCartDrawer();
+      return;
+    }
+    const mobileNav = document.getElementById('mobile-nav-panel');
+    if (mobileNav && mobileNav.classList.contains('open')) {
+      mobileNav.classList.remove('open');
+      return;
+    }
+    const gammesDrawer = document.getElementById('gammes-drawer');
+    if (gammesDrawer && gammesDrawer.classList.contains('open')) {
+      toggleGammesDrawer();
+      return;
+    }
+  });
+
   // Global Escape key listener to close drawer or modals
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeCartDrawer();
       closeProductModal();
       closeCheckoutModal();
+      closeIosModal();
+      const mobileNav = document.getElementById('mobile-nav-panel');
+      if (mobileNav) mobileNav.classList.remove('open');
+    }
+  });
+
+  // Global Click Outside Modal Overlay to dismiss
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.classList && e.target.classList.contains('modal-overlay')) {
+      closeProductModal();
+      closeCheckoutModal();
+      closeIosModal();
     }
   });
 
@@ -2011,6 +2074,18 @@ function setupEventListeners() {
   if (trackForm) {
     trackForm.addEventListener('submit', trackOrder);
   }
+
+  // Scroll to top button visibility
+  const scrollTopBtn = document.getElementById('btn-scroll-top');
+  window.addEventListener('scroll', () => {
+    if (scrollTopBtn) {
+      if (window.pageYOffset > 320) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+  }, { passive: true });
 }
 
 

@@ -4,7 +4,7 @@ import { formatFCFA } from './rules.js';
 const ADMIN_TOKEN_KEY = 'bko_admin_token';
 
 const adminState = {
-  token: sessionStorage.getItem(ADMIN_TOKEN_KEY) || null,
+  token: sessionStorage.getItem(ADMIN_TOKEN_KEY) || localStorage.getItem(ADMIN_TOKEN_KEY) || null,
   user: null,
   currentTab: 'dashboard',
   orders: [],
@@ -123,6 +123,7 @@ async function handleLogin(event) {
 function handleLogout() {
   adminState.token = null;
   sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+  localStorage.removeItem(ADMIN_TOKEN_KEY);
   checkAuth();
 }
 
