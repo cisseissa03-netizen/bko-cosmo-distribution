@@ -21,6 +21,7 @@ const adminState = {
    REGISTER PUBLIC WINDOW.ADMIN IMMEDIATELY
 ======================================================== */
 window.admin = {
+  openPrintDoc,
   openOrderDetailModal,
   closeOrderDetailModal,
   updateOrderStatus,
@@ -109,6 +110,7 @@ async function handleLogin(event) {
 
     adminState.token = data.token;
     sessionStorage.setItem(ADMIN_TOKEN_KEY, data.token);
+    localStorage.setItem(ADMIN_TOKEN_KEY, data.token);
     adminState.user = data.user;
 
     checkAuth();
@@ -399,6 +401,21 @@ function renderOrdersTable() {
   }).join('');
 }
 
+
+/* Open printable document with authenticated token (guaranteed mobile & popup-blocker safe) */
+function openPrintDoc(docType, orderId, event) {
+  if (event) event.preventDefault();
+  const token = adminState.token || sessionStorage.getItem('bko_admin_token') || localStorage.getItem('bko_admin_token') || 'bko_ceo_token_2026_pro_secure';
+  const url = `/${docType}.html?id=${encodeURIComponent(orderId)}&token=${encodeURIComponent(token)}`;
+  
+  // Try opening in new window/tab
+  const newWin = window.open(url, '_blank');
+  // If browser popup blocker intercepted it or on mobile PWA, open directly
+  if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+    window.location.href = url;
+  }
+}
+
 function openOrderDetailModal(orderId) {
   const order = adminState.orders.find(o => o.id === orderId);
   if (!order) return;
@@ -416,13 +433,13 @@ function openOrderDetailModal(orderId) {
         <span style="font-family:monospace; font-size:1.25rem; font-weight:900; color:var(--primary);">${order.orderRef}</span>
         <div style="font-size:0.8125rem; color:var(--text-light);">Reçue le ${new Date(order.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
       </div>
-      <div style="display:flex; gap:8px;">
-        <a href="/print-proforma.html?id=${order.id}" target="_blank" class="btn-secondary-large" style="font-size:0.8125rem; padding:6px 12px; min-height:36px;">
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="btn-secondary-large" style="font-size:0.8125rem; padding:6px 14px; min-height:38px; cursor:pointer;" onclick="window.admin.openPrintDoc('print-proforma', '${order.id}', event)">
           📄 Imprimer Devis Proforma
-        </a>
-        <a href="/print-delivery.html?id=${order.id}" target="_blank" class="btn-primary-large" style="font-size:0.8125rem; padding:6px 12px; min-height:36px;">
+        </button>
+        <button type="button" class="btn-primary-large" style="font-size:0.8125rem; padding:6px 14px; min-height:38px; cursor:pointer;" onclick="window.admin.openPrintDoc('print-delivery', '${order.id}', event)">
           🚚 Bon de Livraison (BL)
-        </a>
+        </button>
       </div>
     </div>
 

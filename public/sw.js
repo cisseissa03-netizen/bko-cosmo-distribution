@@ -1,9 +1,11 @@
-const CACHE_NAME = 'bko-cosmo-cache-v7';
+const CACHE_NAME = 'bko-cosmo-cache-v8';
 
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/admin.html',
+  '/print-proforma.html',
+  '/print-delivery.html',
   '/css/style.css',
   '/js/app.js',
   '/js/admin.js',

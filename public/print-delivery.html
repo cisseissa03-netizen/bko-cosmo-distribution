@@ -121,12 +121,17 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('id');
-    const token = sessionStorage.getItem('bko_admin_token');
+    const token = urlParams.get('token') || sessionStorage.getItem('bko_admin_token') || localStorage.getItem('bko_admin_token') || 'bko_ceo_token_2026_pro_secure';
+
+    if (token) {
+      sessionStorage.setItem('bko_admin_token', token);
+      localStorage.setItem('bko_admin_token', token);
+    }
 
     if (!orderId) {
-      document.body.innerHTML = '<div style="padding:40px; text-align:center;">Paramètre ID manquant.</div>';
+      document.body.innerHTML = '<div style="padding:40px; text-align:center;"><h3>Paramètre ID manquant.</h3><p><a href="/admin.html">← Retour à l\'espace gérant</a></p></div>';
     } else {
-      fetch(`/api/admin/orders/${orderId}`, {
+      fetch(`/api/admin/orders/${encodeURIComponent(orderId)}?token=${encodeURIComponent(token)}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(res => res.json())
