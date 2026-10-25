@@ -1517,12 +1517,15 @@ function closeCartDrawer() {
 
   if (drawer) {
     drawer.classList.remove('active');
+    drawer.style.transform = '';
     if (typeof animateDrawerClose === 'function') {
-      animateDrawerClose(drawer, () => {
+      try {
+        animateDrawerClose(drawer, () => {
+          drawer.style.transform = '';
+        });
+      } catch (e) {
         drawer.style.transform = '';
-      });
-    } else {
-      drawer.style.transform = '';
+      }
     }
   }
 }
