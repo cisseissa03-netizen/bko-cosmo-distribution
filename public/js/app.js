@@ -758,9 +758,17 @@ function updateCartBadge() {
   const totalUnits = state.cart.reduce((sum, item) => sum + item.qty, 0);
   const totalAmount = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
 
+  // Update top header badges
   document.querySelectorAll('.cart-badge').forEach(badge => {
     badge.textContent = totalUnits;
   });
+
+  // Update bottom navigation cart badge
+  const bottomBadge = document.getElementById('bottom-cart-badge');
+  if (bottomBadge) {
+    bottomBadge.textContent = totalUnits;
+    bottomBadge.style.display = totalUnits > 0 ? 'flex' : 'none';
+  }
 
   const stickyUnits = document.getElementById('sticky-cart-units');
   const stickyTotal = document.getElementById('sticky-cart-total');

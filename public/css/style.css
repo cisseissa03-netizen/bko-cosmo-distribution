@@ -5374,3 +5374,168 @@ body.mobile-app-body {
     display: none !important;
   }
 }
+
+
+/* ==========================================================================
+   CART VISIBILITY & ZERO OVERFLOW FIX FOR ALL SMARTPHONES (320px - 430px)
+   ========================================================================== */
+
+/* 1. Header Container and Inner Strict Width */
+.site-header.mockup-header {
+  position: sticky !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: visible !important;
+  z-index: 1000 !important;
+}
+
+.mockup-header .header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 10px !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+}
+
+.mobile-menu-btn {
+  flex-shrink: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.mockup-brand-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.mockup-brand-wrap .brand-logo-img {
+  width: 28px !important;
+  height: 28px !important;
+  flex-shrink: 0 !important;
+}
+
+.mockup-brand-wrap .brand-text {
+  display: flex !important;
+  flex-direction: column !important;
+  line-height: 1.1 !important;
+  overflow: hidden !important;
+}
+
+.mockup-brand-wrap .brand-title {
+  font-size: 0.9rem !important;
+  font-weight: 900 !important;
+  color: var(--navy-deep) !important;
+  white-space: nowrap !important;
+}
+
+.mockup-brand-wrap .brand-subtitle {
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  letter-spacing: 0.04em !important;
+  white-space: nowrap !important;
+}
+
+.header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
+/* Hide WhatsApp button from header on screens < 900px */
+@media (max-width: 899px) {
+  .btn-whatsapp-header,
+  .desktop-only-whatsapp {
+    display: none !important;
+  }
+}
+
+.btn-header-search {
+  flex-shrink: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+}
+
+/* Cart Button in Header: Perfectly Placed on Top Right */
+.mockup-cart-btn {
+  position: relative !important;
+  background: rgba(7, 86, 166, 0.08) !important;
+  border: 1px solid rgba(7, 86, 166, 0.18) !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--navy-deep) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  margin-right: 2px !important;
+}
+
+.mockup-cart-btn:active {
+  transform: scale(0.92) !important;
+  background: rgba(7, 86, 166, 0.16) !important;
+}
+
+.mockup-cart-btn .cart-badge {
+  position: absolute !important;
+  top: -3px !important;
+  right: -3px !important;
+  background: var(--accent-gold) !important;
+  color: var(--navy-deep) !important;
+  font-size: 0.7rem !important;
+  font-weight: 900 !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 4px !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 2. Bottom Nav Cart Button (Accessible right under the thumb) */
+.bottom-nav-cart-btn {
+  position: relative;
+}
+
+.bottom-nav-cart-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -9px;
+  background: var(--accent-gold);
+  color: var(--navy-deep);
+  font-size: 0.65rem;
+  font-weight: 900;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
