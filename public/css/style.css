@@ -1,6 +1,8 @@
-/*    BKO COSMO DISTRIBUTION - STYLESHEET
+/* ==========================================================================
+   BKO COSMO DISTRIBUTION - STYLESHEET
    Direction Artistique : Moderne, Claire, Chaleureuse & Lisible
    Mobile-First & Accessibilité Conforme
+   ========================================================================== */
 
 :root {
   /* Palette Officielle Maquette BKO Cosmo Distribution */
@@ -136,7 +138,7 @@ button {
   }
 }
 
-/*    TOP NOTIFICATION BAR (BAMAKO DISTRIBUTION PROVISIONAL)
+/*    TOP NOTIFICATION BAR (BAMAKO DISTRIBUTION PROVISIONAL) */
 .top-notice-bar {
   background: #0f172a;
   color: #e2e8f0;
@@ -158,7 +160,7 @@ button {
   color: #fef08a;
 }
 
-/*    NAVBAR & HEADER
+/*    NAVBAR & HEADER */
 .site-header {
   position: sticky;
   top: 0;
@@ -362,7 +364,7 @@ button {
   display: flex;
 }
 
-/*    HERO SECTION & THREE.JS 3D CANVAS
+/*    HERO SECTION & THREE.JS 3D CANVAS */
 .hero-section {
   position: relative;
   background: linear-gradient(135deg, #ffffff 0%, #f0f7f9 100%);
@@ -620,7 +622,7 @@ button {
   text-align: center;
 }
 
-/*    HOW IT WORKS (FONCTIONNEMENT EN 3 ÉTAPES)
+/*    HOW IT WORKS (FONCTIONNEMENT EN 3 ÉTAPES) */
 .how-it-works-section {
   padding: 48px 0;
   background: #ffffff;
@@ -709,7 +711,7 @@ button {
   line-height: 1.5;
 }
 
-/*    CATALOG SECTION & FILTER BAR
+/*    CATALOG SECTION & FILTER BAR */
 .catalog-section {
   padding: 48px 0 64px 0;
   background: var(--bg-main);
@@ -769,7 +771,7 @@ button {
   display: none;
 }
 
-/*    SYNCHRONIZED BRAND SEARCH & 1-CLICK BRAND PILLS
+/*    SYNCHRONIZED BRAND SEARCH & 1-CLICK BRAND PILLS */
 .brand-filter-container {
   display: flex;
   flex-direction: column;
@@ -1351,7 +1353,7 @@ button {
   display: block;
 }
 
-/*    COMMANDE RAPIDE (FAST WHOLESALE ORDER SHEET)
+/*    COMMANDE RAPIDE (FAST WHOLESALE ORDER SHEET) */
 .quick-order-section {
   padding: 36px 0 64px 0;
 }
@@ -1427,7 +1429,7 @@ button {
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
 }
 
-/*    ARRIVAGES PAGE (NOUVEAUX PRODUITS & RESTOCKS)
+/*    ARRIVAGES PAGE (NOUVEAUX PRODUITS & RESTOCKS) */
 .arrivages-header-card {
   background: linear-gradient(135deg, #0d5c75 0%, #093746 100%);
   color: #ffffff;
@@ -1468,7 +1470,7 @@ button {
   color: #ffffff;
 }
 
-/*    CART DRAWER & TRANSMISSION CHECKOUT MODAL
+/*    CART DRAWER & TRANSMISSION CHECKOUT MODAL */
 .drawer-backdrop {
   position: fixed;
   inset: 0;
@@ -1650,7 +1652,7 @@ button {
   margin-top: 4px;
 }
 
-/*    TRANSMISSION MODAL / CHECKOUT FORM
+/*    TRANSMISSION MODAL / CHECKOUT FORM */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1777,7 +1779,7 @@ button {
   border: 1px dashed var(--primary);
 }
 
-/*    TRACKING PAGE (SUIVI DE DEMANDE)
+/*    TRACKING PAGE (SUIVI DE DEMANDE) */
 .tracking-card {
   background: #ffffff;
   border: 1px solid var(--border);
@@ -1805,7 +1807,7 @@ button {
 .status-delivered { background: #dcfce7; color: #15803d; }
 .status-cancelled { background: #fee2e2; color: #b91c1c; }
 
-/*    FOOTER
+/*    FOOTER */
 .site-footer {
   margin-top: auto;
   background: #0f172a;
@@ -1856,7 +1858,7 @@ button {
   }
 }
 
-/*    ADMIN STYLES (ESPACE GÉRANT / CEO)
+/*    ADMIN STYLES (ESPACE GÉRANT / CEO) */
 .admin-layout {
   min-height: 100vh;
   background: #f1f5f9;
@@ -1981,7 +1983,7 @@ button {
   border-color: var(--primary);
 }
 
-/*    PWA & NATIVE MOBILE APP EXPERIENCE
+/*    PWA & NATIVE MOBILE APP EXPERIENCE */
 /* Install Pill in Header */
 .btn-pwa-install {
   display: inline-flex;
@@ -2147,7 +2149,7 @@ button {
   margin-top: 2px;
 }
 
-/*    PRINT STYLES FOR OFFICIAL DOCUMENTS
+/*    PRINT STYLES FOR OFFICIAL DOCUMENTS */
 @media print {
   body {
     background: #ffffff !important;
@@ -2164,7 +2166,7 @@ button {
 }
 
 
-/*    MOBILE SMART PWA BANNER & DIRECT PRODUCT SEARCH
+/*    MOBILE SMART PWA BANNER & DIRECT PRODUCT SEARCH */
 .mobile-pwa-banner {
   background: linear-gradient(135deg, #0d5c75 0%, #064052 100%);
   color: #ffffff;
@@ -2460,7 +2462,7 @@ button {
 }
 
 
-/*    INTERACTIVE GAMMES & CATEGORIES ACCORDION
+/*    INTERACTIVE GAMMES & CATEGORIES ACCORDION */
 .gammes-section {
   padding: 10px 0 16px 0;
   background: var(--bg-main);
@@ -2630,7 +2632,11 @@ button {
 .gamme-card {
   background: #ffffff;
   border: 1.5px solid var(--border);
-/*    ENHANCED MOBILE CART DRAWER & PROMINENT TOTAL ESTIMATIF
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+/*    ENHANCED MOBILE CART DRAWER & PROMINENT TOTAL ESTIMATIF */
 body.cart-drawer-open {
   overflow: hidden !important;
 }
@@ -2751,7 +2757,7 @@ body.cart-drawer-open .mobile-bottom-app-bar {
   font-weight: 700;
 }
 
-/*    ENHANCED MOBILE-FIRST PRODUCT CARDS (AFRICA B2B ERGONOMICS)
+/*    ENHANCED MOBILE-FIRST PRODUCT CARDS (AFRICA B2B ERGONOMICS) */
 .product-card {
   border: 1.5px solid var(--border);
   border-radius: 16px;
@@ -2927,7 +2933,7 @@ body.cart-drawer-open .mobile-bottom-app-bar {
 }
 
 
-/*    PRO PWA & MOBILE ERGONOMICS (AFRICA SMARTPHONE FIRST)
+/*    PRO PWA & MOBILE ERGONOMICS (AFRICA SMARTPHONE FIRST) */
 
 /* 1. Hide clunky top notice bar on mobile & PWA */
 @media (max-width: 768px) {
