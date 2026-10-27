@@ -5539,3 +5539,66 @@ body.mobile-app-body {
   border: 1.5px solid #ffffff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
+
+
+/* ==========================================================================
+   CART PILL ADJACENT TO "PLATEFORME B2B BAMAKO MALI"
+   ========================================================================== */
+
+.mockup-hero-tag-row {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 12px !important;
+}
+
+.mockup-hero-cart-pill {
+  background: var(--accent-gold) !important;
+  color: var(--navy-deep) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: var(--radius-full) !important;
+  padding: 5px 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2) !important;
+  transition: transform 0.15s ease !important;
+}
+
+.mockup-hero-cart-pill:active {
+  transform: scale(0.95) !important;
+}
+
+.mockup-hero-cart-pill .hero-cart-icon {
+  font-size: 0.95rem !important;
+}
+
+.mockup-hero-cart-pill .hero-cart-label {
+  color: var(--navy-deep) !important;
+  font-weight: 800 !important;
+}
+
+.mockup-hero-cart-pill .hero-cart-count {
+  background: var(--navy-deep) !important;
+  color: #ffffff !important;
+  padding: 1px 7px !important;
+  border-radius: 10px !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+  display: inline-block !important;
+  min-width: 18px !important;
+  text-align: center !important;
+}
+
+/* Ensure header cart button has comfortable right margin from phone bezel */
+.header-actions {
+  margin-right: 6px !important;
+}
+
+.mockup-cart-btn {
+  margin-right: 4px !important;
+}
