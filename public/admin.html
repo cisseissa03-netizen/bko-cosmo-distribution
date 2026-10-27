@@ -49,29 +49,61 @@
 <body class="admin-layout">
 
   <!-- LOGIN VIEW FOR CEO -->
-  <section id="admin-login-section" style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px;">
-    <div style="background:#ffffff; border-radius:var(--radius-lg); padding:36px; max-width:420px; width:100%; box-shadow:var(--shadow-lg); border:1px solid var(--border);">
-      <div style="text-align:center; margin-bottom:24px;">
-        <div class="brand-logo-icon" style="margin:0 auto 12px auto;">BKO</div>
-        <h1 style="font-size:1.35rem; font-weight:800; color:var(--text-main);">Espace Gérant & CEO</h1>
-        <p style="font-size:0.84rem; color:var(--text-muted); margin-top:4px;">Administration du catalogue et traitement des demandes clients</p>
+  <section id="admin-login-section" class="mockup-admin-page">
+    <div class="mockup-admin-box">
+      <!-- Centered Floral Emblem Logo -->
+      <div class="mockup-admin-logo-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 360" width="160" height="110" style="margin:0 auto; display:block;">
+          <defs>
+            <linearGradient id="adminGoldPetal" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFE066"/>
+              <stop offset="50%" stop-color="#FFC21A"/>
+              <stop offset="100%" stop-color="#E5A600"/>
+            </linearGradient>
+            <filter id="goldGlowAdmin" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#FFC21A" flood-opacity="0.35"/>
+            </filter>
+          </defs>
+          <g transform="translate(0, -30)" filter="url(#goldGlowAdmin)">
+            <path d="M 256 95 C 278 145 280 230 256 270 C 232 230 234 145 256 95 Z" fill="url(#adminGoldPetal)"/>
+            <path d="M 256 270 C 230 215 195 160 175 135 C 172 170 205 235 256 270 Z" fill="url(#adminGoldPetal)"/>
+            <path d="M 256 270 C 282 215 317 160 337 135 C 340 170 307 235 256 270 Z" fill="url(#adminGoldPetal)"/>
+            <path d="M 256 270 C 205 240 145 205 110 195 C 122 235 175 275 256 270 Z" fill="url(#adminGoldPetal)"/>
+            <path d="M 256 270 C 307 240 367 205 402 195 C 390 235 337 275 256 270 Z" fill="url(#adminGoldPetal)"/>
+            <circle cx="256" cy="274" r="13" fill="url(#adminGoldPetal)"/>
+          </g>
+          <text x="256" y="300" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="52" fill="#ffffff" letter-spacing="3">BKO</text>
+          <text x="256" y="335" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="18" fill="#cbd5e1" letter-spacing="2">Cosmo Distribution</text>
+        </svg>
       </div>
 
-      <div id="login-error-msg" style="display:none; background:var(--danger-bg); color:var(--danger); padding:10px; border-radius:var(--radius-sm); font-size:0.84rem; margin-bottom:14px; text-align:center;"></div>
+      <h1 class="mockup-admin-title">Connexion administrateur</h1>
+
+      <div id="login-error-msg" style="display:none; background:rgba(220, 38, 38, 0.2); border:1px solid #dc2626; color:#fca5a5; padding:12px; border-radius:12px; font-size:0.875rem; margin-bottom:16px; text-align:center;"></div>
 
       <form id="admin-login-form">
-        <div class="form-group">
-          <label class="form-label">Mot de passe de gestion</label>
-          <input type="password" id="admin-password-input" class="form-control" placeholder="Entrez le mot de passe" required autofocus>
-          <span class="form-helper">Mot de passe de gestion : <code>0000</code></span>
+        <!-- Identifiant -->
+        <div class="mockup-admin-field">
+          <span class="mockup-admin-icon">👤</span>
+          <input type="text" id="admin-username-input" class="mockup-admin-input" placeholder="Identifiant" value="admin" autocomplete="username">
         </div>
-        <button type="submit" class="btn-primary-large" style="width:100%; justify-content:center; margin-top:16px;">
-          Se connecter à l'espace CEO
+
+        <!-- Mot de passe -->
+        <div class="mockup-admin-field">
+          <span class="mockup-admin-icon">🔒</span>
+          <input type="password" id="admin-password-input" class="mockup-admin-input" placeholder="Mot de passe" required autofocus autocomplete="current-password">
+        </div>
+
+        <!-- Bouton Se connecter Jaune Doré -->
+        <button type="submit" class="mockup-admin-btn-login">
+          Se connecter
         </button>
       </form>
 
-      <div style="text-align:center; margin-top:20px; font-size:0.8125rem;">
-        <a href="/" style="color:var(--text-muted);">← Revenir au catalogue public</a>
+      <p class="mockup-admin-footer-sub">Accès réservé aux administrateurs</p>
+      
+      <div style="margin-top:20px;">
+        <a href="/" style="color:#94a3b8; font-size:0.8125rem; text-decoration:none;">← Revenir à la boutique</a>
       </div>
     </div>
   </section>

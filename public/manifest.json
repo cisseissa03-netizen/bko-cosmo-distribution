@@ -1,13 +1,13 @@
 {
-  "name": "BKO Cosmo Distribution - Gros Cosmétique",
+  "name": "BKO Cosmo Distribution",
   "short_name": "BKO Cosmo",
-  "description": "Plateforme professionnelle de distribution en gros pour pharmacies et supermarchés de Bamako.",
+  "description": "Grossiste B2B en dermo-cosmétique, hygiène et soins pour pharmacies et supermarchés à Bamako.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#f8fafc",
-  "theme_color": "#0d5c75",
+  "background_color": "#06264A",
+  "theme_color": "#06264A",
   "lang": "fr",
   "dir": "ltr",
   "categories": ["business", "shopping", "medical"],
@@ -71,28 +71,27 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
     {
-      "name": "Catalogue Complet",
+      "name": "Catalogue Produits",
       "short_name": "Catalogue",
-      "description": "Consulter toutes les références et tarifs de gros",
+      "description": "Consulter les gammes et tarifs de gros",
       "url": "/?tab=catalog",
       "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     },
     {
-      "name": "Commande Rapide",
-      "short_name": "Saisie Rapide",
-      "description": "Saisie groupée des quantités en 1 clic",
-      "url": "/?tab=quick-order",
-      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "Nouveaux Arrivages",
-      "short_name": "Arrivages",
-      "description": "Voir les derniers arrivages et retours en stock",
-      "url": "/?tab=arrivages",
+      "name": "Suivre ma Commande",
+      "short_name": "Commandes",
+      "description": "Suivi en direct de votre livraison",
+      "url": "/?tab=track",
       "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     }
   ]

@@ -19,3 +19,6 @@
 ## Sécurité
 - Ne jamais ajouter de nouveaux secrets, mots de passe ou tokens en clair. Les accès d’administration existants doivent être migrés progressivement vers des variables d’environnement non versionnées. Ne jamais les afficher, copier ou dupliquer dans de nouveaux fichiers.
 - Interdiction d'exécuter des commandes destructives (`rm -rf`, `git reset --hard`, `git push --force`).
+
+## Options à la Demande
+- **Rendu Vocal** : Uniquement à la demande explicite de l'utilisateur (ex. mentions : *"en vocal"*, *"rendu vocal"*, *"synthèse vocale"*), générer un lecteur interactif de synthèse vocale récapitulant les points clés du travail réalisé.

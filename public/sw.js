@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bko-cosmo-cache-v10';
+const CACHE_NAME = 'bko-cosmo-cache-v12';
 
 const STATIC_ASSETS = [
   '/',
@@ -13,6 +13,8 @@ const STATIC_ASSETS = [
   '/js/three-hero.js',
   '/js/gsap-animations.js',
   '/manifest.json',
+  '/manifest.webmanifest',
+  '/favicon.svg',
   '/favicon.ico',
   '/icons/icon-192.png',
   '/icons/icon-512.png',

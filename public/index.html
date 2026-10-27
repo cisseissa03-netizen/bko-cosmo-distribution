@@ -2,19 +2,19 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>BKO Cosmo Distribution | Grossiste Dermo-Cosmétique & Hygiène Bamako</title>
-  <meta name="description" content="Plateforme de commande en gros de produits cosmétiques, dermo-cosmétiques et hygiène pour pharmacies et supermarchés à Bamako, Mali.">
+  <meta name="description" content="Plateforme B2B de distribution en gros de dermo-cosmétique et hygiène pour pharmacies et supermarchés à Bamako, Mali.">
   
   <!-- PWA Manifest & Multiplatform Mobile App Meta -->
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#0d5c75">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#06264A">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="BKO Cosmo">
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
   <link rel="shortcut icon" href="/favicon.ico">
 
@@ -22,94 +22,104 @@
   <!-- GSAP Local Library -->
   <script src="/vendor/gsap.min.js"></script>
 </head>
-<body>
+<body class="mobile-app-body">
 
-  <!-- Top Announcement Bar (Explicit Wholesale Provisional Notice) -->
+  <!-- Top Announcement Bar (Wholesale B2B Notice) -->
   <aside class="top-notice-bar" aria-label="Informations professionnelles">
     <div class="container top-notice-inner">
-      <span>📍 <strong>Entrepôt Bamako :</strong> Grossiste Pharmacies & Supermarchés</span>
+      <span>📍 <strong>Entrepôt Bamako :</strong> Vente en Gros Pharmacies &amp; Supermarchés</span>
       <span class="pill">Colisage dès 6 unités (ou 3)</span>
       <span class="top-notice-phone">📞 Commercial : (+223) 70 00 00 00</span>
     </div>
   </aside>
 
-  <!-- Site Header / Navbar -->
-  <header class="site-header">
+  <!-- Site Header / Navbar (Screen 1 Header) -->
+  <header class="site-header mockup-header" id="app-site-header">
     <div class="container">
       <div class="header-inner">
-        <!-- Brand / Identity -->
-        <a href="#home" class="brand-wrapper" data-tab="home" onclick="window.app.switchTab('home')">
-          <div class="brand-logo-icon" aria-hidden="true">BKO</div>
+        <!-- Left: Mobile Menu Hamburger Button -->
+        <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu principal" onclick="window.app.toggleMobileMenu()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <!-- Center: Brand Logo & Title -->
+        <a href="#home" class="brand-wrapper mockup-brand-wrap" onclick="window.app.switchTab('home'); return false;">
+          <img src="/favicon.svg" alt="BKO Cosmo Logo" class="brand-logo-img" width="34" height="34">
           <div class="brand-text">
-            <span class="brand-title">COSMO DISTRIB</span>
-            <span class="brand-subtitle">Grossiste Bamako</span>
+            <span class="brand-title">BKO COSMO</span>
+            <span class="brand-subtitle">DISTRIBUTION</span>
           </div>
         </a>
 
-        <!-- Desktop Navigation -->
-        <nav class="main-nav" aria-label="Navigation principale">
-          <button type="button" class="nav-link active" data-tab="home">Accueil</button>
-          <button type="button" class="nav-link" data-tab="catalog">Catalogue</button>
-          <button type="button" class="nav-link" data-tab="quick-order">Commande Rapide</button>
-          <button type="button" class="nav-link" data-tab="arrivages">Nouveaux Arrivages</button>
-          <button type="button" class="nav-link" data-tab="track">Suivi Demande</button>
+        <!-- Desktop Navigation Links (hidden on mobile) -->
+        <nav class="main-nav desktop-only-nav" aria-label="Navigation principale">
+          <button type="button" class="nav-link active" data-tab="home" onclick="window.app.switchTab('home')">Accueil</button>
+          <button type="button" class="nav-link" data-tab="catalog" onclick="window.app.switchTab('catalog')">Catalogue</button>
+          <button type="button" class="nav-link" data-tab="quick-order" onclick="window.app.switchTab('quick-order')">Commande Rapide</button>
+          <button type="button" class="nav-link" data-tab="arrivages" onclick="window.app.switchTab('arrivages')">Arrivages</button>
+          <button type="button" class="nav-link" data-tab="track" onclick="window.app.switchTab('track')">Suivi Commande</button>
         </nav>
 
-
-
-        <!-- Header Actions: Unified for Mobile & Desktop (WhatsApp + Ma Demande + Menu + Search) -->
+        <!-- Right Header Actions (Search & Cart) -->
         <div class="header-actions">
-          <!-- Quick Search Icon Button (mobile & desktop) -->
-          <button type="button" class="btn-header-search" id="header-search-btn" onclick="window.app.focusSearch()" aria-label="Rechercher des produits" title="Rechercher un produit ou une marque">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <!-- Quick Search Icon Button -->
+          <button type="button" class="btn-header-search" id="header-search-btn" onclick="window.app.focusSearch()" aria-label="Rechercher des produits">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </button>
 
           <!-- 1-Click PWA Install Button (desktop / tablet) -->
-          <button type="button" class="btn-pwa-install" id="pwa-install-header-btn" onclick="window.app.promptPwaInstall()" title="Installer l'application sur votre appareil">
+          <button type="button" class="btn-pwa-install" id="pwa-install-header-btn" onclick="window.app.promptPwaInstall()" title="Installer l'application sur votre appareil" style="display:none;">
             <span>📲 Installer</span>
           </button>
 
           <!-- Direct WhatsApp Button -->
           <a href="https://wa.me/22370000000" target="_blank" class="btn-whatsapp-header" id="header-whatsapp-btn" title="Contacter le commercial sur WhatsApp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
             <span class="btn-whatsapp-text">WhatsApp</span>
           </a>
 
-          <!-- Cart Button "Ma Demande" -->
-          <button type="button" class="cart-toggle-btn" id="cart-toggle-btn" aria-label="Ouvrir mon panier de demande" onclick="window.app.openCartDrawer()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-            <span class="cart-label-text">Demande</span>
+          <!-- Cart Trigger Button -->
+          <button type="button" class="cart-toggle-btn mockup-cart-btn" id="cart-toggle-btn" aria-label="Ouvrir mon panier" onclick="window.app.openCartDrawer()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
             <span class="cart-badge">0</span>
-            <span class="cart-price-sum">0 FCFA</span>
-          </button>
-
-          <!-- Mobile Menu Hamburger Button -->
-          <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu de navigation">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Mobile Nav Panel -->
+    <!-- Mobile Nav Panel (Slide-out Hamburger Menu) -->
     <div class="mobile-nav-panel" id="mobile-nav-panel">
-      <button type="button" class="nav-link active" data-tab="home">🏠 Accueil & Recherche</button>
-      <button type="button" class="nav-link" data-tab="catalog">📦 Catalogue complet (12 réf.)</button>
-      <button type="button" class="nav-link" data-tab="quick-order">⚡ Commande Rapide multi-produits</button>
-      <button type="button" class="nav-link" data-tab="arrivages">✨ Nouveaux Arrivages & Retours stock</button>
-      <button type="button" class="nav-link" data-tab="track">🔍 Suivre ma demande</button>
-      <button type="button" class="nav-link" onclick="window.app.promptPwaInstall()" style="color:#059669; font-weight:700;">📲 Installer l'application sur mon téléphone</button>
-      <a href="/admin.html" class="nav-link" style="color:var(--text-light); margin-top:8px;">🔒 Espace Gérant / CEO</a>
+      <div class="mobile-nav-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <img src="/favicon.svg" alt="BKO Logo" width="28" height="28">
+          <strong style="color:var(--navy-deep); font-size:1.05rem;">BKO COSMO DISTRIB</strong>
+        </div>
+        <button type="button" class="btn-close-drawer" onclick="window.app.toggleMobileMenu()" aria-label="Fermer le menu">✕</button>
+      </div>
+      <div class="mobile-nav-links">
+        <button type="button" class="nav-link active" data-tab="home" onclick="window.app.switchTab('home')">🏠 Accueil</button>
+        <button type="button" class="nav-link" data-tab="catalog" onclick="window.app.switchTab('catalog')">📦 Catalogue Produits</button>
+        <button type="button" class="nav-link" data-tab="quick-order" onclick="window.app.switchTab('quick-order')">⚡ Commande Rapide multi-produits</button>
+        <button type="button" class="nav-link" data-tab="arrivages" onclick="window.app.switchTab('arrivages')">✨ Nouveaux Arrivages &amp; Retours</button>
+        <button type="button" class="nav-link" data-tab="track" onclick="window.app.switchTab('track')">🔍 Suivi de Commande</button>
+        <button type="button" class="nav-link" data-tab="account" onclick="window.app.switchTab('account')">👤 Mon Compte &amp; Coordonnées</button>
+        <a href="https://wa.me/22370000000" target="_blank" class="nav-link" style="color:#059669; font-weight:700;">💬 Contacter le Commercial sur WhatsApp</a>
+        <button type="button" class="nav-link" onclick="window.app.promptPwaInstall()" style="color:var(--primary); font-weight:700;">📲 Installer l'application mobile</button>
+        <a href="/admin.html" class="nav-link" style="color:var(--text-light); margin-top:8px; border-top:1px solid #e2e8f0; padding-top:14px;">🔒 Espace Gérant / CEO</a>
+      </div>
     </div>
   </header>
 
-  <!-- Mobile PWA Smart Banner (Shown on mobile when not standalone, dismissible) -->
+  <!-- Backdrop for drawer/menu -->
+  <div class="drawer-backdrop" id="drawer-backdrop" onclick="window.app.closeAllDrawers()"></div>
+
+  <!-- Mobile PWA Smart Banner (Android / Mobile Web) -->
   <div id="mobile-pwa-banner" class="mobile-pwa-banner" style="display:none;">
     <div class="pwa-banner-left">
-      <div class="pwa-banner-icon">BKO</div>
+      <img src="/favicon.svg" alt="App Icon" class="pwa-banner-logo-img" width="36" height="36">
       <div class="pwa-banner-info">
         <strong>Application BKO Cosmo</strong>
-        <span>Accès rapide sans barre d'adresse</span>
+        <span>Accès plein écran &amp; rapide sur votre téléphone</span>
       </div>
     </div>
     <div class="pwa-banner-right">
@@ -118,460 +128,547 @@
     </div>
   </div>
 
-  <!-- MAIN APP VIEWS -->
-  <main id="main-content">
+  <!-- MAIN APP CONTAINER -->
+  <main id="main-content" class="app-main-content">
 
     <!-- ==========================================
-         VIEW 1: HOME (ACCUEIL & RECHERCHE RAPIDE)
+         VIEW 1: HOME (ACCUEIL - SCREEN 1 DE LA MAQUETTE)
     ========================================== -->
-    <div id="tab-view-home">
-
-      <!-- Direct Mobile-First Search Section -->
-      <section class="home-search-hero-bar" id="home-search-hero-bar">
-        <div class="container">
-          <div class="search-hero-card">
-            <div class="search-hero-header">
-              <span class="search-hero-tag">🔍 Recherche Directe de Produits</span>
-              <span class="search-hero-sub">Stock Bamako • Tarifs de gros en FCFA</span>
-            </div>
-            
-            <div class="search-hero-input-wrap">
-              <svg class="search-hero-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <input type="text" id="home-direct-search-input" class="search-hero-input" placeholder="Rechercher produit, marque (CeraVe, Bioderma...), format..." autocomplete="off">
-              <button type="button" id="home-direct-clear-btn" class="search-hero-clear-btn" style="display:none;" aria-label="Effacer">✕</button>
-            </div>
-
-            <!-- Instant Brand Suggestion Banner (when typing) -->
-            <div id="home-brand-search-suggestions" class="brand-search-suggestions" style="display:none;"></div>
+    <div id="tab-view-home" class="app-tab-view active-view">
+      <div class="container app-screen-container">
+        
+        <!-- Screen 1: Hero Banner (Bleu Marine #06264A + Bouton Jaune #FFC21A) -->
+        <section class="mockup-hero-banner" id="mockup-hero-banner">
+          <div class="mockup-hero-content">
+            <span class="mockup-hero-tag">GROSSISTE B2B BAMAKO</span>
+            <h1 class="mockup-hero-title">Distribution Cosmétique &amp; Dermo-Professionnelle</h1>
+            <p class="mockup-hero-subtitle">Tarifs de gros en FCFA pour pharmacies, instituts et supermarchés de Bamako.</p>
+            <button type="button" class="mockup-hero-cta" onclick="window.app.switchTab('catalog')">
+              <span>Découvrir notre catalogue</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
           </div>
+          <div class="mockup-hero-bottles">
+            <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80" alt="Produits cosmétiques" class="mockup-hero-img" loading="eager">
+          </div>
+          <div class="mockup-hero-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </section>
+
+        <!-- Screen 1: Quick Categories 2x2 Grid ("Nos univers") -->
+        <section class="mockup-quick-categories">
+          <div class="section-title-row">
+            <h2 class="mockup-section-title">Nos Catégories Phares</h2>
+            <button type="button" class="btn-see-all-link" onclick="window.app.switchTab('catalog')">Voir tout →</button>
+          </div>
+          <div class="mockup-quick-grid">
+            <!-- 1. Dermo-cosmétique -->
+            <div class="quick-category-card" onclick="window.app.openCategoryFromHome('Dermo-Cosmétique')" role="button" tabindex="0">
+              <div class="quick-category-icon-box">🧴</div>
+              <div class="quick-category-info">
+                <strong>Dermo-cosmétique</strong>
+                <span>Soins experts peau</span>
+              </div>
+              <span class="quick-category-chevron">→</span>
+            </div>
+
+            <!-- 2. Hygiène & Soins -->
+            <div class="quick-category-card" onclick="window.app.openCategoryFromHome('Hygiène & Corps')" role="button" tabindex="0">
+              <div class="quick-category-icon-box">🧼</div>
+              <div class="quick-category-info">
+                <strong>Hygiène &amp; Soins</strong>
+                <span>Savons, gels &amp; laits</span>
+              </div>
+              <span class="quick-category-chevron">→</span>
+            </div>
+
+            <!-- 3. Cheveux & Beauté -->
+            <div class="quick-category-card" onclick="window.app.openCategoryFromHome('Capillaire')" role="button" tabindex="0">
+              <div class="quick-category-icon-box">💆</div>
+              <div class="quick-category-info">
+                <strong>Cheveux &amp; Beauté</strong>
+                <span>Soins &amp; masques</span>
+              </div>
+              <span class="quick-category-chevron">→</span>
+            </div>
+
+            <!-- 4. Produits pharmaceutiques -->
+            <div class="quick-category-card" onclick="window.app.openCategoryFromHome('Soins Bébé & Maternité')" role="button" tabindex="0">
+              <div class="quick-category-icon-box">💊</div>
+              <div class="quick-category-info">
+                <strong>Pharmaceutiques</strong>
+                <span>Officine &amp; pédiatrie</span>
+              </div>
+              <span class="quick-category-chevron">→</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 1: Featured Products 2-Column Grid -->
+        <section class="mockup-featured-products-section">
+          <div class="section-title-row">
+            <h2 class="mockup-section-title">Produits Populaires</h2>
+            <span class="mockup-stock-badge">✓ Stock garanti Bamako</span>
+          </div>
+          <div class="mockup-products-grid" id="home-featured-grid">
+            <!-- Dynamically populated by app.js with 2-column mobile cards -->
+          </div>
+        </section>
+
+        <!-- Wholesale Trust Pillars -->
+        <section class="mockup-trust-pillars">
+          <div class="trust-pillar-card">
+            <span class="trust-pillar-icon">📦</span>
+            <div>
+              <strong>Colisage Standard</strong>
+              <span>Paliers de 6 unités (ou exception de 3)</span>
+            </div>
+          </div>
+          <div class="trust-pillar-card">
+            <span class="trust-pillar-icon">🚚</span>
+            <div>
+              <strong>Livraison Express</strong>
+              <span>Livraison directe dans votre officine à Bamako</span>
+            </div>
+          </div>
+          <div class="trust-pillar-card">
+            <span class="trust-pillar-icon">🤝</span>
+            <div>
+              <strong>Paiement B2B Sécurisé</strong>
+              <span>Règlement à la livraison sans carte en ligne</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Access Shortcuts -->
+        <div class="mockup-quick-shortcuts">
+          <button type="button" class="btn-secondary-card" onclick="window.app.switchTab('quick-order')">
+            <span>⚡ Passer en commande rapide multi-produits</span>
+            <span>➔</span>
+          </button>
+          <button type="button" class="btn-secondary-card" onclick="window.app.switchTab('arrivages')">
+            <span>✨ Consulter les nouveaux arrivages en entrepôt</span>
+            <span>➔</span>
+          </button>
         </div>
-      </section>
 
-      <!-- Interactive Gammes & Catégories Déroulantes (Touch Accordion & Cards) -->
-      <section class="gammes-section" id="gammes-section">
-        <div class="container">
-          <div class="gammes-card" id="gammes-card">
-            <!-- Header Trigger -->
-            <div class="gammes-header-trigger" id="gammes-toggle-btn" onclick="window.app.toggleGammesDrawer()" role="button" tabindex="0" aria-expanded="false" aria-controls="gammes-dropdown">
-              <div class="gammes-trigger-left">
-                <div class="gammes-icon-badge">🗂️</div>
-                <div class="gammes-trigger-text">
-                  <div class="gammes-trigger-top">
-                    <strong class="gammes-title-text">Gammes & Catégories de Gros</strong>
-                    <span class="gammes-count-badge">5 gammes</span>
-                  </div>
-                  <div class="gammes-active-status" id="gammes-active-status">
-                    🌟 Toutes les gammes (12 réf. en entrepôt)
-                  </div>
-                </div>
-              </div>
-              <div class="gammes-trigger-right">
-                <span class="gammes-toggle-text" id="gammes-toggle-text">Ouvrir</span>
-                <span class="gammes-chevron" id="gammes-chevron">▼</span>
-              </div>
-            </div>
-
-            <!-- Collapsible Dropdown with all categories & ranges -->
-            <div class="gammes-dropdown" id="gammes-dropdown" style="display:none;">
-              <div class="gammes-dropdown-header">
-                <span>Touchez une gamme pour filtrer les produits correspondants :</span>
-                <button type="button" class="btn-gamme-reset" onclick="window.app.selectGammeCategory('all')">Tout afficher ✕</button>
-              </div>
-              <div class="gammes-grid" id="gammes-categories-list">
-                <!-- Dynamically populated by app.js -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-
-      <!-- Hero Showcase Section (Photo HD OU Scène 3D Stylisée Three.js) -->
-      <section class="hero-section">
-        <div class="container">
-          <div class="hero-grid">
-            <div class="hero-content">
-              <div class="hero-badge-tag">
-                <span class="badge-dot" style="width:8px; height:8px; border-radius:50%; background:var(--primary);"></span>
-                <span>Plateforme B2B Grossiste • Bamako, Mali</span>
-              </div>
-              <h1 class="hero-title">
-                Approvisionnement direct pour <span class="highlight">Pharmacies & Supermarchés</span>
-              </h1>
-              <p class="hero-description">
-                Catalogue de distribution en gros de dermo-cosmétique, hygiène et soins bébé à Bamako. Tarifs transparents en FCFA, colisage rigoureux dès 6 unités (ou 3 unités sur références techniques), transmission simple sans paiement en ligne.
-              </p>
-              <div class="hero-ctas">
-                <button type="button" class="btn-primary-large" onclick="window.app.switchTab('catalog')">
-                  <span>Consulter le catalogue complet</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-                <button type="button" class="btn-secondary-large" onclick="window.app.switchTab('quick-order')">
-                  <span>Commande rapide multi-lignes</span>
-                </button>
-              </div>
-
-              <!-- Key Rules Highlights -->
-              <div class="hero-rules-highlights">
-                <div class="rule-highlight-item">
-                  <div class="rule-highlight-icon">✓</div>
-                  <div class="rule-highlight-text">
-                    <strong>Colisage Standard</strong>
-                    <span>Paliers stricts de 6 unités (6, 12, 18...)</span>
-                  </div>
-                </div>
-                <div class="rule-highlight-item">
-                  <div class="rule-highlight-icon">⚡</div>
-                  <div class="rule-highlight-text">
-                    <strong>Exception 3 Unités</strong>
-                    <span>Autorisée sur produits techniques & fins de stock</span>
-                  </div>
-                </div>
-                <div class="rule-highlight-item">
-                  <div class="rule-highlight-icon">🚚</div>
-                  <div class="rule-highlight-text">
-                    <strong>Livraison Bamako</strong>
-                    <span>Coordination directe avec notre commercial</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Hero Visual Card (Photo Réelle OU Scène 3D Stylisée) -->
-            <div class="hero-visual-card" id="hero-visual-card">
-              <!-- Real Showcase Photo Container -->
-              <div id="hero-photo-wrapper" class="hero-photo-wrapper" style="display:none;">
-                <img id="hero-main-photo" src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1000&auto=format&fit=crop&q=80" alt="Présentation Cosmétique Pro" class="hero-cover-image">
-                <div class="hero-photo-badge">
-                  <span>✨ Gamme Professionnelle Disponible</span>
-                </div>
-              </div>
-
-              <!-- 3D Canvas -->
-              <canvas id="hero-three-canvas" aria-label="Visualisation 3D décorative"></canvas>
-
-              <!-- Static Accessible Fallback -->
-              <div class="hero-fallback-visual">
-                <div style="font-size:3rem; margin-bottom:12px;">🧴✨</div>
-                <h3 style="font-size:1.2rem; font-weight:800; color:var(--primary);">Distribution Cosmétique Pro</h3>
-                <p style="font-size:0.875rem; color:var(--text-muted); margin-top:8px;">Soins dermatologiques, capillaires et corporels sélectionnés pour le marché de Bamako.</p>
-              </div>
-
-              <!-- Bottom Bar with 1-Click Toggle between Photo and 3D -->
-              <div class="hero-visual-caption">
-                <span id="hero-visual-caption-text">✨ Vitrine 3D Interactive (Three.js WebGL)</span>
-                <div style="display:flex; gap:6px; align-items:center;">
-                  <button type="button" class="btn-3d-toggle" id="toggle-hero-mode-btn" onclick="window.app.toggleHeroMode()" title="Basculer entre la Photo réelle et la Scène 3D">
-                    📸 Voir la Photo
-                  </button>
-                  <button type="button" class="btn-3d-toggle" id="toggle-3d-btn" style="display:none;" title="Mettre en pause ou relancer la scène 3D">⏸ Pause</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- How it Works (Fonctionnement en 3 étapes) -->
-      <section class="how-it-works-section">
-        <div class="container">
-          <div class="section-header">
-            <span class="section-subtitle-tag">Simplicité & Rigueur Commerciale</span>
-            <h2 class="section-main-title">Comment fonctionne votre approvisionnement</h2>
-            <p class="section-description">Un parcours d'achat conçu pour les professionnels de santé et gérants de magasins à Bamako.</p>
-          </div>
-          <div class="steps-grid">
-            <div class="step-card">
-              <div class="step-number">1</div>
-              <h3 class="step-title">Sélectionnez vos références</h3>
-              <p class="step-text">Parcourez le catalogue ou la commande rapide. Choisissez des quantités autorisées (6, 12, 18... ou 3 sur références spécifiques). Chaque produit est contrôlé indépendamment.</p>
-            </div>
-            <div class="step-card">
-              <div class="step-number">2</div>
-              <h3 class="step-title">Transmettez votre demande</h3>
-              <p class="step-text">Renseignez le nom de votre établissement et votre quartier à Bamako. Aucun compte obligatoire, aucun paiement en ligne : votre demande est enregistrée immédiatement.</p>
-            </div>
-            <div class="step-card">
-              <div class="step-number">3</div>
-              <h3 class="step-title">Confirmation & Livraison</h3>
-              <p class="step-text">Le commercial/CEO vérifie votre commande, vous contacte pour confirmer le créneau et organise la livraison directe à votre officine ou point de vente.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
+      </div>
     </div>
 
     <!-- ==========================================
-         VIEW 2: CATALOG (CATALOGUE COMPLET)
+         VIEW 2: CATALOG (SCREENS 2 & 3 DE LA MAQUETTE)
     ========================================== -->
-    <div id="tab-view-catalog">
-      <section class="catalog-section">
-        <div class="container">
-          <!-- Filter and Search Toolbar -->
-          <div class="filter-bar">
-            <!-- Search Input with Synchronized Brand Matching -->
-            <div class="search-input-wrapper">
-              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <input type="text" id="catalog-search-input" class="search-input" placeholder="Rechercher par nom de produit, marque (ex: CeraVe, Bioderma) ou réf..." autocomplete="off">
-              <button type="button" id="clear-search-btn" class="btn-clear-search" aria-label="Effacer recherche">✕</button>
-            </div>
+    <div id="tab-view-catalog" class="app-tab-view" style="display:none;">
+      <div class="container app-screen-container">
 
-            <!-- Instant 1-Click Brand Suggestion Bar (dynamically populated when typing) -->
-            <div id="brand-search-suggestions" class="brand-search-suggestions" style="display:none;"></div>
+        <!-- ==========================================
+             SCREEN 2: ROOT CATALOG (4 LIGNES DE CATÉGORIES)
+        ========================================== -->
+        <div id="catalog-categories-screen" class="catalog-subview">
+          <div class="screen-header-block">
+            <h1 class="screen-page-title">Notre catalogue</h1>
+            <p class="screen-page-subtitle">Sélectionnez une catégorie ou recherchez une référence</p>
+          </div>
 
-            <!-- 1-Click Brand Pills Bar (Synchronized with Search) -->
-            <div class="brand-filter-container">
-              <div class="brand-filter-label-row">
-                <span class="brand-filter-title">🏷️ Marques en 1 clic :</span>
-                <span class="brand-filter-hint">Sélectionnez une marque pour voir tous ses produits</span>
-              </div>
-              <div class="brand-pills-row" id="brand-pills-row" role="tablist">
-                <!-- Populated dynamically by app.js -->
-              </div>
-            </div>
+          <!-- Screen 2: Pill Search Bar -->
+          <div class="catalog-search-pill-wrap">
+            <svg class="search-pill-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="catalog-search-input" class="catalog-search-pill-input" placeholder="Rechercher produit, marque (CeraVe, Bioderma...)" autocomplete="off">
+            <button type="button" id="clear-search-btn" class="btn-clear-pill-search" style="display:none;" onclick="window.app.clearSearch()" aria-label="Effacer recherche">✕</button>
+          </div>
 
-            <!-- Categories Horizontal Pills -->
-            <div class="category-pills-row" role="tablist">
-              <button type="button" class="pill-filter active" data-category="all">Toutes les catégories</button>
-              <button type="button" class="pill-filter" data-category="Dermo-Cosmétique">Dermo-Cosmétique</button>
-              <button type="button" class="pill-filter" data-category="Hygiène & Corps">Hygiène & Corps</button>
-              <button type="button" class="pill-filter" data-category="Protection Solaire">Protection Solaire</button>
-              <button type="button" class="pill-filter" data-category="Soins Bébé & Maternité">Soins Bébé</button>
-              <button type="button" class="pill-filter" data-category="Capillaire">Capillaire</button>
-            </div>
+          <!-- Instant Brand Search Matches Suggestions -->
+          <div id="brand-search-suggestions" class="brand-search-suggestions" style="display:none;"></div>
 
-            <!-- Additional Selects & Active Filters Badges & Results Count -->
-            <div class="filter-controls-row">
-              <div class="active-filters-badges" id="active-filters-badges">
-                <!-- Dynamically populated with active brand, category or search chips -->
-              </div>
-              <div class="filter-selects-group">
-                <select id="brand-select" class="custom-select" aria-label="Filtrer par marque">
-                  <option value="all">Toutes les marques</option>
-                </select>
-              </div>
-              <span class="results-count-text" id="catalog-results-count">Chargement des références...</span>
+          <!-- Screen 2: Filter Toggle Pills ("Toutes les catégories" | "Marques") -->
+          <div class="catalog-filter-toggle-row">
+            <button type="button" class="catalog-toggle-btn active" id="toggle-cat-btn" onclick="window.app.showCatalogCategoriesView()">
+              <span>Toutes les catégories</span>
+            </button>
+            <button type="button" class="catalog-toggle-btn" id="toggle-brand-btn" onclick="window.app.showCatalogBrandsView()">
+              <span>Marques</span>
+            </button>
+          </div>
+
+          <!-- Brand Pills Container (shown when Marques is clicked) -->
+          <div id="catalog-brand-pills-container" class="catalog-brand-pills-container" style="display:none;">
+            <div class="brand-pills-row" id="brand-pills-row">
+              <!-- Dynamically populated by app.js -->
             </div>
           </div>
 
-          <!-- Product Cards Grid -->
-          <div class="products-grid" id="products-grid">
-            <!-- Rendered by app.js -->
+          <!-- Screen 2: 4 Category Row Cards with Image Thumbnails & Chevrons -->
+          <div class="mockup-cat-rows-list" id="mockup-cat-rows-list">
+            <!-- Row 1: Dermo-cosmétique -->
+            <div class="cat-row-card" onclick="window.app.openCategoryDetails('Dermo-Cosmétique')" role="button" tabindex="0">
+              <div class="cat-row-thumb">
+                <img src="https://images.unsplash.com/photo-1608248597359-25f0a3821817?w=200&auto=format&fit=crop&q=80" alt="Dermo-cosmétique">
+              </div>
+              <div class="cat-row-info">
+                <strong class="cat-row-title">Dermo-cosmétique</strong>
+                <span class="cat-row-subtitle">Soins spécifiques visage &amp; corps</span>
+                <span class="cat-row-badge" id="cat-count-dermo">3 références</span>
+              </div>
+              <span class="cat-row-chevron">›</span>
+            </div>
+
+            <!-- Row 2: Hygiène & Soins -->
+            <div class="cat-row-card" onclick="window.app.openCategoryDetails('Hygiène & Corps')" role="button" tabindex="0">
+              <div class="cat-row-thumb">
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=200&auto=format&fit=crop&q=80" alt="Hygiène & Soins">
+              </div>
+              <div class="cat-row-info">
+                <strong class="cat-row-title">Hygiène &amp; Soins</strong>
+                <span class="cat-row-subtitle">Nettoyants, savons, lotions &amp; déodorants</span>
+                <span class="cat-row-badge" id="cat-count-hygiene">4 références</span>
+              </div>
+              <span class="cat-row-chevron">›</span>
+            </div>
+
+            <!-- Row 3: Cheveux & Beauté -->
+            <div class="cat-row-card" onclick="window.app.openCategoryDetails('Capillaire')" role="button" tabindex="0">
+              <div class="cat-row-thumb">
+                <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=200&auto=format&fit=crop&q=80" alt="Cheveux & Beauté">
+              </div>
+              <div class="cat-row-info">
+                <strong class="cat-row-title">Cheveux &amp; Beauté</strong>
+                <span class="cat-row-subtitle">Soins capillaires, masques &amp; huiles</span>
+                <span class="cat-row-badge" id="cat-count-capillaire">1 référence</span>
+              </div>
+              <span class="cat-row-chevron">›</span>
+            </div>
+
+            <!-- Row 4: Produits pharmaceutiques -->
+            <div class="cat-row-card" onclick="window.app.openCategoryDetails('Soins Bébé & Maternité')" role="button" tabindex="0">
+              <div class="cat-row-thumb">
+                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=200&auto=format&fit=crop&q=80" alt="Produits pharmaceutiques">
+              </div>
+              <div class="cat-row-info">
+                <strong class="cat-row-title">Produits pharmaceutiques</strong>
+                <span class="cat-row-subtitle">Soins pédiatriques, peaux fragiles &amp; officine</span>
+                <span class="cat-row-badge" id="cat-count-pharma">2 références</span>
+              </div>
+              <span class="cat-row-chevron">›</span>
+            </div>
+
+            <!-- Row 5: Protection Solaire -->
+            <div class="cat-row-card" onclick="window.app.openCategoryDetails('Protection Solaire')" role="button" tabindex="0">
+              <div class="cat-row-thumb">
+                <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=200&auto=format&fit=crop&q=80" alt="Protection Solaire">
+              </div>
+              <div class="cat-row-info">
+                <strong class="cat-row-title">Protection Solaire SPF50+</strong>
+                <span class="cat-row-subtitle">Fluides teintés &amp; brumes anti-brillance</span>
+                <span class="cat-row-badge" id="cat-count-solaire">2 références</span>
+              </div>
+              <span class="cat-row-chevron">›</span>
+            </div>
           </div>
         </div>
-      </section>
+
+        <!-- ==========================================
+             SCREEN 3: CATEGORY PRODUCTS LISTING (AVEC RETOUR ←)
+        ========================================== -->
+        <div id="catalog-products-screen" class="catalog-subview" style="display:none;">
+          <!-- Screen 3 Header: Back Arrow ← + Category Title -->
+          <div class="screen-back-header">
+            <button type="button" class="btn-screen-back" onclick="window.app.backToCategoriesList()" aria-label="Retour aux catégories">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </button>
+            <div class="screen-back-title-wrap">
+              <h2 class="screen-back-title" id="category-listing-title">Dermo-cosmétique</h2>
+              <span class="screen-back-count" id="category-listing-count">3 produits</span>
+            </div>
+          </div>
+
+          <!-- Screen 3: Subcategory Pills (Tout | Visage | Corps | Solaire) -->
+          <div class="subcategory-pills-row" id="subcategory-pills-row">
+            <button type="button" class="subcat-pill active" data-sub="all" onclick="window.app.filterSubcategory('all')">Tout</button>
+            <button type="button" class="subcat-pill" data-sub="visage" onclick="window.app.filterSubcategory('visage')">Visage</button>
+            <button type="button" class="subcat-pill" data-sub="corps" onclick="window.app.filterSubcategory('corps')">Corps</button>
+            <button type="button" class="subcat-pill" data-sub="solaire" onclick="window.app.filterSubcategory('solaire')">Solaire</button>
+          </div>
+
+          <!-- Active Filter indicator & reset -->
+          <div class="active-filter-indicator-bar" id="active-filter-indicator" style="display:none;">
+            <span id="active-filter-text">Filtre actif</span>
+            <button type="button" class="btn-clear-filter-small" onclick="window.app.resetActiveFilters()">Effacer ✕</button>
+          </div>
+
+          <!-- Screen 3: 2-Column Product Grid -->
+          <div class="mockup-products-grid" id="products-grid">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- ==========================================
          VIEW 3: QUICK ORDER (COMMANDE RAPIDE)
     ========================================== -->
-    <div id="tab-view-quick-order">
-      <section class="quick-order-section">
-        <div class="container">
-          <div style="margin-bottom:16px;">
-            <span class="section-subtitle-tag">Vue groupée haute productivité</span>
-            <h2 style="font-size:1.6rem; font-weight:800; color:var(--text-main);">Saisie Rapide Multi-Références</h2>
-            <p style="font-size:0.9rem; color:var(--text-muted);">
-              Ajustez directement les quantités autorisées par ligne sans ouvrir les fiches individuelles.
-            </p>
-          </div>
+    <div id="tab-view-quick-order" class="app-tab-view" style="display:none;">
+      <div class="container app-screen-container">
+        <div class="screen-header-block">
+          <span class="section-subtitle-tag">Vue groupée B2B</span>
+          <h1 class="screen-page-title">Saisie Rapide Multi-Lignes</h1>
+          <p class="screen-page-subtitle">Ajustez les quantités autorisées par ligne sans ouvrir les fiches.</p>
+        </div>
 
-          <!-- Quick Order 1-Click Brand Filter -->
-          <div class="quick-order-brand-bar" style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-md); padding:12px 16px; margin-bottom:16px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
-              <span style="font-size:0.8125rem; font-weight:700; color:var(--text-main);">🏷️ Filtrer par Marque en 1 clic :</span>
-              <span style="font-size:0.75rem; color:var(--text-light);" id="quick-order-count"></span>
-            </div>
-            <div class="brand-pills-row" id="quick-order-brand-pills">
-              <!-- Populated dynamically by app.js -->
-            </div>
-          </div>
-
-          <div class="quick-order-table-card">
-            <div id="quick-order-items-list">
-              <!-- Rendered by app.js -->
-            </div>
+        <div class="quick-order-table-card">
+          <div id="quick-order-items-list">
+            <!-- Dynamically populated by app.js -->
           </div>
         </div>
-      </section>
+      </div>
 
       <!-- Sticky Floating Bar for Quick Order -->
       <div class="sticky-bottom-summary-bar">
         <div>
-          <span style="font-size:0.8125rem; opacity:0.8; display:block;">Total sélectionné :</span>
-          <strong id="sticky-cart-units" style="font-size:1.1rem; color:#fef08a;">0 unités</strong>
-          <span style="margin:0 8px; opacity:0.4;">|</span>
-          <strong id="sticky-cart-total" style="font-size:1.1rem;">0 FCFA</strong>
+          <span style="font-size:0.75rem; opacity:0.8; display:block;">Total sélectionné :</span>
+          <strong id="sticky-cart-units" style="font-size:1.05rem; color:#fef08a;">0 unités</strong>
+          <span style="margin:0 6px; opacity:0.4;">|</span>
+          <strong id="sticky-cart-total" style="font-size:1.05rem;">0 FCFA</strong>
         </div>
-        <button type="button" class="btn-primary-large" id="sticky-open-cart-btn" onclick="window.app.openCartDrawer()" style="min-height:42px; padding:8px 18px; font-size:0.9rem;">
-          <span>Consulter mon panier</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <button type="button" class="btn-primary-large" onclick="window.app.openCartDrawer()" style="min-height:42px; padding:8px 18px; font-size:0.9rem;">
+          <span>Voir le panier</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
       </div>
     </div>
 
     <!-- ==========================================
-         VIEW 4: ARRIVAGES & RESTOCKS
+         VIEW 4: ARRIVAGES (ARRIVAGES & RESTOCKS)
     ========================================== -->
-    <div id="tab-view-arrivages">
-      <section style="padding:40px 0 64px 0;">
-        <div class="container">
-          <!-- Arrivages Header Banner -->
-          <div class="arrivages-header-card">
-            <div>
-              <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:var(--radius-full); font-size:0.75rem; font-weight:700; text-transform:uppercase;">
-                Stock Bamako Entrepôt
-              </span>
-              <h2 style="font-size:1.6rem; font-weight:900; margin-top:8px;">Nouveaux Arrivages & Retours en Stock</h2>
-              <p style="font-size:0.9rem; opacity:0.9; margin-top:4px;">
-                Références récemment réceptionnées prêtes pour expédition rapide dans vos rayons.
-              </p>
-            </div>
-            <button type="button" class="btn-share-whatsapp-arrivages" id="share-arrivages-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-              <span>Partager la liste sur WhatsApp</span>
-            </button>
+    <div id="tab-view-arrivages" class="app-tab-view" style="display:none;">
+      <div class="container app-screen-container">
+        <div class="arrivages-header-card">
+          <div>
+            <span style="background:rgba(255,255,255,0.2); padding:3px 8px; border-radius:var(--radius-full); font-size:0.7rem; font-weight:700; text-transform:uppercase;">
+              Stock Bamako Entrepôt
+            </span>
+            <h1 style="font-size:1.45rem; font-weight:900; margin-top:8px;">Nouveaux Arrivages &amp; Retours</h1>
+            <p style="font-size:0.875rem; opacity:0.9; margin-top:4px;">
+              Références récemment réceptionnées prêtes pour expédition rapide dans vos rayons.
+            </p>
           </div>
-
-          <!-- Arrivages Sub-tabs -->
-          <div style="display:flex; gap:8px; margin-bottom:24px; overflow-x:auto;">
-            <button type="button" class="pill-filter active arrivage-tab-pill" data-filter="all">Tous les arrivages</button>
-            <button type="button" class="pill-filter arrivage-tab-pill" data-filter="new-arrival">Nouveaux arrivages</button>
-            <button type="button" class="pill-filter arrivage-tab-pill" data-filter="new-product">Nouveaux produits</button>
-            <button type="button" class="pill-filter arrivage-tab-pill" data-filter="restock">Retours en stock</button>
-          </div>
-
-          <!-- Arrivages Grid -->
-          <div class="products-grid" id="arrivages-products-grid">
-            <!-- Rendered by app.js -->
-          </div>
+          <button type="button" class="btn-share-whatsapp-arrivages" id="share-arrivages-btn" onclick="window.app.shareArrivagesOnWhatsApp()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <span>Partager sur WhatsApp</span>
+          </button>
         </div>
-      </section>
+
+        <!-- Arrivages Grid -->
+        <div class="mockup-products-grid" id="arrivages-products-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
     </div>
 
     <!-- ==========================================
-         VIEW 5: TRACK ORDER (SUIVI DE DEMANDE)
+         VIEW 5: TRACK (COMMANDES / SUIVI - TAB 3 BOTTOM NAV)
     ========================================== -->
-    <div id="tab-view-track">
-      <section style="padding:48px 0 64px 0;">
-        <div class="container">
-          <div class="tracking-card">
-            <h2 style="font-size:1.4rem; font-weight:800; color:var(--text-main); margin-bottom:6px;">Suivre votre demande de commande</h2>
-            <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:20px;">
-              Saisissez le numéro de référence transmis lors de votre demande (ex : <code>DEM-BKO-2026-XXXX</code>).
-            </p>
-            <form id="tracking-form" style="display:flex; gap:10px; flex-wrap:wrap;">
-              <input type="text" id="track-order-input" class="form-control" style="flex:1; min-width:240px; font-family:monospace; font-weight:700;" placeholder="ex: DEM-BKO-2026-9841" required>
-              <button type="submit" class="btn-primary-large" style="min-height:44px; padding:10px 20px;">
-                Vérifier le statut
-              </button>
-            </form>
+    <div id="tab-view-track" class="app-tab-view" style="display:none;">
+      <div class="container app-screen-container">
+        <div class="screen-header-block">
+          <span class="section-subtitle-tag">Suivi &amp; Historique</span>
+          <h1 class="screen-page-title">Mes Commandes</h1>
+          <p class="screen-page-subtitle">Suivez l'état de préparation et de livraison de vos demandes B2B.</p>
+        </div>
 
-            <div id="tracking-result-box" style="margin-top:24px;"></div>
+        <div class="tracking-card">
+          <h2 style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-bottom:8px;">Rechercher une commande</h2>
+          <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:16px;">
+            Saisissez le numéro de référence transmis lors de votre demande (ex : <code>DEM-BKO-2026-XXXX</code>).
+          </p>
+          <form id="tracking-form" onsubmit="window.app.trackOrderDirect(event)" style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="text" id="track-order-input" class="form-control" style="flex:1; min-width:220px; font-family:monospace; font-weight:700; font-size:1rem; padding:12px 14px;" placeholder="DEM-BKO-2026-XXXX" required>
+            <button type="submit" class="mockup-btn-primary" style="min-height:48px; padding:10px 22px;">
+              Vérifier le statut
+            </button>
+          </form>
+
+          <div id="tracking-result-box" style="margin-top:20px;"></div>
+        </div>
+
+        <!-- Recent Orders History Saved on Device -->
+        <div class="recent-orders-card" id="recent-orders-card" style="margin-top:24px;">
+          <h3 style="font-size:1.1rem; font-weight:800; color:var(--text-main); margin-bottom:12px;">Historique récent sur cet appareil</h3>
+          <div id="recent-orders-list">
+            <!-- Dynamically populated from localStorage -->
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         VIEW 6: ACCOUNT (COMPTE - TAB 4 BOTTOM NAV)
+    ========================================== -->
+    <div id="tab-view-account" class="app-tab-view" style="display:none;">
+      <div class="container app-screen-container">
+        <div class="screen-header-block">
+          <span class="section-subtitle-tag">Espace Professionnel</span>
+          <h1 class="screen-page-title">Mon Compte B2B</h1>
+          <p class="screen-page-subtitle">Coordonnées de votre établissement &amp; accès professionnel</p>
+        </div>
+
+        <div class="account-profile-card">
+          <div class="account-avatar-row">
+            <div class="account-avatar-icon">🏥</div>
+            <div>
+              <strong style="font-size:1.15rem; color:var(--navy-deep); display:block;" id="account-disp-name">Pharmacie / Établissement</strong>
+              <span style="font-size:0.85rem; color:var(--text-muted);" id="account-disp-location">Bamako, Mali</span>
+            </div>
+          </div>
+
+          <div class="account-menu-list">
+            <a href="https://wa.me/22370000000" target="_blank" class="account-menu-item">
+              <span class="account-menu-icon">💬</span>
+              <div class="account-menu-text">
+                <strong>Assistance Commerciale WhatsApp</strong>
+                <span>Contact direct pour créneaux de livraison et devis</span>
+              </div>
+              <span class="account-menu-arrow">›</span>
+            </a>
+            <div class="account-menu-item" onclick="window.app.switchTab('track')" role="button" tabindex="0">
+              <span class="account-menu-icon">📦</span>
+              <div class="account-menu-text">
+                <strong>Suivi de mes commandes en cours</strong>
+                <span>Consulter les statuts de préparation</span>
+              </div>
+              <span class="account-menu-arrow">›</span>
+            </div>
+            <div class="account-menu-item" onclick="window.app.promptPwaInstall()" role="button" tabindex="0">
+              <span class="account-menu-icon">📲</span>
+              <div class="account-menu-text">
+                <strong>Installer l'application sur mon écran</strong>
+                <span>Accès ultra-rapide sans navigateur</span>
+              </div>
+              <span class="account-menu-arrow">›</span>
+            </div>
+            <a href="/admin.html" class="account-menu-item admin-access-item">
+              <span class="account-menu-icon">🔒</span>
+              <div class="account-menu-text">
+                <strong style="color:var(--primary);">Espace Gérant / CEO</strong>
+                <span>Accès réservé pour gestion du catalogue et commandes</span>
+              </div>
+              <span class="account-menu-arrow">›</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="wholesale-rules-card" style="margin-top:20px;">
+          <h3 style="font-size:1rem; font-weight:800; color:var(--navy-deep); margin-bottom:8px;">Rappel des Règles de Colisage BKO Cosmo</h3>
+          <p style="font-size:0.8125rem; color:var(--text-muted); line-height:1.6;">
+            • Paliers standards obligatoires : 6, 12, 18, 24... unités par référence.<br>
+            • Paliers exceptionnels autorisés sur références techniques : 3, 6, 12, 18... unités.<br>
+            • Les quantités 9, 15 et 21 sont strictement non conformes.<br>
+            • Règlements acceptés : Espèces ou Chèque à la livraison, Virement bancaire.
+          </p>
+        </div>
+      </div>
     </div>
 
   </main>
 
   <!-- ==========================================
-       CART SLIDE-OVER DRAWER
+       SCREEN 5: PANIER (MON PANIER - SLIDE DRAWER / MODAL)
   ========================================== -->
-  <div class="drawer-backdrop" id="drawer-backdrop" onclick="window.app && window.app.closeCartDrawer ? window.app.closeCartDrawer() : null; this.classList.remove('active'); const d=document.getElementById('cart-drawer'); if(d){d.classList.remove('active'); d.style.transform='';} document.body.classList.remove('cart-drawer-open');"></div>
-  <aside class="cart-drawer-panel" id="cart-drawer" aria-label="Panier de commande">
-    <div class="drawer-header">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-        <h2 class="drawer-title">Ma Demande de Commande</h2>
+  <aside class="cart-drawer-panel mockup-cart-drawer" id="cart-drawer" aria-label="Panier de commande">
+    <div class="mockup-cart-header">
+      <div class="mockup-cart-header-left">
+        <h2 class="mockup-cart-title">Mon panier</h2>
+        <span class="mockup-cart-subtitle" id="cart-items-count-text">0 articles</span>
       </div>
-      <button type="button" class="btn-close-drawer" id="close-cart-btn" onclick="window.app && window.app.closeCartDrawer ? window.app.closeCartDrawer() : null; const d=document.getElementById('cart-drawer'); if(d){d.classList.remove('active'); d.style.transform='';} const b=document.getElementById('drawer-backdrop'); if(b){b.classList.remove('active');} document.body.classList.remove('cart-drawer-open');" aria-label="Fermer le panier">✕</button>
+      <button type="button" class="btn-close-cart-mockup" onclick="window.app.closeCartDrawer()" aria-label="Fermer le panier">✕</button>
     </div>
-    <div class="drawer-body" id="cart-drawer-body">
-      <!-- Rendered by app.js -->
+
+    <!-- Cart Products List -->
+    <div class="mockup-cart-body" id="cart-drawer-body">
+      <!-- Dynamically populated by app.js matching Screen 5 -->
     </div>
-    <div class="drawer-footer" id="cart-drawer-footer">
-      <!-- Rendered by app.js -->
+
+    <!-- Cart Summary Footer (Screen 5: Total HT / Total + Bouton Jaune #FFC21A) -->
+    <div class="mockup-cart-footer" id="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total (FCFA)</span>
+        <strong class="cart-total-val" id="cart-footer-total">0 FCFA</strong>
+      </div>
+      <button type="button" class="mockup-btn-checkout-gold" id="btn-proceed-checkout" onclick="window.app.openCheckoutModal()">
+        <span>Passer la commande</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
     </div>
   </aside>
 
   <!-- ==========================================
-       MODAL: PRODUCT DETAIL
+       SCREEN 4: FICHE PRODUIT MODAL
   ========================================== -->
   <div class="modal-overlay" id="product-detail-modal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 style="font-size:1.1rem; font-weight:800;">Fiche Produit Détaillée</h3>
-        <button type="button" class="btn-close-drawer" onclick="window.app.closeProductModal()" aria-label="Fermer">✕</button>
+    <div class="modal-dialog mockup-product-modal-dialog">
+      <div class="mockup-modal-top-bar">
+        <button type="button" class="btn-modal-back" onclick="window.app.closeProductModal()" aria-label="Retour">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <span class="modal-header-tag">Fiche Produit</span>
+        <button type="button" class="btn-modal-close-icon" onclick="window.app.closeProductModal()" aria-label="Fermer">✕</button>
       </div>
-      <div class="modal-body" id="product-modal-body">
-        <!-- Rendered by app.js -->
+      <div class="modal-body mockup-product-modal-body" id="product-modal-body">
+        <!-- Dynamically rendered by app.js matching Screen 4 -->
       </div>
     </div>
   </div>
 
   <!-- ==========================================
-       MODAL: TRANSMISSION CHECKOUT FORM
+       SCREEN 6: COMMANDE (CHECKOUT - 4-STEP STEPPER)
   ========================================== -->
   <div class="modal-overlay" id="checkout-modal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 style="font-size:1.15rem; font-weight:800;">Transmission de votre Demande</h3>
-        <button type="button" class="btn-close-drawer" onclick="window.app.closeCheckoutModal()" aria-label="Fermer">✕</button>
+    <div class="modal-dialog mockup-checkout-modal-dialog">
+      <div class="mockup-modal-top-bar">
+        <button type="button" class="btn-modal-back" onclick="window.app.closeCheckoutModal()" aria-label="Retour">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <span class="modal-header-tag">Validation de Commande</span>
+        <button type="button" class="btn-modal-close-icon" onclick="window.app.closeCheckoutModal()" aria-label="Fermer">✕</button>
       </div>
-      <div class="modal-body" id="checkout-modal-body">
-        <!-- Rendered by app.js -->
+
+      <!-- Screen 6: 4-Step Stepper Progress Bar -->
+      <div class="mockup-stepper-bar">
+        <div class="step-item completed" id="checkout-step-1">
+          <span class="step-circle">✓</span>
+          <span class="step-label">1 Panier</span>
+        </div>
+        <div class="step-line active"></div>
+        <div class="step-item active" id="checkout-step-2">
+          <span class="step-circle">2</span>
+          <span class="step-label">2 Livraison</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" id="checkout-step-3">
+          <span class="step-circle">3</span>
+          <span class="step-label">3 Paiement</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" id="checkout-step-4">
+          <span class="step-circle">4</span>
+          <span class="step-label">4 Confirmation</span>
+        </div>
+      </div>
+
+      <div class="modal-body mockup-checkout-modal-body" id="checkout-modal-body">
+        <!-- Dynamically rendered by app.js matching Screen 6 -->
       </div>
     </div>
   </div>
-
-  <!-- Site Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4>BKO COSMO DISTRIBUTION (Démonstration)</h4>
-          <p>
-            Plateforme professionnelle de distribution en gros destinée aux pharmacies d'officine, parapharmacies et supermarchés de Bamako et ses environs.
-          </p>
-          <p style="font-size:0.8125rem; color:#cbd5e1;">
-            Direction Commerciale & Gérance : Bamako, Mali.
-          </p>
-        </div>
-        <div class="footer-col">
-          <h4>Règles de Colisage</h4>
-          <p>• <strong>Colisage Standard :</strong> Minimum 6 unités, progression par 6 (6, 12, 18, 24...).</p>
-          <p>• <strong>Exception Technique :</strong> 3 unités minimum sur références spécifiques (3, 6, 12, 18...).</p>
-          <p>• Les quantités 9, 15 et 21 sont strictement non conformes.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Espace Professionnel</h4>
-          <p>Accès réservé au commercial et CEO de la plateforme pour l'administration du catalogue et le suivi des demandes.</p>
-          <a href="/admin.html" class="btn-secondary-large" style="display:inline-block; padding:8px 16px; font-size:0.84rem; margin-top:8px; border-color:#475569; color:#f8fafc; background:transparent;">
-            🔒 Accès Espace Gérant / CEO
-          </a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div>© 2026 BKO Cosmo Distribution. Tous droits réservés. Plateforme B2B Bamako.</div>
-        <div style="font-size:0.75rem; color:#94a3b8;">
-          Note : Les marques et visuels sont présentés à titre indicatif pour démonstration de gros.
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Offline Toast Notification -->
-  <div id="offline-status-toast" class="offline-status-toast" style="display:none;"></div>
 
   <!-- iOS PWA Install Guide Modal -->
   <div class="modal-overlay" id="pwa-ios-modal">
     <div class="modal-dialog" style="max-width:440px;">
       <div class="modal-header">
-        <h3 style="font-size:1.1rem; font-weight:800;">📲 Installer sur iPhone / iPad</h3>
+        <h3 style="font-size:1.1rem; font-weight:800; color:var(--navy-deep);">📲 Installer sur iPhone / iPad</h3>
         <button type="button" class="btn-close-drawer" onclick="window.app.closeIosModal()" aria-label="Fermer">✕</button>
       </div>
       <div class="modal-body">
@@ -581,7 +678,7 @@
         <div class="ios-guide-box">
           <div class="ios-guide-step">
             <span class="ios-step-num">1</span>
-            <div>Appuyez sur le bouton <strong>Partager</strong> en bas de Safari (le carré avec la flèche vers le haut <span style="font-size:1.1rem; color:var(--primary); font-weight:800;">⬆</span>).</div>
+            <div>Appuyez sur le bouton <strong>Partager</strong> en bas de Safari (icône <span style="font-size:1.1rem; color:var(--primary); font-weight:800;">⬆</span>).</div>
           </div>
           <div class="ios-guide-step">
             <span class="ios-step-num">2</span>
@@ -592,48 +689,41 @@
             <div>Appuyez sur <strong>« Ajouter »</strong> en haut à droite. L'application est installée !</div>
           </div>
         </div>
-        <button type="button" class="btn-primary-large" style="width:100%; min-height:44px;" onclick="window.app.closeIosModal()">J'ai compris !</button>
+        <button type="button" class="mockup-btn-primary" style="width:100%; min-height:44px; margin-top:16px;" onclick="window.app.closeIosModal()">J'ai compris !</button>
       </div>
     </div>
   </div>
 
-  <!-- Native Mobile Bottom Navigation Bar (Android & iOS) -->
-  <nav class="mobile-bottom-app-bar" aria-label="Navigation mobile principale">
-    <button type="button" class="bottom-nav-item active" data-tab="home" id="bnav-home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+  <!-- Native Mobile Bottom Navigation Bar (4 ENTRÉES STRICTES DE LA MAQUETTE) -->
+  <nav class="mobile-bottom-app-bar mockup-bottom-nav" aria-label="Navigation mobile principale">
+    <!-- 1. Accueil -->
+    <button type="button" class="bottom-nav-item active" data-tab="home" id="bnav-home" onclick="window.app.switchTab('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
       <span>Accueil</span>
     </button>
-    <button type="button" class="bottom-nav-item" onclick="window.app.openGammes()" id="bnav-gammes">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-      <span>Gammes</span>
-    </button>
-    <button type="button" class="bottom-nav-item" data-tab="catalog" id="bnav-catalog">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+    <!-- 2. Catalogue -->
+    <button type="button" class="bottom-nav-item" data-tab="catalog" id="bnav-catalog" onclick="window.app.switchTab('catalog')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
       <span>Catalogue</span>
     </button>
-    <button type="button" class="bottom-nav-item" data-tab="quick-order" id="bnav-quick-order">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-      <span>Rapide</span>
+    <!-- 3. Commandes -->
+    <button type="button" class="bottom-nav-item" data-tab="track" id="bnav-track" onclick="window.app.switchTab('track')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      <span>Commandes</span>
     </button>
-    <button type="button" class="bottom-nav-item" data-tab="arrivages" id="bnav-arrivages">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-      <span>Arrivages</span>
-    </button>
-    <button type="button" class="bottom-nav-item" onclick="window.app.openCartDrawer()" id="bnav-cart">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-      <span>Demande</span>
-      <span class="bottom-nav-badge" id="bottom-cart-badge" style="display:none;">0</span>
+    <!-- 4. Compte -->
+    <button type="button" class="bottom-nav-item" data-tab="account" id="bnav-account" onclick="window.app.switchTab('account')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Compte</span>
     </button>
   </nav>
 
-  <!-- Floating Scroll To Top Button -->
-  <button type="button" id="btn-scroll-top" class="btn-scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Retour en haut de page" title="Retour en haut de page">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-  </button>
+  <!-- Offline Toast Notification -->
+  <div id="offline-status-toast" class="offline-status-toast" style="display:none;"></div>
+  <!-- Floating Toast Notification for Cart Actions -->
+  <div id="product-added-toast" class="product-added-toast" style="display:none;" role="status"></div>
 
   <!-- Application Main Script -->
   <script type="module" src="/js/app.js"></script>
-  <!-- Floating Toast Notification for Cart Actions -->
-  <div id="product-added-toast" class="product-added-toast" style="display:none;" role="status"></div>
 </body>
 </html>
